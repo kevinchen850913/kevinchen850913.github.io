@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C++ 學習筆記 - 變量和類型 | Kevin的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# 變量和類型介紹  變量：可以將值存儲到內存中，方便進行操作和計算。 類型：變量可以有不同的類型，例如整數、浮點數、布林值等，C++ 需要在變量名稱之前聲明其類型。  123456789&#x2F;&#x2F; 聲明整型變量 x 和 y，將 5 和 2 賦值給它們int x &#x3D; 5;int y &#x3D; 2;&#x2F;&#x2F; 對變量 x 進行加 1 操作，將結果賦值給變量 xx &#x3D; x + 1;&#x2F;&#x2F; 將變量 x 減去變量 y 的值，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 學習筆記 - 變量和類型">
+<meta property="og:url" content="http://example.com/2023/04/08/cplusplus-tutorial-variables/index.html">
+<meta property="og:site_name" content="Kevin的學習筆記">
+<meta property="og:description" content="# 變量和類型介紹  變量：可以將值存儲到內存中，方便進行操作和計算。 類型：變量可以有不同的類型，例如整數、浮點數、布林值等，C++ 需要在變量名稱之前聲明其類型。  123456789&#x2F;&#x2F; 聲明整型變量 x 和 y，將 5 和 2 賦值給它們int x &#x3D; 5;int y &#x3D; 2;&#x2F;&#x2F; 對變量 x 進行加 1 操作，將結果賦值給變量 xx &#x3D; x + 1;&#x2F;&#x2F; 將變量 x 減去變量 y 的值，">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-04-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-29T02:55:12.445Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/04/08/cplusplus-tutorial-variables/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++ 學習筆記 - 變量和類型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-29 10:55:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">78</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++ 學習筆記 - 變量和類型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-04-07T16:00:00.000Z" title="發表於 2023-04-08 00:00:00">2023-04-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-10-29T02:55:12.445Z" title="更新於 2023-10-29 10:55:12">2023-10-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++ 學習筆記 - 變量和類型"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="變量和類型介紹"><a class="markdownIt-Anchor" href="#變量和類型介紹">#</a> 變量和類型介紹</h1>
+<ul>
+<li>變量：可以將值存儲到內存中，方便進行操作和計算。</li>
+<li>類型：變量可以有不同的類型，例如整數、浮點數、布林值等，C++ 需要在變量名稱之前聲明其類型。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 聲明整型變量 x 和 y，將 5 和 2 賦值給它們</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> y = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 對變量 x 進行加 1 操作，將結果賦值給變量 x</span></span><br><span class="line">x = x + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 將變量 x 減去變量 y 的值，將結果賦值給變量 result</span></span><br><span class="line"><span class="type">int</span> result = x - y;</span><br></pre></td></tr></table></figure>
+<h1 id="標識符-identifiers"><a class="markdownIt-Anchor" href="#標識符-identifiers">#</a> 標識符 (Identifiers)</h1>
+<h3 id="常見關鍵字"><a class="markdownIt-Anchor" href="#常見關鍵字">#</a> 常見關鍵字</h3>
+<p>using, namespace, void, return<br>
+int, float, double, char, bool, signed, unsigned, long, short ,const , true, false, sizeof<br>
+if, else, for, do, while, switch, case, continue, break<br>
+class, struct, private, public, this, new, delete</p>
+<h3 id="自定義標識符"><a class="markdownIt-Anchor" href="#自定義標識符">#</a> 自定義標識符</h3>
+<ol>
+<li>由字母、數字和下劃線組成</li>
+<li>第 1 個符號不能是數字</li>
+<li>長度：不同編譯器規定不同</li>
+<li>區分大小寫（大小寫敏感）</li>
+</ol>
+<blockquote>
+<p>非常重要 ：C++ 語言是一種 “區分大小寫” 的語言。例如 :   <code>RESULT</code> 、 <code>result</code> 、 <code>Result</code>  這是三個不同的標識符，用於標識三個不同的變量。</p>
+</blockquote>
+<h1 id="變量-variable"><a class="markdownIt-Anchor" href="#變量-variable">#</a> 變量 (Variable)</h1>
+<h3 id="宣告"><a class="markdownIt-Anchor" href="#宣告">#</a> 宣告</h3>
+<p>要求配置記憶體空間 註冊新名稱。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 語法一</span></span><br><span class="line">type name;  </span><br><span class="line"><span class="comment">// 語法二</span></span><br><span class="line">type name = value;  </span><br><span class="line"><span class="comment">// 語法三</span></span><br><span class="line">type nameA = valueA, nameB = valueB;</span><br></pre></td></tr></table></figure>
+<h3 id="指派"><a class="markdownIt-Anchor" href="#指派">#</a> 指派</h3>
+<p>將右值指派給左值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name = value;</span><br></pre></td></tr></table></figure>
+<h3 id="取值"><a class="markdownIt-Anchor" href="#取值">#</a> 取值</h3>
+<p>只要變數名稱不是出現在 = 左側，便是取得變數所代表的記憶體中的值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvalue = rvalue;</span><br></pre></td></tr></table></figure>
+<h3 id="隱式類型轉換"><a class="markdownIt-Anchor" href="#隱式類型轉換">#</a> 隱式類型轉換</h3>
+<p>隱式類型轉換 (Implicit conversions) 也稱為自動類型轉換，編譯器自行完成，無需用戶的任何外部觸發。</p>
+<ul>
+<li>通常在表達式中存在多種類型時發生，會類型轉換以避免丟失數據</li>
+<li>數據類型會升級為更大的數據類型</li>
+<li>隱式轉換可能會丟失信息，並且可能發生溢出</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">10</span>; </span><br><span class="line"><span class="type">char</span> y = <span class="string">&#x27;a&#x27;</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// y 被隱式轉換為 int。</span></span><br><span class="line">x = x + y;</span><br><span class="line"></span><br><span class="line"><span class="comment">// x 被隱式轉換為 float。</span></span><br><span class="line"><span class="type">float</span> z = x + <span class="number">1.0</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="顯式類型轉換"><a class="markdownIt-Anchor" href="#顯式類型轉換">#</a> 顯式類型轉換</h3>
+<p>顯式類型轉換 (Casting) 也稱為類型轉換，用戶可以進行類型轉換，使其成為特定的數據類型。</p>
+<ul>
+<li>這樣做可利於應用結構或類型的某些特性</li>
+<li>助於計算包含不同數據類型變量的表達式</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> x = <span class="number">1.2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 從 double 到 int 的顯式轉換</span></span><br><span class="line"><span class="type">int</span> a = (<span class="type">int</span>)x + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用轉換運算符</span></span><br><span class="line"><span class="type">int</span> b = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(x);</span><br></pre></td></tr></table></figure>
+<h1 id="整數類-integer-types"><a class="markdownIt-Anchor" href="#整數類-integer-types">#</a> 整數類 (Integer types)</h1>
+<p>C++ 語言的整數型態可概略分成 <strong>short</strong> 、 <strong>int</strong> 、 <strong>long</strong> 、 <strong>long long</strong> ，差異為佔用的記憶體空間不同，例如 <strong>short</strong> 是 16 位元，可儲存 -32768 到 32767 之間的整數值。 <strong>long</strong> 被稱為長整數，則至少佔有 4 個 byte 的記憶體空間，也就是 32 位元，可儲存 -2147483648 到 2147483647 之間的整數。</p>
+<h3 id="short"><a class="markdownIt-Anchor" href="#short">#</a> short</h3>
+<p>描述 : <strong>short</strong> 是 16 位元的整數型別。<br>
+<strong>short</strong> 變數可儲存 16 位元的整數值，範圍由 -32768 到 32767 (最小值 -2^15，最大值 (2^15) – 1)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">short</span> Pin = <span class="number">10</span>;</span><br><span class="line"><span class="comment">//short 變數名稱 = 變數數值;</span></span><br></pre></td></tr></table></figure>
+<h3 id="long"><a class="markdownIt-Anchor" href="#long">#</a> long</h3>
+<p>描述 : <strong>Long</strong> 是一個延伸儲存空間的變數型別，它可以儲存 32bits (4 bytes) 大小的整數，從 -2,147,483,648 到 2,147,483,647。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> speed = <span class="number">100000</span>;</span><br><span class="line"><span class="comment">//long 變數名稱 = 變數數值;</span></span><br></pre></td></tr></table></figure>
+<h3 id="long-long"><a class="markdownIt-Anchor" href="#long-long">#</a> long long</h3>
+<p>描述 : <strong>Long long</strong> 是一個延伸儲存空間的變數型別，它可以儲存 64bits (8 bytes) 大小的整數，從 –9,223,372,036,854,775,808 到 9,223,372,036,854,775,807。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="type">long</span> acc = <span class="number">100000000</span>;</span><br><span class="line"><span class="comment">//long long 變數名稱 = 變數數值;</span></span><br></pre></td></tr></table></figure>
+<h3 id="int"><a class="markdownIt-Anchor" href="#int">#</a> int</h3>
+<p>描述：整數型別是儲存一個數字的主要資料型別。<br>
+<strong>int</strong> 很特別，通常使用整數指的就是它，<strong>int</strong> 的範圍大小跟機器硬體的整數大小相同，並非固定為 32 位元或 64 位元，例如使用 32 位元的機器， <strong>int</strong> 與 <strong>long</strong> 的範圍大小會相同，所以實際上運用視所用機器及編譯器可否支援。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//int 變數名稱 = 變數數值;</span></span><br></pre></td></tr></table></figure>
+<h3 id="unsigned-int"><a class="markdownIt-Anchor" href="#unsigned-int">#</a> unsigned int</h3>
+<p>描述：無號整數和有號整數一樣，都儲存在 4 byte (32 bits) 的空間，因為不能儲存負數，因此儲存正整數的範圍擴大為 0 到 4,294,967,295 (2^32 – 1)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//unsigned int 變數名稱 = 變數數值;</span></span><br></pre></td></tr></table></figure>
+<h1 id="浮點數類-floating-point-types"><a class="markdownIt-Anchor" href="#浮點數類-floating-point-types">#</a> 浮點數類 (Floating-point types)</h1>
+<p>類似於整數常數，使用浮點數常數亦可增加程式碼的可讀性，在編譯程式時，編譯器會自動將浮點數常數轉換成可用於運算的數值。浮點數常數可以被表示為科學記號 E 或者 e，即指數表示法。</p>
+<h3 id="float"><a class="markdownIt-Anchor" href="#float">#</a> float</h3>
+<p>描述 : <strong>float</strong> 浮點數是一種含有小數點的資料型別。因為浮點數比整數有較佳的解析度，它可用來近似類比且連續的數值，浮點數範圍最大可至 3.4028235E+38，而最小可至 -3.4028235E+38，它們以 32 位元資訊儲存。</p>
+<p>浮點數的數值並不是精確的，在比較時可能產生奇怪的結果；例如 6.0/3.0 可能不等於 2.0，而此時你應該檢查兩個比較數值的差的絕對值是否小於很小的數值。</p>
+<p>在計算效能上，浮點數運算較整數運算慢，所以應該避免經常使用它。程式設計師通常會用一些方法將浮點數計算轉換整數運算來加快速度。</p>
+<p>如果要用浮點數運算，你必須加上小數點，否則會被當成 int 運算。詳細資料可參考 浮點數 頁面。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> myfloat = <span class="number">1.1</span>;</span><br><span class="line"><span class="comment">//float 變數名稱 = 變數數值;</span></span><br></pre></td></tr></table></figure>
+<h3 id="double"><a class="markdownIt-Anchor" href="#double">#</a> double</h3>
+<p>描述 : <strong>double</strong> 稱為雙精度浮點數，<strong>double</strong> 型別占用 8 個位元組 (64 bit) 記憶體，其可以表示的最大範圍是 1.79769E+308 到 -1.79769E+308，詳細的資料可以參考 二進位浮點數算術標準 IEEE754。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> mydouble = <span class="number">2.2</span>;</span><br><span class="line"><span class="comment">//double 變數名稱 = 變數數值;</span></span><br></pre></td></tr></table></figure>
+<p>補充資料 : C/C++ 中各種不同型別的後綴</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="type">long</span> b = <span class="number">0L</span>;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> c = <span class="number">0LL</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> d = <span class="number">0UL</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="字元類-character-types"><a class="markdownIt-Anchor" href="#字元類-character-types">#</a> 字元類 (Character types)</h1>
+<p>字元型態的關鍵字 <strong>char</strong> ，可以稍後利用指派給初值，凡是用單引號圍起來的單一字元都屬於字元型態，這樣就把字元  ‘A’  指派到變數 <strong>mychar</strong> 裡了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> mychar = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="comment">//char 變數名稱 = 變數數值;</span></span><br></pre></td></tr></table></figure>
+<h3 id="ascii-碼"><a class="markdownIt-Anchor" href="#ascii-碼">#</a> ASCII 碼</h3>
+<p>字元在電腦中是以一個八位元的整數來儲存 (即 1 Byte)，而這個符號與數字的對應關係我們稱為 ASCII 碼 (American Standard Code for Information Interchange)，也就是說其實字元也是一個數字，因此也可以拿來做加減乘除等四則運算。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> mychar = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">mychar = mychar + <span class="number">3</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, mychar);</span><br></pre></td></tr></table></figure>
+<h3 id="字元陣列"><a class="markdownIt-Anchor" href="#字元陣列">#</a> 字元陣列</h3>
+<p>字串就是一段文字，我們可以用一對雙引號  <code>&quot;文字&quot;</code>  把該段文字夾起來。由於 C++ 語言中並沒有字串的變數型態，而是用字元的陣列來儲存一個字串，字串型態 string 也就是連續字元的集合， <code>\0</code>  這是字串的結束字元，  <code>\0</code>  不會被計算在字串的長度內，但每個字串都會自動附加上  <code>\0</code>  ，作為字串結束的標記。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> text1[] = &#123;<span class="string">&#x27;h&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;\0&#x27;</span>&#125;;</span><br><span class="line"><span class="type">char</span> text2[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">char</span> text3[<span class="number">10</span>] = &#123;<span class="string">&#x27;\0&#x27;</span>&#125;; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>若 text3 已如上聲明，後續則不可再以該方法賦值，因為數組不能賦值，只有它的元素可以單獨分配值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">text3[<span class="number">0</span>] = <span class="string">&#x27;h&#x27;</span>; </span><br><span class="line">text3[<span class="number">1</span>] = <span class="string">&#x27;e&#x27;</span>; </span><br><span class="line">text3[<span class="number">2</span>] = <span class="string">&#x27;l&#x27;</span>; </span><br><span class="line">text3[<span class="number">3</span>] = <span class="string">&#x27;l&#x27;</span>; </span><br><span class="line">text3[<span class="number">4</span>] = <span class="string">&#x27;o&#x27;</span>;</span><br><span class="line">text3[<span class="number">5</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="字串和字元陣列"><a class="markdownIt-Anchor" href="#字串和字元陣列">#</a> 字串和字元陣列</h3>
+<p>具有 null 結尾的字符序列是 C 語言中用來表示字符串的典型類型，即使在 C++ 中標準庫為字符串定義了特定類型字符串 (string)，C 字符串仍然很常見，並且大多數需要字符串的函數都被重載以支持兩者。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> question1[] = <span class="string">&quot;What is your name? &quot;</span>;</span><br><span class="line">string question2 = <span class="string">&quot;Where do you live? &quot;</span>;</span><br><span class="line">cout &lt;&lt; question1;</span><br><span class="line">cout &lt;&lt; question2;</span><br></pre></td></tr></table></figure>
+<p>可以將字符序列轉換為字符串，string 的成員函數 c_str 可以將字符串轉換為字符序列。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> myntcs[] = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line">string mystring = myntcs;  </span><br><span class="line"><span class="comment">// convert c-string to string</span></span><br><span class="line">cout &lt;&lt; mystring;          </span><br><span class="line"><span class="comment">// printed as a library string</span></span><br><span class="line">cout &lt;&lt; mystring.<span class="built_in">c_str</span>();  </span><br><span class="line"><span class="comment">// printed as a c-string </span></span><br></pre></td></tr></table></figure>
+<h3 id="特殊字元"><a class="markdownIt-Anchor" href="#特殊字元">#</a> 特殊字元</h3>
+<p>若是字串中要儲存某些不可見字元，或是雙引號本身，這時候就要用到跳脫序列了。以下的字串附加印出新行的符號。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x27;\0&#x27; 空字元，用於字串的結束 </span><br><span class="line">&#x27;\n&#x27; New Line，換行符號 </span><br><span class="line">&#x27;\r&#x27; Carriage Return，回歸鍵(即 Enter 鍵) </span><br><span class="line">&#x27;\t&#x27; Tab，跳格 &#x27;\b&#x27; Backspace，倒退鍵 </span><br><span class="line">&#x27;\a&#x27; Bell，嗶一聲 </span><br><span class="line">&#x27;\\&#x27; 反斜線 \ </span><br><span class="line">&#x27;\&#x27;&#x27; 單引號 &#x27; </span><br><span class="line">&#x27;\&quot;&#x27; 雙引號 &quot;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/04/08/cplusplus-tutorial-variables/">http://example.com/2023/04/08/cplusplus-tutorial-variables/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/14/cplusplus-tutorial-constants/" title="C++ 學習筆記 - 常量(Constants)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++ 學習筆記 - 常量(Constants)</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/07/cplusplus-tutorial-program_structure/" title="C++ 學習筆記 - 基本程式架構"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++ 學習筆記 - 基本程式架構</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023/05/06/cplusplus-stl-deque/" title="C++ 學習筆記 - 雙向佇列(Deque)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ 學習筆記 - 雙向佇列(Deque)</div></div></a></div><div><a href="/2023/04/28/cplusplus-stl-list/" title="C++ 學習筆記 - 清單(List)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-28</div><div class="title">C++ 學習筆記 - 清單(List)</div></div></a></div><div><a href="/2023/05/05/cplusplus-stl-queue/" title="C++ 學習筆記 - 佇列(Queue)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-05</div><div class="title">C++ 學習筆記 - 佇列(Queue)</div></div></a></div><div><a href="/2023/04/29/cplusplus-stl-stack/" title="C++ 學習筆記 - 堆疊(Stack)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-29</div><div class="title">C++ 學習筆記 - 堆疊(Stack)</div></div></a></div><div><a href="/2023/05/13/cplusplus-stl-map-unordered_map/" title="C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)</div></div></a></div><div><a href="/2023/05/12/cplusplus-stl-set-unordered_set/" title="C++ 學習筆記 - 集合(Set)、無序集合(Unordered Set)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-12</div><div class="title">C++ 學習筆記 - 集合(Set)、無序集合(Unordered Set)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">78</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%8A%E9%87%8F%E5%92%8C%E9%A1%9E%E5%9E%8B%E4%BB%8B%E7%B4%B9"><span class="toc-number">1.</span> <span class="toc-text"> 變量和類型介紹</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%99%E8%AD%98%E7%AC%A6-identifiers"><span class="toc-number">2.</span> <span class="toc-text"> 標識符 (Identifiers)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A6%8B%E9%97%9C%E9%8D%B5%E5%AD%97"><span class="toc-number">2.0.1.</span> <span class="toc-text"> 常見關鍵字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E7%BE%A9%E6%A8%99%E8%AD%98%E7%AC%A6"><span class="toc-number">2.0.2.</span> <span class="toc-text"> 自定義標識符</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%8A%E9%87%8F-variable"><span class="toc-number">3.</span> <span class="toc-text"> 變量 (Variable)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A3%E5%91%8A"><span class="toc-number">3.0.1.</span> <span class="toc-text"> 宣告</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%B4%BE"><span class="toc-number">3.0.2.</span> <span class="toc-text"> 指派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E5%80%BC"><span class="toc-number">3.0.3.</span> <span class="toc-text"> 取值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%B1%E5%BC%8F%E9%A1%9E%E5%9E%8B%E8%BD%89%E6%8F%9B"><span class="toc-number">3.0.4.</span> <span class="toc-text"> 隱式類型轉換</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%AF%E5%BC%8F%E9%A1%9E%E5%9E%8B%E8%BD%89%E6%8F%9B"><span class="toc-number">3.0.5.</span> <span class="toc-text"> 顯式類型轉換</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B4%E6%95%B8%E9%A1%9E-integer-types"><span class="toc-number">4.</span> <span class="toc-text"> 整數類 (Integer types)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#short"><span class="toc-number">4.0.1.</span> <span class="toc-text"> short</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#long"><span class="toc-number">4.0.2.</span> <span class="toc-text"> long</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#long-long"><span class="toc-number">4.0.3.</span> <span class="toc-text"> long long</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int"><span class="toc-number">4.0.4.</span> <span class="toc-text"> int</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unsigned-int"><span class="toc-number">4.0.5.</span> <span class="toc-text"> unsigned int</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%AE%E9%BB%9E%E6%95%B8%E9%A1%9E-floating-point-types"><span class="toc-number">5.</span> <span class="toc-text"> 浮點數類 (Floating-point types)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#float"><span class="toc-number">5.0.1.</span> <span class="toc-text"> float</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#double"><span class="toc-number">5.0.2.</span> <span class="toc-text"> double</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E5%85%83%E9%A1%9E-character-types"><span class="toc-number">6.</span> <span class="toc-text"> 字元類 (Character types)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ascii-%E7%A2%BC"><span class="toc-number">6.0.1.</span> <span class="toc-text"> ASCII 碼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%83%E9%99%A3%E5%88%97"><span class="toc-number">6.0.2.</span> <span class="toc-text"> 字元陣列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%B8%B2%E5%92%8C%E5%AD%97%E5%85%83%E9%99%A3%E5%88%97"><span class="toc-number">6.0.3.</span> <span class="toc-text"> 字串和字元陣列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%AD%97%E5%85%83"><span class="toc-number">6.0.4.</span> <span class="toc-text"> 特殊字元</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/01/2020%E5%B9%B4%E8%B2%93%E5%92%AA%E7%94%9F%E6%B4%BB%E7%85%A7/" title="2020年貓咪生活照">2020年貓咪生活照</a><time datetime="2023-10-31T16:00:00.000Z" title="發表於 2023-11-01 00:00:00">2023-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)%E6%95%99%E5%AD%B8/" title="Keil-C 退出許可證(LIC)教學">Keil-C 退出許可證(LIC)教學</a><time datetime="2023-10-29T16:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/27/%E5%A6%82%E6%9E%9C%20ChatGPT%20%E6%98%AF%E5%82%B3%E7%94%A2%E7%9A%84%E5%93%A1%E5%B7%A5/" title="ChatGPT如何看待工作中的困境">ChatGPT如何看待工作中的困境</a><time datetime="2023-10-26T16:00:00.000Z" title="發表於 2023-10-27 00:00:00">2023-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/21/%E6%85%A2%E9%A3%9B%E5%A4%A9%E4%BD%BF%E6%84%9B%E5%BF%83%E5%9C%92%E9%81%8A%E6%9C%83/" title="慢飛天使愛心園遊會">慢飛天使愛心園遊會</a><time datetime="2023-10-20T16:00:00.000Z" title="發表於 2023-10-21 00:00:00">2023-10-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/06/%E9%9B%BB%E8%85%A6%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%EF%BC%8C%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F/" title="電腦中的生命，細胞自動機">電腦中的生命，細胞自動機</a><time datetime="2023-10-05T16:00:00.000Z" title="發表於 2023-10-06 00:00:00">2023-10-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

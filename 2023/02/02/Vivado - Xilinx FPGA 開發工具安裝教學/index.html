@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Vivado - Xilinx FPGA 開發工具安裝教學 | Kevin的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# Vivado 介紹 本篇文章主要介紹了如何使用 Vivado 工具對 RTL（Verilog 代碼）進行從仿真到燒錄的流程，包括生成 bin 文件以及使用各種 IP&#x2F;IO 和時序約束，最後有副簡單的範例程式。 在過去，我們通常使用 ncverilog（Cadence）或 VCS（Synopsys）或 ModelSim 進行 RTL 的實現，並使用 Verdi 來查看波形。同時，使用 Synop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vivado - Xilinx FPGA 開發工具安裝教學">
+<meta property="og:url" content="http://example.com/2023/02/02/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/index.html">
+<meta property="og:site_name" content="Kevin的學習筆記">
+<meta property="og:description" content="# Vivado 介紹 本篇文章主要介紹了如何使用 Vivado 工具對 RTL（Verilog 代碼）進行從仿真到燒錄的流程，包括生成 bin 文件以及使用各種 IP&#x2F;IO 和時序約束，最後有副簡單的範例程式。 在過去，我們通常使用 ncverilog（Cadence）或 VCS（Synopsys）或 ModelSim 進行 RTL 的實現，並使用 Verdi 來查看波形。同時，使用 Synop">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-02-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-29T02:55:12.308Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="Vivado">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/02/02/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vivado - Xilinx FPGA 開發工具安裝教學',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-29 10:55:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">78</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vivado - Xilinx FPGA 開發工具安裝教學</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-02-01T16:00:00.000Z" title="發表於 2023-02-02 00:00:00">2023-02-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-10-29T02:55:12.308Z" title="更新於 2023-10-29 10:55:12">2023-10-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Vivado - Xilinx FPGA 開發工具安裝教學"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="vivado-介紹"><a class="markdownIt-Anchor" href="#vivado-介紹">#</a> Vivado 介紹</h2>
+<p>本篇文章主要介紹了如何使用 Vivado 工具對 RTL（Verilog 代碼）進行從仿真到燒錄的流程，包括生成 bin 文件以及使用各種 IP/IO 和時序約束，最後有副簡單的範例程式。</p>
+<p>在過去，我們通常使用 ncverilog（Cadence）或 VCS（Synopsys）或 ModelSim 進行 RTL 的實現，並使用 Verdi 來查看波形。同時，使用 Synopsys 綜合和 IC 編譯器來實現設計編譯（這些工具通常在 Linux 和 PuTTY 上使用）。然而，相對於這些開發工具，Vivado 在多方面都有著更優秀的表現。</p>
+<p>Vivado 提供了一個綜合的開發環境，可以從設計的仿真到最終的燒錄一站式完成。使用 Vivado，我們可以直接對 RTL 代碼進行仿真並觀察波形，同時還能夠生成二進制（bin）文件以供後續燒錄使用。此外，Vivado 還提供了各種 IP 和 IO，以及時序約束等功能，使得設計更加方便且靈活，Vivado 提供了更強大且一體化的開發環境，使得 RTL 設計的仿真、編譯和燒錄過程更加高效、方便。</p>
+<h2 id="vivado-三大功能"><a class="markdownIt-Anchor" href="#vivado-三大功能">#</a> Vivado 三大功能</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230816173559.png" alt="image.png"></p>
+<h3 id="系統設計ip-rtl-hls實現"><a class="markdownIt-Anchor" href="#系統設計ip-rtl-hls實現">#</a> 系統設計 (IP、RTL、HLS 實現)</h3>
+<ul>
+<li>IP：使用 Xilinx 或其他廠商提供的 IP（智慧財產）模塊，這些模塊包含預先設計好的硬體功能，可以在設計中重用。</li>
+<li>RTL：使用硬體描述語言（如 Verilog 或 VHDL）編寫的設計，用於定義硬體電路的邏輯功能和結構。</li>
+<li>HLS（高級綜合）實現：使用高級程式語言（如 C/C++）編寫的設計，通過高級綜合工具轉換為硬體描述，加快開發流程。</li>
+</ul>
+<h3 id="實施邏輯模擬-合成-優化"><a class="markdownIt-Anchor" href="#實施邏輯模擬-合成-優化">#</a> 實施 (邏輯模擬、合成、優化)</h3>
+<ul>
+<li>模擬功能檢查：使用模擬工具對設計進行功能驗證和測試，檢查設計的正確性和預期行為。</li>
+<li>邏輯綜合：將 RTL 代碼轉換為閘級電路，生成邏輯網表。這個過程使用綜合工具進行，並考慮設計的時序和約束條件。</li>
+<li>時序約束：指定設計的時序要求和約束條件，確保設計能夠滿足時序要求。</li>
+<li>分析和計時：使用時序分析工具對設計進行時序優化和分析，確保設計在目標 FPGA 上能夠達到頻率和時序要求。</li>
+</ul>
+<h3 id="硬體啟動-驗證-燒錄"><a class="markdownIt-Anchor" href="#硬體啟動-驗證-燒錄">#</a> 硬體啟動、驗證、燒錄</h3>
+<ul>
+<li>生成比特流：通過綜合後的設計和相關的約束條件，使用實現工具生成比特流（bitstream），該比特流包含了將被燒錄到 FPGA 上的配置數據。</li>
+<li>FPGA 編程：將生成的比特流文件載入到目標 FPGA 設備中，將其配置為實現設計的硬體電路。</li>
+</ul>
+<h3 id="免費版與付費版"><a class="markdownIt-Anchor" href="#免費版與付費版">#</a> 免費版與付費版</h3>
+<ol>
+<li>功能限制：免費版的 Vivado 具有一些功能限制。</li>
+<li>設計規模限制：免費版的 Vivado 可以使用的邏輯單元（LUT）數量或可配置的記憶體容量有限制。</li>
+<li>IP 限制：免費版的 Vivado 僅提供部分的 IP 模塊。</li>
+</ol>
+<h3 id="燒錄用-lab-版本"><a class="markdownIt-Anchor" href="#燒錄用-lab-版本">#</a> 燒錄用 Lab 版本</h3>
+<p>Lab 版本 (1G 小檔案) 是單純提供驗證、燒錄使用，如果是開發用途，要小心不要下載到錯誤版本，官安版本中眾多又無法直觀看出差異。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230817105043.png" alt="image.png"></p>
+<h2 id="下載-vivado"><a class="markdownIt-Anchor" href="#下載-vivado">#</a> 下載 Vivado</h2>
+<p>前往 Xilinx 官方網站，找到 Vivado 的下載頁面，選擇您要的版本並下載安裝程式。執行下載的安裝程式，根據提示進行安裝選項的選擇。請注意，安裝 Vivado 可能需要大量的磁碟空間，請確保您的系統滿足相關要求。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230816173003.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230816173042.png" alt="image.png"></p>
+<blockquote>
+<p>下載網址 (個人建議安裝 2018.2 版)<br>
+<a target="_blank" rel="noopener" href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230816173111.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230816173158.png" alt="image.png"></p>
+<h2 id="運行安裝程式"><a class="markdownIt-Anchor" href="#運行安裝程式">#</a> 運行安裝程式</h2>
+<p>記得要去辦 Xilinx (AMD) 的帳號，還有如果是合併以後才辦的帳號 User ID 就是直接輸入信箱，而不是需要另外的名稱。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230817104024.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230817104404.png" alt="image.png"></p>
+<p>在安裝選項中，您可以選擇安裝 Vivado Design Suite、Vivado Lab Edition 或其他組件。選擇 Vivado Lab 版本以滿足您的需求。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230817104204.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230817104428.png" alt="image.png"></p>
+<p>等待安裝過程完成，這可能需要一段時間，取決於您的系統性能和選擇的組件，這麼說可能太客氣了，意思就是安裝會需要花費數小時。</p>
+<h2 id="安裝失敗解決方法"><a class="markdownIt-Anchor" href="#安裝失敗解決方法">#</a> 安裝失敗解決方法</h2>
+<ul>
+<li>需解壓縮到不含中文和空格的路徑</li>
+<li>嘗試對解壓縮完的檔案再解壓縮一次</li>
+</ul>
+<p>進入 bin -&gt; xsetup.bat，刪除這段然後執行 bat 檔。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%SYSTEMROOT%\System32\net session &gt;nul 2&gt;&amp;1</span><br><span class="line">if NOT %errorLevel% == 0 (</span><br><span class="line">echo ERROR: Administrative permissions are not available. Please restart the command line shell as Administrator.</span><br><span class="line">set EXITCODE=1</span><br><span class="line">goto :end</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>執行 bat 檔後跳出資訊，表示與監控程式衝突</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ANOMALY: use of REX.w is meaningless (default operand size is 64)</span><br></pre></td></tr></table></figure>
+<p>登陸編輯程式 (註冊檔)<br>
+ 新建字串值，數值名稱 : hookapi_disins, 數值資料 : 1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\HKEY_LOCAL_MACHINE\SOFTWARE\TEC\Ocular.3\agent\config</span><br></pre></td></tr></table></figure>
+<h2 id="更多相關文章"><a class="markdownIt-Anchor" href="#更多相關文章">#</a> 更多相關文章</h2>
+<p><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/02/02/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/">Vivado - Xilinx FPGA 開發工具安裝教學</a><br>
+<a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/02/03/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E7%95%AB%E9%9D%A2%E8%AA%AA%E6%98%8E/"> Vivado - Xilinx FPGA 開發工具畫面說明</a><br>
+<a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/02/04/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E6%B5%81%E7%A8%8B%E8%AA%AA%E6%98%8E/"> Vivado - Xilinx FPGA 開發工具流程說明</a><br>
+<a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/02/05/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E7%87%92%E9%8C%84%E6%95%99%E5%AD%B8/"> Vivado - Xilinx FPGA 開發工具燒錄教學</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/02/02/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/">http://example.com/2023/02/02/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vivado/">Vivado</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/03/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E7%95%AB%E9%9D%A2%E8%AA%AA%E6%98%8E/" title="Vivado - Xilinx FPGA 開發工具畫面說明"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vivado - Xilinx FPGA 開發工具畫面說明</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/01/%E8%A8%98%E9%8C%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%AF%AB%20FPGA%20%E6%99%82%E6%9C%89%E5%A4%9A%E8%8F%9C(%E8%A8%88%E6%95%B8%E5%99%A8)/" title="記錄第一次寫 FPGA 時有多菜(計數器)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">記錄第一次寫 FPGA 時有多菜(計數器)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023/02/06/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%20Debug%20%E6%95%99%E5%AD%B8/" title="Vivado - Xilinx FPGA 開發工具 Debug 教學"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-06</div><div class="title">Vivado - Xilinx FPGA 開發工具 Debug 教學</div></div></a></div><div><a href="/2023/02/04/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E6%B5%81%E7%A8%8B%E8%AA%AA%E6%98%8E/" title="Vivado - Xilinx FPGA 開發工具流程說明"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-04</div><div class="title">Vivado - Xilinx FPGA 開發工具流程說明</div></div></a></div><div><a href="/2023/02/05/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E7%87%92%E9%8C%84%E6%95%99%E5%AD%B8/" title="Vivado - Xilinx FPGA 開發工具燒錄教學"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-05</div><div class="title">Vivado - Xilinx FPGA 開發工具燒錄教學</div></div></a></div><div><a href="/2023/02/03/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E7%95%AB%E9%9D%A2%E8%AA%AA%E6%98%8E/" title="Vivado - Xilinx FPGA 開發工具畫面說明"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-03</div><div class="title">Vivado - Xilinx FPGA 開發工具畫面說明</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">78</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vivado-%E4%BB%8B%E7%B4%B9"><span class="toc-number">1.</span> <span class="toc-text"> Vivado 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vivado-%E4%B8%89%E5%A4%A7%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text"> Vivado 三大功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88ip-rtl-hls%E5%AF%A6%E7%8F%BE"><span class="toc-number">2.1.</span> <span class="toc-text"> 系統設計 (IP、RTL、HLS 實現)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%A6%E6%96%BD%E9%82%8F%E8%BC%AF%E6%A8%A1%E6%93%AC-%E5%90%88%E6%88%90-%E5%84%AA%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text"> 實施 (邏輯模擬、合成、優化)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E9%AB%94%E5%95%9F%E5%8B%95-%E9%A9%97%E8%AD%89-%E7%87%92%E9%8C%84"><span class="toc-number">2.3.</span> <span class="toc-text"> 硬體啟動、驗證、燒錄</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8D%E8%B2%BB%E7%89%88%E8%88%87%E4%BB%98%E8%B2%BB%E7%89%88"><span class="toc-number">2.4.</span> <span class="toc-text"> 免費版與付費版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%87%92%E9%8C%84%E7%94%A8-lab-%E7%89%88%E6%9C%AC"><span class="toc-number">2.5.</span> <span class="toc-text"> 燒錄用 Lab 版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BC%89-vivado"><span class="toc-number">3.</span> <span class="toc-text"> 下載 Vivado</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E8%A1%8C%E5%AE%89%E8%A3%9D%E7%A8%8B%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text"> 運行安裝程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%9D%E5%A4%B1%E6%95%97%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text"> 安裝失敗解決方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E7%9B%B8%E9%97%9C%E6%96%87%E7%AB%A0"><span class="toc-number">6.</span> <span class="toc-text"> 更多相關文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/01/2020%E5%B9%B4%E8%B2%93%E5%92%AA%E7%94%9F%E6%B4%BB%E7%85%A7/" title="2020年貓咪生活照">2020年貓咪生活照</a><time datetime="2023-10-31T16:00:00.000Z" title="發表於 2023-11-01 00:00:00">2023-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)%E6%95%99%E5%AD%B8/" title="Keil-C 退出許可證(LIC)教學">Keil-C 退出許可證(LIC)教學</a><time datetime="2023-10-29T16:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/27/%E5%A6%82%E6%9E%9C%20ChatGPT%20%E6%98%AF%E5%82%B3%E7%94%A2%E7%9A%84%E5%93%A1%E5%B7%A5/" title="ChatGPT如何看待工作中的困境">ChatGPT如何看待工作中的困境</a><time datetime="2023-10-26T16:00:00.000Z" title="發表於 2023-10-27 00:00:00">2023-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/21/%E6%85%A2%E9%A3%9B%E5%A4%A9%E4%BD%BF%E6%84%9B%E5%BF%83%E5%9C%92%E9%81%8A%E6%9C%83/" title="慢飛天使愛心園遊會">慢飛天使愛心園遊會</a><time datetime="2023-10-20T16:00:00.000Z" title="發表於 2023-10-21 00:00:00">2023-10-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/06/%E9%9B%BB%E8%85%A6%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%EF%BC%8C%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F/" title="電腦中的生命，細胞自動機">電腦中的生命，細胞自動機</a><time datetime="2023-10-05T16:00:00.000Z" title="發表於 2023-10-06 00:00:00">2023-10-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

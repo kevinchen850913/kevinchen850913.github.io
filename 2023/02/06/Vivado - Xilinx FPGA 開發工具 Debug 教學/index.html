@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Vivado - Xilinx FPGA 開發工具 Debug 教學 | Kevin的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# 加入調試訊號 (Debug Nets) 以下是三種常見添加調適訊號的方式，實際上在 vivado 調試中會直接修改.xdc 文件，若直接修改.xdc 文件也可以達成相同的功能。  在 Verilog 文件中直接添加 在綜合後的網表中添加 在綜合後的原理圖中添加  # 在 Verilog 文件中直接添加 在 Verilog 中可以直接將變量 wire 或 reg 加入調試表， 方法就是在變量宣告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vivado - Xilinx FPGA 開發工具 Debug 教學">
+<meta property="og:url" content="http://example.com/2023/02/06/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%20Debug%20%E6%95%99%E5%AD%B8/index.html">
+<meta property="og:site_name" content="Kevin的學習筆記">
+<meta property="og:description" content="# 加入調試訊號 (Debug Nets) 以下是三種常見添加調適訊號的方式，實際上在 vivado 調試中會直接修改.xdc 文件，若直接修改.xdc 文件也可以達成相同的功能。  在 Verilog 文件中直接添加 在綜合後的網表中添加 在綜合後的原理圖中添加  # 在 Verilog 文件中直接添加 在 Verilog 中可以直接將變量 wire 或 reg 加入調試表， 方法就是在變量宣告">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-02-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-04T11:38:13.138Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="Vivado">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/02/06/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%20Debug%20%E6%95%99%E5%AD%B8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vivado - Xilinx FPGA 開發工具 Debug 教學',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-04 19:38:13'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">78</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vivado - Xilinx FPGA 開發工具 Debug 教學</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-02-05T16:00:00.000Z" title="發表於 2023-02-06 00:00:00">2023-02-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-12-04T11:38:13.138Z" title="更新於 2023-12-04 19:38:13">2023-12-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Vivado - Xilinx FPGA 開發工具 Debug 教學"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="加入調試訊號debug-nets"><a class="markdownIt-Anchor" href="#加入調試訊號debug-nets">#</a> 加入調試訊號 (Debug Nets)</h1>
+<p>以下是三種常見添加調適訊號的方式，實際上在 vivado 調試中會直接修改.xdc 文件，若直接修改.xdc 文件也可以達成相同的功能。</p>
+<ul>
+<li>在 Verilog 文件中直接添加</li>
+<li>在綜合後的網表中添加</li>
+<li>在綜合後的原理圖中添加</li>
+</ul>
+<h3 id="在-verilog-文件中直接添加"><a class="markdownIt-Anchor" href="#在-verilog-文件中直接添加">#</a> 在 Verilog 文件中直接添加</h3>
+<p>在 Verilog 中可以直接將變量 wire 或 reg 加入調試表，<br>
+方法就是在變量宣告前添加一行，範例如下:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(* mark_debug=<span class="string">&quot;true&quot;</span> *) <span class="keyword">output</span> trig_out</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/kevinchen850913/PublicAlbum/blob/main/VivadoDebug/VivadoDebug-1.jpg?raw=true" alt=""></p>
+<h3 id="在綜合後的網表中添加"><a class="markdownIt-Anchor" href="#在綜合後的網表中添加">#</a> 在綜合後的網表中添加</h3>
+<p>在專案綜合後 (SYNTHESIS)，開啟視窗 Netlist, 該視窗會列出當前設計存在的所有節點，右鍵節點，點擊小甲蟲 (Mark Debug)，然後該節點就會出現小甲蟲的標記。</p>
+<p><img src="https://github.com/kevinchen850913/PublicAlbum/blob/main/VivadoDebug/VivadoDebug-3.jpg?raw=true" alt=""></p>
+<h3 id="在綜合後的原理圖中添加"><a class="markdownIt-Anchor" href="#在綜合後的原理圖中添加">#</a> 在綜合後的原理圖中添加</h3>
+<p>在專案綜合後 (SYNTHESIS)，開啟原理圖 (Schematic), 該視窗會顯示當前的設計圖，右鍵目標線路或位置，點擊小甲蟲 (Mark Debug)，然後該節點就會出現小甲蟲的標記。</p>
+<p><img src="https://github.com/kevinchen850913/PublicAlbum/blob/main/VivadoDebug/VivadoDebug-2.jpg?raw=true" alt=""></p>
+<h1 id="建立-ila-debug-core"><a class="markdownIt-Anchor" href="#建立-ila-debug-core">#</a> 建立 ILA Debug Core</h1>
+<p>在專案綜合後 (SYNTHESIS)，開啟 Set Up Debug，點擊 Next 至如下方畫面，直接搜尋剛剛設定節點的名稱並加入其中，注意要提供參考的時鐘 (clock domain)，設定完成後繼續點擊 Next，完成後存檔，此時.xdc 文件中可以看到加入 debug 的訊息。</p>
+<p><img src="https://github.com/kevinchen850913/PublicAlbum/blob/main/VivadoDebug/VivadoDebug-4.jpg?raw=true" alt=""></p>
+<h1 id="產生檔案並載入檔案"><a class="markdownIt-Anchor" href="#產生檔案並載入檔案">#</a> 產生檔案並載入檔案</h1>
+<ol>
+<li>點擊布局布線 (Run Implementation)</li>
+<li>點擊產生 bit 檔 (Generate Bitstream)</li>
+<li>點擊並找到 FPGA (open target)</li>
+<li>再點擊 Program Device</li>
+</ol>
+<p>如下圖選擇對應的 .bit 與 .ltx，通常會在下方路徑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XXX.Fpga\XXX.runs\impl_1</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/kevinchen850913/PublicAlbum/blob/main/VivadoDebug/VivadoDebug-5.jpg?raw=true" alt=""></p>
+<h1 id="ila實戰範例"><a class="markdownIt-Anchor" href="#ila實戰範例">#</a> ILA 實戰範例</h1>
+<p>在 Vivado 的畫面中分成幾個區塊，可參考下方的設定方式。</p>
+<h3 id="右下角觸發設定區塊"><a class="markdownIt-Anchor" href="#右下角觸發設定區塊">#</a> 右下角觸發設定區塊</h3>
+<p>在觸發條件設置 (trigger setup) 中點擊加號，選擇指定的訊號，Operator 選擇 == ，Value 選擇 B，及偵測到上緣或下緣都會觸發而開始計錄訊號。</p>
+<h3 id="左下角擷取視窗設定區塊"><a class="markdownIt-Anchor" href="#左下角擷取視窗設定區塊">#</a> 左下角擷取視窗設定區塊</h3>
+<p>左下角只調整 trigger position in window，<br>
+使顯示訊號較容易觀看及計算。</p>
+<h3 id="左上角快捷圖示區塊"><a class="markdownIt-Anchor" href="#左上角快捷圖示區塊">#</a> 左上角快捷圖示區塊</h3>
+<ol>
+<li>添加觀察訊號</li>
+<li>重複觸發模式</li>
+<li>單次觸發模式</li>
+<li>立即觸發模式</li>
+<li>結束觸發模式<br>
+範例中點擊添加觀察訊號，再點擊單次觸發模式。</li>
+</ol>
+<p><img src="https://github.com/kevinchen850913/PublicAlbum/blob/main/VivadoDebug/VivadoDebug-6.jpg?raw=true" alt=""></p>
+<p>示範添加多條訊號的狀況，到這一步基本上就跟一般的邏輯分析儀一樣，不再多加贅述。</p>
+<p><img src="https://github.com/kevinchen850913/PublicAlbum/blob/main/VivadoDebug/VivadoDebug-7.jpg?raw=true" alt=""></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/02/06/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%20Debug%20%E6%95%99%E5%AD%B8/">http://example.com/2023/02/06/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%20Debug%20%E6%95%99%E5%AD%B8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vivado/">Vivado</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/24/%E9%80%A3%E7%8C%B4%E5%AD%90%E9%83%BD%E6%87%82%E7%9A%84%20DLL%20%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8/" title="連猴子都懂的 DLL 使用教學"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">連猴子都懂的 DLL 使用教學</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/06/Vivado%20-%20Xilinx%20FPGA%20LED%20%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F/" title="Vivado - Xilinx FPGA LED 範例程式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vivado - Xilinx FPGA LED 範例程式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023/02/02/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/" title="Vivado - Xilinx FPGA 開發工具安裝教學"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-02</div><div class="title">Vivado - Xilinx FPGA 開發工具安裝教學</div></div></a></div><div><a href="/2023/02/04/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E6%B5%81%E7%A8%8B%E8%AA%AA%E6%98%8E/" title="Vivado - Xilinx FPGA 開發工具流程說明"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-04</div><div class="title">Vivado - Xilinx FPGA 開發工具流程說明</div></div></a></div><div><a href="/2023/02/05/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E7%87%92%E9%8C%84%E6%95%99%E5%AD%B8/" title="Vivado - Xilinx FPGA 開發工具燒錄教學"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-05</div><div class="title">Vivado - Xilinx FPGA 開發工具燒錄教學</div></div></a></div><div><a href="/2023/02/03/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%E7%95%AB%E9%9D%A2%E8%AA%AA%E6%98%8E/" title="Vivado - Xilinx FPGA 開發工具畫面說明"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-03</div><div class="title">Vivado - Xilinx FPGA 開發工具畫面說明</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">78</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5%E8%AA%BF%E8%A9%A6%E8%A8%8A%E8%99%9Fdebug-nets"><span class="toc-number">1.</span> <span class="toc-text"> 加入調試訊號 (Debug Nets)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-verilog-%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.0.1.</span> <span class="toc-text"> 在 Verilog 文件中直接添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%B6%9C%E5%90%88%E5%BE%8C%E7%9A%84%E7%B6%B2%E8%A1%A8%E4%B8%AD%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.0.2.</span> <span class="toc-text"> 在綜合後的網表中添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%B6%9C%E5%90%88%E5%BE%8C%E7%9A%84%E5%8E%9F%E7%90%86%E5%9C%96%E4%B8%AD%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.0.3.</span> <span class="toc-text"> 在綜合後的原理圖中添加</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B-ila-debug-core"><span class="toc-number">2.</span> <span class="toc-text"> 建立 ILA Debug Core</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A2%E7%94%9F%E6%AA%94%E6%A1%88%E4%B8%A6%E8%BC%89%E5%85%A5%E6%AA%94%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text"> 產生檔案並載入檔案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ila%E5%AF%A6%E6%88%B0%E7%AF%84%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text"> ILA 實戰範例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%B3%E4%B8%8B%E8%A7%92%E8%A7%B8%E7%99%BC%E8%A8%AD%E5%AE%9A%E5%8D%80%E5%A1%8A"><span class="toc-number">4.0.1.</span> <span class="toc-text"> 右下角觸發設定區塊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E4%B8%8B%E8%A7%92%E6%93%B7%E5%8F%96%E8%A6%96%E7%AA%97%E8%A8%AD%E5%AE%9A%E5%8D%80%E5%A1%8A"><span class="toc-number">4.0.2.</span> <span class="toc-text"> 左下角擷取視窗設定區塊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E4%B8%8A%E8%A7%92%E5%BF%AB%E6%8D%B7%E5%9C%96%E7%A4%BA%E5%8D%80%E5%A1%8A"><span class="toc-number">4.0.3.</span> <span class="toc-text"> 左上角快捷圖示區塊</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/01/2020%E5%B9%B4%E8%B2%93%E5%92%AA%E7%94%9F%E6%B4%BB%E7%85%A7/" title="2020年貓咪生活照">2020年貓咪生活照</a><time datetime="2023-10-31T16:00:00.000Z" title="發表於 2023-11-01 00:00:00">2023-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)%E6%95%99%E5%AD%B8/" title="Keil-C 退出許可證(LIC)教學">Keil-C 退出許可證(LIC)教學</a><time datetime="2023-10-29T16:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/27/%E5%A6%82%E6%9E%9C%20ChatGPT%20%E6%98%AF%E5%82%B3%E7%94%A2%E7%9A%84%E5%93%A1%E5%B7%A5/" title="ChatGPT如何看待工作中的困境">ChatGPT如何看待工作中的困境</a><time datetime="2023-10-26T16:00:00.000Z" title="發表於 2023-10-27 00:00:00">2023-10-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/21/%E6%85%A2%E9%A3%9B%E5%A4%A9%E4%BD%BF%E6%84%9B%E5%BF%83%E5%9C%92%E9%81%8A%E6%9C%83/" title="慢飛天使愛心園遊會">慢飛天使愛心園遊會</a><time datetime="2023-10-20T16:00:00.000Z" title="發表於 2023-10-21 00:00:00">2023-10-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/06/%E9%9B%BB%E8%85%A6%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%EF%BC%8C%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F/" title="電腦中的生命，細胞自動機">電腦中的生命，細胞自動機</a><time datetime="2023-10-05T16:00:00.000Z" title="發表於 2023-10-06 00:00:00">2023-10-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
