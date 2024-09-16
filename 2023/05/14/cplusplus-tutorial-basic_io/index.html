@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C++ 學習筆記 - 基本輸入輸出 | Kevin的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# 基本介紹 在 C++ 中，要從控制台獲取輸入和輸出，可以使用標準輸入和輸出流對象。標準輸入流對象 cin  和標準輸出流對象 cout  分別用於從鍵盤獲取輸入和向屏幕輸出信息。 # 流 (stream) C++ 使用一種稱為流 (stream) 的抽象詞來描述媒體，例如螢幕、鍵盤或文件，流是一個實體，可執行輸入或輸出操作，無需了解流的詳細運作方式，只需要知道流的來源與目的地即可進行應用。 #">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 學習筆記 - 基本輸入輸出">
+<meta property="og:url" content="http://example.com/2023/05/14/cplusplus-tutorial-basic_io/index.html">
+<meta property="og:site_name" content="Kevin的學習筆記">
+<meta property="og:description" content="# 基本介紹 在 C++ 中，要從控制台獲取輸入和輸出，可以使用標準輸入和輸出流對象。標準輸入流對象 cin  和標準輸出流對象 cout  分別用於從鍵盤獲取輸入和向屏幕輸出信息。 # 流 (stream) C++ 使用一種稱為流 (stream) 的抽象詞來描述媒體，例如螢幕、鍵盤或文件，流是一個實體，可執行輸入或輸出操作，無需了解流的詳細運作方式，只需要知道流的來源與目的地即可進行應用。 #">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-05-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-16T06:37:47.862Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/05/14/cplusplus-tutorial-basic_io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++ 學習筆記 - 基本輸入輸出',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-16 14:37:47'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++ 學習筆記 - 基本輸入輸出</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-05-13T16:00:00.000Z" title="發表於 2023-05-14 00:00:00">2023-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2024-09-16T06:37:47.862Z" title="更新於 2024-09-16 14:37:47">2024-09-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++ 學習筆記 - 基本輸入輸出"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="基本介紹"><a class="markdownIt-Anchor" href="#基本介紹">#</a> 基本介紹</h2>
+<p>在 C++ 中，要從控制台獲取輸入和輸出，可以使用標準輸入和輸出流對象。標準輸入流對象 <code>cin</code>  和標準輸出流對象 <code>cout</code>  分別用於從鍵盤獲取輸入和向屏幕輸出信息。</p>
+<h3 id="流stream"><a class="markdownIt-Anchor" href="#流stream">#</a> 流 (stream)</h3>
+<p>C++ 使用一種稱為流 (stream) 的抽象詞來描述媒體，例如螢幕、鍵盤或文件，流是一個實體，可執行輸入或輸出操作，無需了解流的詳細運作方式，只需要知道流的來源與目的地即可進行應用。</p>
+<h3 id="標準庫中的流"><a class="markdownIt-Anchor" href="#標準庫中的流">#</a> 標準庫中的流</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cin  <span class="comment">// 標準輸入流</span></span><br><span class="line">cout <span class="comment">// 標準輸出流</span></span><br><span class="line">cerr <span class="comment">// 標準錯誤（輸出）流</span></span><br><span class="line">clog <span class="comment">// 標準日誌記錄（輸出）流</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>cerr</code>  並且 <code>clog</code>  也是輸出流，區別是識別特定目的，它們可以單獨重定向，在大多數環境設置中，它們實際上做的是與 <code>cout</code>  完全相同的事情。</p>
+</blockquote>
+<h2 id="標準輸出cout"><a class="markdownIt-Anchor" href="#標準輸出cout">#</a> 標準輸出 (cout)</h2>
+<p>在大多數環境中標準輸出是螢幕，用於訪問的是 cout</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">&quot;Output&quot;</span>; <span class="comment">// prints Output on screen</span></span><br><span class="line">cout &lt;&lt; <span class="number">120</span>;      <span class="comment">// prints number 120 on screen</span></span><br><span class="line">cout &lt;&lt; x;        <span class="comment">// prints the value of x on screen </span></span><br></pre></td></tr></table></figure>
+<p>多個插入操作  <code>&lt;&lt;</code>  可以鏈接在一個語句中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">&quot;This &quot;</span> &lt;&lt; <span class="string">&quot; is a &quot;</span> &lt;&lt; <span class="string">&quot;single C++ statement&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>要插入換行符，換行符應插入到換行符的確切位置。<br>
+在 C++ 中換行符可以指定為 <code>\n</code> ，或是使用 <code>endl</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">&quot;First sentence.\n&quot;</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Second sentence.&quot;</span> &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<h2 id="標準輸入cin"><a class="markdownIt-Anchor" href="#標準輸入cin">#</a> 標準輸入 (cin)</h2>
+<p>在大多數環境中標準輸入是鍵盤，用於訪問的是 cin</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> age;</span><br><span class="line">cin &gt;&gt; age;</span><br></pre></td></tr></table></figure>
+<p>第一條語句聲明變量 age，第二條語句從 cin 中提取數據並存儲。程式將根據需要等待，直到使用者當按下 ENTER 鍵時，輸入的字符將被傳遞到程式。</p>
+<p>可以將提取 <code>cin</code>  鏈接起來以請求多個數據</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cin &gt;&gt; a &gt;&gt; b;</span><br></pre></td></tr></table></figure>
+<p>等同下方寫法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cin &gt;&gt; a;</span><br><span class="line">cin &gt;&gt; b;</span><br></pre></td></tr></table></figure>
+<p>cin 與 cout 範例</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// i/o example</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> i;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Please enter an integer value: &quot;</span>;</span><br><span class="line">  cin &gt;&gt; i;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;The value you entered is &quot;</span> &lt;&lt; i;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot; and its double is &quot;</span> &lt;&lt; i*<span class="number">2</span> &lt;&lt; <span class="string">&quot;.\n&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果用戶輸入不為整數內容，在上面的示例中會發生什麼？在這種情況下，操作會出現失敗。</p>
+</blockquote>
+<h2 id="cin-和字串string"><a class="markdownIt-Anchor" href="#cin-和字串string">#</a> cin 和字串 (string)</h2>
+<p>可用  <code>cin</code>  與基本數據類型相同的方式獲取<a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/04/22/cplusplus-stl-string/">字符串 (string)</a>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string mystring;</span><br><span class="line">cin &gt;&gt; mystring;</span><br></pre></td></tr></table></figure>
+<p><code>cin</code>  提取會將空格、換行符視為提取的終止，因此終提取單個單詞，而不是短語或整個句子，若要獲取整行可用函數 <code>getline</code> 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// cin with strings</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  string mystr;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;What&#x27;s your name? &quot;</span>;</span><br><span class="line">  <span class="built_in">getline</span> (cin, mystr);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Hello &quot;</span> &lt;&lt; mystr &lt;&lt; <span class="string">&quot;.\n&quot;</span>;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;What is your favorite team? &quot;</span>;</span><br><span class="line">  <span class="built_in">getline</span> (cin, mystr);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;I like &quot;</span> &lt;&lt; mystr &lt;&lt; <span class="string">&quot; too!\n&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="字串流stringstream"><a class="markdownIt-Anchor" href="#字串流stringstream">#</a> 字串流 (stringstream)</h2>
+<p>標準標頭 <code>&lt;sstream&gt;</code>  定義了一個名為的類型 <code>stringstream</code> ，該類型允許將字符串視為流。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">mystr</span> <span class="params">(<span class="string">&quot;1204&quot;</span>)</span></span>;</span><br><span class="line"><span class="type">int</span> myint;</span><br><span class="line"><span class="built_in">stringstream</span>(mystr) &gt;&gt; myint;</span><br></pre></td></tr></table></figure>
+<p>stringstream 範例</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// stringstreams</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  string mystr;</span><br><span class="line">  <span class="type">float</span> price=<span class="number">0</span>;</span><br><span class="line">  <span class="type">int</span> quantity=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Enter price: &quot;</span>;</span><br><span class="line">  <span class="built_in">getline</span> (cin,mystr);</span><br><span class="line">  <span class="built_in">stringstream</span>(mystr) &gt;&gt; price;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Enter quantity: &quot;</span>;</span><br><span class="line">  <span class="built_in">getline</span> (cin,mystr);</span><br><span class="line">  <span class="built_in">stringstream</span>(mystr) &gt;&gt; quantity;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Total price: &quot;</span> &lt;&lt; price*quantity &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>stringstream 是 sprintf 在 C++ 的替代品，比較靈活也比較慢，至少自己是都用 sprintf。</p>
+</blockquote>
+<h2 id="轉換英文大小寫"><a class="markdownIt-Anchor" href="#轉換英文大小寫">#</a> 轉換英文大小寫</h2>
+<p><code>std::tolower</code>  更加健壯和可讀。</p>
+<p>位元操作轉換大小寫是 ASCII 一個有趣的特色，因為大寫字母和小寫字母僅相差一位，所以可以藉由修改 1bit 解決，但是不能用來處理  <code>@ [ \ ] ^ _</code> 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">toLowerCase</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span>&amp; c : s)</span><br><span class="line">            c |= <span class="number">0b00100000</span>;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>transform</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">toLowerCase</span><span class="params">(string str)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">transform</span>(str.<span class="built_in">begin</span>(),str.<span class="built_in">end</span>(),str.<span class="built_in">begin</span>(),::tolower);</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/05/14/cplusplus-tutorial-basic_io/">http://example.com/2023/05/14/cplusplus-tutorial-basic_io/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/19/cplusplus-tutorial-control/" title="C++ 學習筆記 - 流程控制"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++ 學習筆記 - 流程控制</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/13/cplusplus-stl-map-unordered_map/" title="C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023/05/06/cplusplus-stl-deque/" title="C++ 學習筆記 - 雙向佇列(Deque)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ 學習筆記 - 雙向佇列(Deque)</div></div></a></div><div><a href="/2023/04/28/cplusplus-stl-list/" title="C++ 學習筆記 - 清單(List)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-28</div><div class="title">C++ 學習筆記 - 清單(List)</div></div></a></div><div><a href="/2023/05/13/cplusplus-stl-map-unordered_map/" title="C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)</div></div></a></div><div><a href="/2023/05/05/cplusplus-stl-queue/" title="C++ 學習筆記 - 佇列(Queue)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-05</div><div class="title">C++ 學習筆記 - 佇列(Queue)</div></div></a></div><div><a href="/2023/05/12/cplusplus-stl-set-unordered_set/" title="C++ 學習筆記 - 集合(Set)、無序集合(Unordered Set)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-12</div><div class="title">C++ 學習筆記 - 集合(Set)、無序集合(Unordered Set)</div></div></a></div><div><a href="/2023/04/29/cplusplus-stl-stack/" title="C++ 學習筆記 - 堆疊(Stack)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-29</div><div class="title">C++ 學習筆記 - 堆疊(Stack)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9"><span class="toc-number">1.</span> <span class="toc-text"> 基本介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81stream"><span class="toc-number">1.1.</span> <span class="toc-text"> 流 (stream)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%99%E6%BA%96%E5%BA%AB%E4%B8%AD%E7%9A%84%E6%B5%81"><span class="toc-number">1.2.</span> <span class="toc-text"> 標準庫中的流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%99%E6%BA%96%E8%BC%B8%E5%87%BAcout"><span class="toc-number">2.</span> <span class="toc-text"> 標準輸出 (cout)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%99%E6%BA%96%E8%BC%B8%E5%85%A5cin"><span class="toc-number">3.</span> <span class="toc-text"> 標準輸入 (cin)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cin-%E5%92%8C%E5%AD%97%E4%B8%B2string"><span class="toc-number">4.</span> <span class="toc-text"> cin 和字串 (string)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%B8%B2%E6%B5%81stringstream"><span class="toc-number">5.</span> <span class="toc-text"> 字串流 (stringstream)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%89%E6%8F%9B%E8%8B%B1%E6%96%87%E5%A4%A7%E5%B0%8F%E5%AF%AB"><span class="toc-number">6.</span> <span class="toc-text"> 轉換英文大小寫</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/27/Git%20%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Git 常用指令介紹">Git 常用指令介紹</a><time datetime="2024-02-26T16:00:00.000Z" title="發表於 2024-02-27 00:00:00">2024-02-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)/" title="Keil-C 退出許可證(LIC)">Keil-C 退出許可證(LIC)</a><time datetime="2023-10-29T16:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/06/%E9%9B%BB%E8%85%A6%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%EF%BC%8C%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F/" title="電腦中的生命，細胞自動機">電腦中的生命，細胞自動機</a><time datetime="2023-10-05T16:00:00.000Z" title="發表於 2023-10-06 00:00:00">2023-10-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/22/%E8%87%AA%E8%A3%BD%E5%89%AA%E8%B2%BC%E7%B0%BF%E5%B7%A5%E5%85%B7(Clipboard)/" title="自製剪貼簿工具(Clipboard)">自製剪貼簿工具(Clipboard)</a><time datetime="2023-09-21T16:00:00.000Z" title="發表於 2023-09-22 00:00:00">2023-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/01/EtherCAT%20%E7%94%A2%E5%93%81%E9%96%8B%E7%99%BC%E8%80%85%E7%9A%84%E5%BF%83%E5%BE%97/" title="EtherCAT 產品開發者的心得">EtherCAT 產品開發者的心得</a><time datetime="2023-08-31T16:00:00.000Z" title="發表於 2023-09-01 00:00:00">2023-09-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

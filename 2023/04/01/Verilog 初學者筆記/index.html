@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Verilog 初學者筆記 | Kevin的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# 關於寫法 # Notgate !  與  ~  所做的事是不一樣的，只有在 1bit 時動作是一樣的。  !  是邏輯的反向， !0x00 &#x3D; true ~  是位元的反向， ~0x00 &#x3D; 0xFF  除此之外還會常用到其他位元運算  NOR XNOR XOR  判斷 a 相等 b 有更快的方法， a ^ b &#x3D; 0  比  a &#x3D;&#x3D; b  更快，異或運算的效率更高。 # bit 陣列 打括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Verilog 初學者筆記">
+<meta property="og:url" content="http://example.com/2023/04/01/Verilog%20%E5%88%9D%E5%AD%B8%E8%80%85%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="Kevin的學習筆記">
+<meta property="og:description" content="# 關於寫法 # Notgate !  與  ~  所做的事是不一樣的，只有在 1bit 時動作是一樣的。  !  是邏輯的反向， !0x00 &#x3D; true ~  是位元的反向， ~0x00 &#x3D; 0xFF  除此之外還會常用到其他位元運算  NOR XNOR XOR  判斷 a 相等 b 有更快的方法， a ^ b &#x3D; 0  比  a &#x3D;&#x3D; b  更快，異或運算的效率更高。 # bit 陣列 打括">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-03-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-26T07:41:28.831Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="Verilog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/04/01/Verilog%20%E5%88%9D%E5%AD%B8%E8%80%85%E7%AD%86%E8%A8%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Verilog 初學者筆記',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-26 15:41:28'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Verilog 初學者筆記</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-03-31T16:00:00.000Z" title="發表於 2023-04-01 00:00:00">2023-04-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2024-08-26T07:41:28.831Z" title="更新於 2024-08-26 15:41:28">2024-08-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Verilog 初學者筆記"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="關於寫法"><a class="markdownIt-Anchor" href="#關於寫法">#</a> 關於寫法</h2>
+<h3 id="notgate"><a class="markdownIt-Anchor" href="#notgate">#</a> Notgate</h3>
+<p><code>!</code>  與  <code>~</code>  所做的事是不一樣的，只有在 1bit 時動作是一樣的。</p>
+<ul>
+<li><code>!</code>  是邏輯的反向， <code>!0x00 = true</code></li>
+<li><code>~</code>  是位元的反向， <code>~0x00 = 0xFF</code></li>
+</ul>
+<p>除此之外還會常用到其他位元運算</p>
+<ul>
+<li>NOR</li>
+<li>XNOR</li>
+<li>XOR</li>
+</ul>
+<p>判斷 a 相等 b 有更快的方法， <code>a ^ b = 0</code>  比  <code>a == b</code>  更快，異或運算的效率更高。</p>
+<h3 id="bit-陣列"><a class="markdownIt-Anchor" href="#bit-陣列">#</a> bit 陣列</h3>
+<p>打括弧包起來就完事，又常用又好用的寫法，直接上範例。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">  out &lt;= &#123;out[<span class="number">6</span>:<span class="number">0</span>], in&#125;;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>verilog 中的陣列高位在左邊，低位在右邊。<br>
+bit:7 bit:6 bit:5 bit:4 bit:3 bit:2 bit:1 bit:0<br>
+bit:6 bit:5 bit:4 bit:3 bit:2 bit:1 bit:0 bit:in</p>
+<h3 id="reg-不是變數"><a class="markdownIt-Anchor" href="#reg-不是變數">#</a> reg 不是變數</h3>
+<p>wire reg 不能像 C 語言中一個變數用到底，這樣寫會有問題。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">wire</span> [<span class="number">15</span>:<span class="number">0</span>] rdata_tmp</span><br><span class="line"></span><br><span class="line"><span class="variable">.rdata1</span>(rdata_tmp)</span><br><span class="line"><span class="variable">.rdata2</span>(rdata_tmp)</span><br></pre></td></tr></table></figure>
+<p>需手動處理資料合併問題。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">wire</span> [<span class="number">15</span>:<span class="number">0</span>] rdata = </span><br><span class="line">	(<span class="number">16</span>&#123;rdata1_en&#125; &amp; rdata1) | (<span class="number">16</span>&#123;rdata2_en&#125; &amp; rdata2);</span><br><span class="line"></span><br><span class="line"><span class="variable">.rdata1</span>(rdata1)</span><br><span class="line"><span class="variable">.rdata2</span>(rdata2)</span><br></pre></td></tr></table></figure>
+<h3 id="always-用法"><a class="markdownIt-Anchor" href="#always-用法">#</a> always 用法</h3>
+<p>對於硬件綜合有兩種相關的 always 塊</p>
+<ul>
+<li>組合邏輯： <code>always@(*)</code></li>
+<li>時序邏輯： <code>always@(posedge clk)</code></li>
+</ul>
+<p>時鐘控制的總是塊創建一個組合邏輯塊，就像組合總是塊一樣，而且還在組合邏輯塊的輸出處創建一組觸發器。不是立即可見邏輯塊的輸出，而是僅在下一個（posedge clk）之後立即可見輸出。</p>
+<h3 id="阻塞與非阻塞"><a class="markdownIt-Anchor" href="#阻塞與非阻塞">#</a> 阻塞與非阻塞</h3>
+<p>Verilog 中有三種類型的賦值</p>
+<ul>
+<li>連續賦值（assign x = y;）。只能在不在過程中使用。</li>
+<li>程序塊分配：( x = y; )。只能在程序內部使用。</li>
+<li>程序非阻塞賦值：( x &lt;= y; )。只能在程序內部使用。<br>
+在合的 always 塊中，使用塊分配。在時鐘控制的 always 塊中，使用<strong>非阻塞</strong>分配。完全理解為什麼對硬件設計不是特別有用，並且需要很好地理解 Verilog 模擬器如何跟踪事件。不遵循此規則會導致極難發現既不確定又在模擬和合成硬件之間存在差異的錯誤。</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// synthesis verilog_input_version verilog_2001</span></span><br><span class="line"><span class="keyword">module</span> top_module(</span><br><span class="line">    <span class="keyword">input</span> clk,</span><br><span class="line">    <span class="keyword">input</span> a,</span><br><span class="line">    <span class="keyword">input</span> b,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> out_assign,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> out_always_comb,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> out_always_ff   );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assign</span> out_assign = a ^ b;</span><br><span class="line">    <span class="keyword">always</span> @(*) out_always_comb = a ^ b;</span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) out_always_ff &lt;= a ^ b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>在組合塊中，使用阻塞賦值 (=)，在時鐘塊中，使用非阻塞分配 (&lt;=)。</p>
+<h2 id="關於架構"><a class="markdownIt-Anchor" href="#關於架構">#</a> 關於架構</h2>
+<h3 id="路過不做事"><a class="markdownIt-Anchor" href="#路過不做事">#</a> 路過不做事</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//-----------------------------------------------</span></span><br><span class="line"><span class="comment">// AXI-S Interface                                   </span></span><br><span class="line"><span class="comment">//-----------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Common</span></span><br><span class="line"><span class="variable">.user_clk</span>                       ( user_clk ),</span><br><span class="line"><span class="variable">.user_reset</span>                     ( user_reset_q ),</span><br><span class="line"><span class="variable">.user_lnk_up</span>                    ( user_lnk_up_q ),</span><br><span class="line"></span><br><span class="line"><span class="comment">// Tx</span></span><br><span class="line"><span class="variable">.s_axis_tx_tready</span>               ( s_axis_tx_tready ),</span><br><span class="line"><span class="variable">.s_axis_tx_tdata</span>                ( s_axis_tx_tdata ),</span><br><span class="line"><span class="variable">.s_axis_tx_tkeep</span>                ( s_axis_tx_tkeep ),</span><br><span class="line"><span class="variable">.s_axis_tx_tuser</span>                ( s_axis_tx_tuser ),</span><br><span class="line"><span class="variable">.s_axis_tx_tlast</span>                ( s_axis_tx_tlast ),</span><br><span class="line"><span class="variable">.s_axis_tx_tvalid</span>               ( s_axis_tx_tvalid ),</span><br><span class="line"></span><br><span class="line"><span class="comment">// Rx</span></span><br><span class="line"><span class="variable">.m_axis_rx_tdata</span>                ( m_axis_rx_tdata ),</span><br><span class="line"><span class="variable">.m_axis_rx_tkeep</span>                ( m_axis_rx_tkeep ),</span><br><span class="line"><span class="variable">.m_axis_rx_tlast</span>                ( m_axis_rx_tlast ),</span><br><span class="line"><span class="variable">.m_axis_rx_tvalid</span>               ( m_axis_rx_tvalid ),</span><br><span class="line"><span class="variable">.m_axis_rx_tready</span>               ( m_axis_rx_tready ),</span><br><span class="line"><span class="variable">.m_axis_rx_tuser</span>                ( m_axis_rx_tuser ),</span><br></pre></td></tr></table></figure>
+<p>上面這段程式，什麼事也沒做，就只是單純的把數值，從上一個模組往下一個模組丟，在硬體中傳值就是拉一條線過去，考慮資料的依賴性，往往會經過許多  <code>過水</code>  的模組，直到最後一個模組才開始做事。</p>
+<ul>
+<li>資料流一開始就要想清楚，不然很難修改。</li>
+<li>不是最後一關就不要動，手腳乾淨點。</li>
+</ul>
+<h3 id="不延遲狀態機"><a class="markdownIt-Anchor" href="#不延遲狀態機">#</a> 不延遲狀態機</h3>
+<p>一般狀態轉移時會消耗一 clk，但若必須同時輸出結果，此時則必須搭配組合電路寫法，用組合電路轉移狀態，時序電路輸出，這樣才能及時的同步輸出。</p>
+<p><a target="_blank" rel="noopener" href="https://hdlbits.01xz.net/wiki/Fsm_hdlc">https://hdlbits.01xz.net/wiki/Fsm_hdlc</a><br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/202309071618196.png" alt="image.png"></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> top_module(</span><br><span class="line">    <span class="keyword">input</span> clk,</span><br><span class="line">    <span class="keyword">input</span> reset,    <span class="comment">// Synchronous reset</span></span><br><span class="line">    <span class="keyword">input</span> in,</span><br><span class="line">    <span class="keyword">output</span> disc,</span><br><span class="line">    <span class="keyword">output</span> flag,</span><br><span class="line">    <span class="keyword">output</span> err);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">parameter</span> d_disc = <span class="number">8&#x27;b00111110</span>;</span><br><span class="line">    <span class="keyword">parameter</span> d_flag = <span class="number">8&#x27;b01111110</span>;</span><br><span class="line">    <span class="keyword">parameter</span> d_err  =  <span class="number">7&#x27;b1111111</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] data;</span><br><span class="line">    <span class="keyword">wire</span> s_disc, s_flag, s_err;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(reset | ~in) data &lt;= <span class="number">8&#x27;b0</span>;</span><br><span class="line">        <span class="keyword">else</span> data &lt;= &#123;data[<span class="number">6</span>:<span class="number">0</span>], in&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assign</span> s_disc = &#123;data[<span class="number">6</span>:<span class="number">0</span>], in&#125; == d_disc;</span><br><span class="line">    <span class="keyword">assign</span> s_flag = &#123;data[<span class="number">6</span>:<span class="number">0</span>], in&#125; == d_flag;</span><br><span class="line">    <span class="keyword">assign</span> s_err  = &#123;data[<span class="number">5</span>:<span class="number">0</span>], in&#125; == d_err;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(reset) <span class="keyword">begin</span></span><br><span class="line">            disc &lt;= <span class="number">1&#x27;b0</span>;</span><br><span class="line">            flag &lt;= <span class="number">1&#x27;b0</span>;</span><br><span class="line">            err &lt;= <span class="number">1&#x27;b0</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            disc &lt;= s_disc;</span><br><span class="line">            flag &lt;= s_flag;</span><br><span class="line">            err &lt;= s_err;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>data 是因時序平移，所以必然會延遲。</li>
+<li>s_disc 必須同時使用 data + in 才能準時完成。</li>
+</ul>
+<p>個人理解：延遲離散化，要撐到輸出的最後一刻再固定數值。</p>
+<h2 id="關於編譯"><a class="markdownIt-Anchor" href="#關於編譯">#</a> 關於編譯</h2>
+<h3 id="程式轉電路"><a class="markdownIt-Anchor" href="#程式轉電路">#</a> 程式轉電路</h3>
+<p>測試程式碼</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> AandB = A &amp; B;</span><br><span class="line"><span class="keyword">assign</span> AorB = A | B;</span><br></pre></td></tr></table></figure>
+<p>RTL 分析為 and 、or<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230825113649.png" alt="image.png"></p>
+<p>Synthesis 後變成邏輯閘 (LUT2)。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230825111135.png" alt="image.png"></p>
+<h3 id="gitignore-example"><a class="markdownIt-Anchor" href="#gitignore-example">#</a> gitignore example</h3>
+<p><a target="_blank" rel="noopener" href="https://support.xilinx.com/s/article/61232?language=en_US">https://support.xilinx.com/s/article/61232?language=en_US</a><br>
+ 檔案太複雜，使用官方的 gitignore 方便 git 版本控管。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/04/01/Verilog%20%E5%88%9D%E5%AD%B8%E8%80%85%E7%AD%86%E8%A8%98/">http://example.com/2023/04/01/Verilog%20%E5%88%9D%E5%AD%B8%E8%80%85%E7%AD%86%E8%A8%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Verilog/">Verilog</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/07/cplusplus-tutorial-program_structure/" title="C++ 學習筆記 - 基本程式架構"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++ 學習筆記 - 基本程式架構</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/14/HDLbits%20Circuits%20Sequential%20Logic%20Finite%20State%20Machines%203/" title="HDLbits Circuits Sequential Logic Finite State Machines 3"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">HDLbits Circuits Sequential Logic Finite State Machines 3</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023/03/06/HDLbits%20Circuits%20Combinational%20Logic%20Arithmetic%20Circuits/" title="HDLbits Circuits Combinational Logic Arithmetic Circuits"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-06</div><div class="title">HDLbits Circuits Combinational Logic Arithmetic Circuits</div></div></a></div><div><a href="/2023/03/04/HDLbits%20Circuits%20Combinational%20Logic%20Basic%20Gates/" title="HDLbits Circuits Combinational Logic Basic Gates"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-04</div><div class="title">HDLbits Circuits Combinational Logic Basic Gates</div></div></a></div><div><a href="/2023/03/07/HDLbits%20Circuits%20Combinational%20Logic%20Karnaugh%20Map%20to%20Circuit/" title="HDLbits Circuits Combinational Logic Karnaugh Map to Circuit"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-07</div><div class="title">HDLbits Circuits Combinational Logic Karnaugh Map to Circuit</div></div></a></div><div><a href="/2023/03/05/HDLbits%20Circuits%20Combinational%20Logic%20Multiplexers/" title="HDLbits Circuits Combinational Logic Multiplexers"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-05</div><div class="title">HDLbits Circuits Combinational Logic Multiplexers</div></div></a></div><div><a href="/2023/03/09/HDLbits%20Circuits%20Sequential%20Logic%20Counters/" title="HDLbits Circuits Sequential Logic Counters"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-09</div><div class="title">HDLbits Circuits Sequential Logic Counters</div></div></a></div><div><a href="/2023/03/12/HDLbits%20Circuits%20Sequential%20Logic%20Finite%20State%20Machines%201/" title="HDLbits Circuits Sequential Logic Finite State Machines 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-12</div><div class="title">HDLbits Circuits Sequential Logic Finite State Machines 1</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%9C%E6%96%BC%E5%AF%AB%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text"> 關於寫法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#notgate"><span class="toc-number">1.1.</span> <span class="toc-text"> Notgate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bit-%E9%99%A3%E5%88%97"><span class="toc-number">1.2.</span> <span class="toc-text"> bit 陣列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reg-%E4%B8%8D%E6%98%AF%E8%AE%8A%E6%95%B8"><span class="toc-number">1.3.</span> <span class="toc-text"> reg 不是變數</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#always-%E7%94%A8%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text"> always 用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BB%E5%A1%9E%E8%88%87%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="toc-number">1.5.</span> <span class="toc-text"> 阻塞與非阻塞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%9C%E6%96%BC%E6%9E%B6%E6%A7%8B"><span class="toc-number">2.</span> <span class="toc-text"> 關於架構</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E9%81%8E%E4%B8%8D%E5%81%9A%E4%BA%8B"><span class="toc-number">2.1.</span> <span class="toc-text"> 路過不做事</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%BB%B6%E9%81%B2%E7%8B%80%E6%85%8B%E6%A9%9F"><span class="toc-number">2.2.</span> <span class="toc-text"> 不延遲狀態機</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%9C%E6%96%BC%E7%B7%A8%E8%AD%AF"><span class="toc-number">3.</span> <span class="toc-text"> 關於編譯</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BC%8F%E8%BD%89%E9%9B%BB%E8%B7%AF"><span class="toc-number">3.1.</span> <span class="toc-text"> 程式轉電路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gitignore-example"><span class="toc-number">3.2.</span> <span class="toc-text"> gitignore example</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/27/Git%20%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Git 常用指令介紹">Git 常用指令介紹</a><time datetime="2024-02-26T16:00:00.000Z" title="發表於 2024-02-27 00:00:00">2024-02-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)/" title="Keil-C 退出許可證(LIC)">Keil-C 退出許可證(LIC)</a><time datetime="2023-10-29T16:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/06/%E9%9B%BB%E8%85%A6%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%EF%BC%8C%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F/" title="電腦中的生命，細胞自動機">電腦中的生命，細胞自動機</a><time datetime="2023-10-05T16:00:00.000Z" title="發表於 2023-10-06 00:00:00">2023-10-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/22/%E8%87%AA%E8%A3%BD%E5%89%AA%E8%B2%BC%E7%B0%BF%E5%B7%A5%E5%85%B7(Clipboard)/" title="自製剪貼簿工具(Clipboard)">自製剪貼簿工具(Clipboard)</a><time datetime="2023-09-21T16:00:00.000Z" title="發表於 2023-09-22 00:00:00">2023-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/01/EtherCAT%20%E7%94%A2%E5%93%81%E9%96%8B%E7%99%BC%E8%80%85%E7%9A%84%E5%BF%83%E5%BE%97/" title="EtherCAT 產品開發者的心得">EtherCAT 產品開發者的心得</a><time datetime="2023-08-31T16:00:00.000Z" title="發表於 2023-09-01 00:00:00">2023-09-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
