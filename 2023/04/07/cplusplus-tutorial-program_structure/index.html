@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C++ 學習筆記 - 基本程式架構 | Kevin的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# C++ 基本要素 # Hello World 通常第一個程式是名為 “Hello World” 的程式，它只是將 “Hello World” 顯示到電腦螢幕上，雖然簡單但包含了 C++ 的基本組件。 123456&#x2F;&#x2F; my first program in C++#include &lt;iostream&gt;int main()&amp;#123;  std::cout &lt;&lt; &amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 學習筆記 - 基本程式架構">
+<meta property="og:url" content="http://example.com/2023/04/07/cplusplus-tutorial-program_structure/index.html">
+<meta property="og:site_name" content="Kevin的學習筆記">
+<meta property="og:description" content="# C++ 基本要素 # Hello World 通常第一個程式是名為 “Hello World” 的程式，它只是將 “Hello World” 顯示到電腦螢幕上，雖然簡單但包含了 C++ 的基本組件。 123456&#x2F;&#x2F; my first program in C++#include &lt;iostream&gt;int main()&amp;#123;  std::cout &lt;&lt; &amp;quo">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-04-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-30T03:46:22.474Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/04/07/cplusplus-tutorial-program_structure/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++ 學習筆記 - 基本程式架構',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-30 11:46:22'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++ 學習筆記 - 基本程式架構</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-04-06T16:00:00.000Z" title="發表於 2023-04-07 00:00:00">2023-04-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2024-08-30T03:46:22.474Z" title="更新於 2024-08-30 11:46:22">2024-08-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++ 學習筆記 - 基本程式架構"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="c-基本要素"><a class="markdownIt-Anchor" href="#c-基本要素">#</a> C++ 基本要素</h1>
+<h3 id="hello-world"><a class="markdownIt-Anchor" href="#hello-world">#</a> Hello World</h3>
+<p>通常第一個程式是名為 “Hello World” 的程式，它只是將 “Hello World” 顯示到電腦螢幕上，雖然簡單但包含了 C++ 的基本組件。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my first program in C++</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="標識符"><a class="markdownIt-Anchor" href="#標識符">#</a> 標識符</h2>
+<p><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/04/08/cplusplus-tutorial-variables/">C++ 學習筆記 - 變量和類型</a><br>
+<a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/04/14/cplusplus-tutorial-constants/"> C++ 學習筆記 - 常量 (Constants)</a></p>
+<ul>
+<li>標識符：程式中變數、類型、函式和標號的名稱。</li>
+<li>關鍵字：系統已有的標識符。</li>
+<li>自訂義標識符：自己給變數、函數等起的名字。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> A,B,C; </span><br><span class="line"><span class="type">double</span> a1,b2,c3; </span><br><span class="line"><span class="type">char</span> name[<span class="number">50</span>], addr[<span class="number">100</span>]; </span><br></pre></td></tr></table></figure>
+<h2 id="運算子"><a class="markdownIt-Anchor" href="#運算子">#</a> 運算子</h2>
+<p><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/04/15/cplusplus-tutorial-operators/">C++ 學習筆記 - 運算符 (Operators)</a></p>
+<ul>
+<li>算數運算符號 : +, - , * , /</li>
+<li>關係運算子 : &gt; , &lt;</li>
+</ul>
+<h2 id="陳述式"><a class="markdownIt-Anchor" href="#陳述式">#</a> 陳述式</h2>
+<p><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/05/19/cplusplus-tutorial-control/">C++ 學習筆記 - 流程控制</a><br>
+ C++ 程式由一系列語句組成，語句是可以產生某種效果的表達式。在  <code>main</code>  函數主體部分中，可以使用各種語句來進行變數聲明、運算、流程控制、函數調用等操作。每一段的程式碼都需要用分號  <code>;</code> ，它代表一個表達完整的命令。</p>
+<h2 id="輸入-輸出"><a class="markdownIt-Anchor" href="#輸入-輸出">#</a> 輸入 、 輸出</h2>
+<p><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/05/14/cplusplus-tutorial-basic_io/">C++ 學習筆記 - 基本輸入輸出</a><br>
+在 C++ 中，使用 cin 和 cout 以在終端機獲取和輸出資料。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n; <span class="comment">// 宣告變數 n </span></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;請輸入數字:&quot;</span>; </span><br><span class="line">cin &gt;&gt; n;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;你輸入的數字為: &quot;</span> &lt;&lt; n &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<h2 id="函數-function"><a class="markdownIt-Anchor" href="#函數-function">#</a> 函數 function</h2>
+<p><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/05/20/cplusplus-tutorial-functions/">C++ 學習筆記 - 特殊函數</a><br>
+能完成一定功能的有名的程式序列，是組成 C++ 程序的基本單位。</p>
+<h2 id="命名空間標準"><a class="markdownIt-Anchor" href="#命名空間標準">#</a> 命名空間標準</h2>
+<p><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/05/26/cplusplus-tutorial-namespaces/">C++ 學習筆記 - 名稱可見性</a><br>
+命名空間是 C++ 用來區分不同名稱之間的作用域的一種機制，使用元素時可以限定其命名空間，以避免命名衝突。</p>
+<h2 id="預處理器指令"><a class="markdownIt-Anchor" href="#預處理器指令">#</a> 預處理器指令</h2>
+<p>以  <code>#</code>  開頭的行是由預處理器解釋的指令，它們是在程序本身的編譯開始之前解釋的特殊行，其中  <code>#include</code>  指令是最常見的一種，用於引入標準或自定義的標頭檔。</p>
+<h1 id="工程師的好習慣"><a class="markdownIt-Anchor" href="#工程師的好習慣">#</a> 工程師的好習慣</h1>
+<h3 id="註解"><a class="markdownIt-Anchor" href="#註解">#</a> 註解</h3>
+<p>程式員可以在程式碼中插入註解以提高可讀性，其對程式行為沒有影響，例如範例中的  <code>// my first program in C++</code>  就沒有實質行為。</p>
+<p>C++ 支持兩種註解的方式</p>
+<ul>
+<li>行註解 :  <code>//</code>  的位置到同一行末尾的所有內容。</li>
+<li>區塊註解 :  <code>/*</code>  字符和字符第一次出現之間的所有內容 <code>*/</code> 。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>; <span class="comment">// 行註解，左邊不會受影響。</span></span><br><span class="line"><span class="comment">/* 這段話在區塊註解的範圍， </span></span><br><span class="line"><span class="comment">   裡面的句子都不會被執行。</span></span><br><span class="line"><span class="comment">   作者：陳科文 */</span></span><br></pre></td></tr></table></figure>
+<h2 id="縮排"><a class="markdownIt-Anchor" href="#縮排">#</a> 縮排</h2>
+<p>為了讓程序更易讀，C++ 中使用不同的行結構和適當的縮進，但沒有關於縮進或如何在不同行中拆分指令的嚴格規則。下方使用函數 main 的寫法為例。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot; Hello World!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函數 main 寫成一行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Hello World!&quot;</span>; &#125;</span><br></pre></td></tr></table></figure>
+<p>函數 main 寫成更多行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  std::cout &lt;&lt;</span><br><span class="line">    <span class="string">&quot;Hello &quot;</span>;</span><br><span class="line">  std::cout</span><br><span class="line">    &lt;&lt; <span class="string">&quot;World!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程式中有空行也不會影響行為。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Hello &quot;</span>;</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;World!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這些寫法都是有效的，結果將再次與前面的示例完全相同，根據使用情境調整縮排或換行，可提高了代碼的可讀性。</p>
+<h2 id="編碼風格"><a class="markdownIt-Anchor" href="#編碼風格">#</a> 編碼風格</h2>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Indentation_style">wiki 編碼風格</a><br>
+集合種習慣並統一規則，就會成為編碼風格，要成為好的工程師一定要有編碼風格，比起在意採用何種風格，更重要的是在團隊中統一編碼風格，使程式碼更有一致性，若是初學者建議 Visual Studio 裝起來，模仿自動排版的格式即可。</p>
+<h1 id="初學者專區"><a class="markdownIt-Anchor" href="#初學者專區">#</a> 初學者專區</h1>
+<h3 id="建議學習順序"><a class="markdownIt-Anchor" href="#建議學習順序">#</a> 建議學習順序</h3>
+<ul>
+<li>變量、數據類型和數值運算符</li>
+<li>基本輸入與輸出</li>
+<li>邏輯 (if 語句、switch 語句)</li>
+<li>循環 (for、while、do- while)</li>
+<li>函數</li>
+<li><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/06/10/cplusplus-tutorial-arrays/">陣列 (arrays)</a></li>
+<li><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/04/22/cplusplus-stl-string/">字串 (String)</a></li>
+<li><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/06/02/cplusplus-tutorial-structures/">數據結構 (struct)</a></li>
+<li><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/06/30/cplusplus-tutorial-classes/">類別 (class)</a></li>
+<li><a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2023/06/09/cplusplus-tutorial-pointers/">指標 (pointers)</a></li>
+<li>排序</li>
+<li>鍊錶</li>
+<li>遞迴</li>
+</ul>
+<h2 id="常見編譯錯誤"><a class="markdownIt-Anchor" href="#常見編譯錯誤">#</a> 常見編譯錯誤</h2>
+<ul>
+<li>忘記加分號：解決方法在錯誤出現處的行末尾加上  <code>;</code> 。</li>
+<li>括號沒括好：解決方法檢查自己縮排的狀況，並找出遺漏的 {或} 並補上。</li>
+<li>忘記宣告：解決方法檢查使用前已被宣告，若無則就宣告它。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/04/07/cplusplus-tutorial-program_structure/">http://example.com/2023/04/07/cplusplus-tutorial-program_structure/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/08/cplusplus-tutorial-variables/" title="C++ 學習筆記 - 變量和類型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++ 學習筆記 - 變量和類型</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/01/Verilog%20%E5%88%9D%E5%AD%B8%E8%80%85%E7%AD%86%E8%A8%98/" title="Verilog 初學者筆記"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Verilog 初學者筆記</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023/05/06/cplusplus-stl-deque/" title="C++ 學習筆記 - 雙向佇列(Deque)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ 學習筆記 - 雙向佇列(Deque)</div></div></a></div><div><a href="/2023/04/28/cplusplus-stl-list/" title="C++ 學習筆記 - 清單(List)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-28</div><div class="title">C++ 學習筆記 - 清單(List)</div></div></a></div><div><a href="/2023/05/13/cplusplus-stl-map-unordered_map/" title="C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)</div></div></a></div><div><a href="/2023/05/05/cplusplus-stl-queue/" title="C++ 學習筆記 - 佇列(Queue)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-05</div><div class="title">C++ 學習筆記 - 佇列(Queue)</div></div></a></div><div><a href="/2023/05/12/cplusplus-stl-set-unordered_set/" title="C++ 學習筆記 - 集合(Set)、無序集合(Unordered Set)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-12</div><div class="title">C++ 學習筆記 - 集合(Set)、無序集合(Unordered Set)</div></div></a></div><div><a href="/2023/04/29/cplusplus-stl-stack/" title="C++ 學習筆記 - 堆疊(Stack)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-29</div><div class="title">C++ 學習筆記 - 堆疊(Stack)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#c-%E5%9F%BA%E6%9C%AC%E8%A6%81%E7%B4%A0"><span class="toc-number">1.</span> <span class="toc-text"> C++ 基本要素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-world"><span class="toc-number">1.0.1.</span> <span class="toc-text"> Hello World</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%99%E8%AD%98%E7%AC%A6"><span class="toc-number">1.1.</span> <span class="toc-text"> 標識符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%AE%97%E5%AD%90"><span class="toc-number">1.2.</span> <span class="toc-text"> 運算子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%B3%E8%BF%B0%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text"> 陳述式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BC%B8%E5%85%A5-%E8%BC%B8%E5%87%BA"><span class="toc-number">1.4.</span> <span class="toc-text"> 輸入 、 輸出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B8-function"><span class="toc-number">1.5.</span> <span class="toc-text"> 函數 function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E6%A8%99%E6%BA%96"><span class="toc-number">1.6.</span> <span class="toc-text"> 命名空間標準</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A0%90%E8%99%95%E7%90%86%E5%99%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">1.7.</span> <span class="toc-text"> 預處理器指令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%A5%BD%E7%BF%92%E6%85%A3"><span class="toc-number">2.</span> <span class="toc-text"> 工程師的好習慣</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A8%BB%E8%A7%A3"><span class="toc-number">2.0.1.</span> <span class="toc-text"> 註解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B8%AE%E6%8E%92"><span class="toc-number">2.1.</span> <span class="toc-text"> 縮排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B7%A8%E7%A2%BC%E9%A2%A8%E6%A0%BC"><span class="toc-number">2.2.</span> <span class="toc-text"> 編碼風格</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E5%AD%B8%E8%80%85%E5%B0%88%E5%8D%80"><span class="toc-number">3.</span> <span class="toc-text"> 初學者專區</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E8%AD%B0%E5%AD%B8%E7%BF%92%E9%A0%86%E5%BA%8F"><span class="toc-number">3.0.1.</span> <span class="toc-text"> 建議學習順序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A6%8B%E7%B7%A8%E8%AD%AF%E9%8C%AF%E8%AA%A4"><span class="toc-number">3.1.</span> <span class="toc-text"> 常見編譯錯誤</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/27/Git%20%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Git 常用指令介紹">Git 常用指令介紹</a><time datetime="2024-02-26T16:00:00.000Z" title="發表於 2024-02-27 00:00:00">2024-02-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)/" title="Keil-C 退出許可證(LIC)">Keil-C 退出許可證(LIC)</a><time datetime="2023-10-29T16:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/06/%E9%9B%BB%E8%85%A6%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%EF%BC%8C%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F/" title="電腦中的生命，細胞自動機">電腦中的生命，細胞自動機</a><time datetime="2023-10-05T16:00:00.000Z" title="發表於 2023-10-06 00:00:00">2023-10-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/22/%E8%87%AA%E8%A3%BD%E5%89%AA%E8%B2%BC%E7%B0%BF%E5%B7%A5%E5%85%B7(Clipboard)/" title="自製剪貼簿工具(Clipboard)">自製剪貼簿工具(Clipboard)</a><time datetime="2023-09-21T16:00:00.000Z" title="發表於 2023-09-22 00:00:00">2023-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/01/EtherCAT%20%E7%94%A2%E5%93%81%E9%96%8B%E7%99%BC%E8%80%85%E7%9A%84%E5%BF%83%E5%BE%97/" title="EtherCAT 產品開發者的心得">EtherCAT 產品開發者的心得</a><time datetime="2023-08-31T16:00:00.000Z" title="發表於 2023-09-01 00:00:00">2023-09-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

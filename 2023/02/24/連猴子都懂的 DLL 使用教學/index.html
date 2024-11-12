@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>連猴子都懂的 DLL 使用教學 | Kevin的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# DLL 相關說明 DLL (動態鏈接庫)  是一個程式庫，其中包含多個程式可以同時使用的程式碼和資料，它有助於提升程式碼重複使用和高效的記憶體使用量，簡單來說可以想像 DLL 也是應用程式的一種，只是它可以讓其他程式在執行中直接呼叫，而如何使用 DLL 與 DLL 的種類有關。 # 靜態連結 DLL 的方法 靜態連結在使用上會有函式和資料被編譯進一個二進位制檔案 (.lib)。編譯連結庫可執行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="連猴子都懂的 DLL 使用教學">
+<meta property="og:url" content="http://example.com/2023/02/24/%E9%80%A3%E7%8C%B4%E5%AD%90%E9%83%BD%E6%87%82%E7%9A%84%20DLL%20%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8/index.html">
+<meta property="og:site_name" content="Kevin的學習筆記">
+<meta property="og:description" content="# DLL 相關說明 DLL (動態鏈接庫)  是一個程式庫，其中包含多個程式可以同時使用的程式碼和資料，它有助於提升程式碼重複使用和高效的記憶體使用量，簡單來說可以想像 DLL 也是應用程式的一種，只是它可以讓其他程式在執行中直接呼叫，而如何使用 DLL 與 DLL 的種類有關。 # 靜態連結 DLL 的方法 靜態連結在使用上會有函式和資料被編譯進一個二進位制檔案 (.lib)。編譯連結庫可執行">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-02-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-26T08:19:17.247Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/02/24/%E9%80%A3%E7%8C%B4%E5%AD%90%E9%83%BD%E6%87%82%E7%9A%84%20DLL%20%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '連猴子都懂的 DLL 使用教學',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-26 16:19:17'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">連猴子都懂的 DLL 使用教學</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-02-23T16:00:00.000Z" title="發表於 2023-02-24 00:00:00">2023-02-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2024-08-26T08:19:17.247Z" title="更新於 2024-08-26 16:19:17">2024-08-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="連猴子都懂的 DLL 使用教學"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="dll-相關說明"><a class="markdownIt-Anchor" href="#dll-相關說明">#</a> DLL 相關說明</h2>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/troubleshoot/windows-client/deployment/dynamic-link-library">DLL (動態鏈接庫)</a>  是一個程式庫，其中包含多個程式可以同時使用的程式碼和資料，它有助於提升程式碼重複使用和高效的記憶體使用量，簡單來說可以想像 DLL 也是應用程式的一種，只是它可以讓其他程式在執行中直接呼叫，而如何使用 DLL 與 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/cpp/build/kinds-of-dlls?view=msvc-170">DLL 的種類有關</a>。</p>
+<h3 id="靜態連結-dll-的方法"><a class="markdownIt-Anchor" href="#靜態連結-dll-的方法">#</a> 靜態連結 DLL 的方法</h3>
+<p>靜態連結在使用上會有函式和資料被編譯進一個二進位制檔案 (.lib)。編譯連結庫可執行檔案時，連結器從庫中複製這些函式和資料並把它們和應用程式的其它模組，還有同時會提供標頭檔 (.h) 協助確認 DLL 庫提供的介面，檔案配置完畢後即完成靜態連結 DLL。</p>
+<h3 id="動態連結-dll-的方法"><a class="markdownIt-Anchor" href="#動態連結-dll-的方法">#</a> 動態連結 DLL 的方法</h3>
+<p>在執行 Windows 程式時，它通過一個被稱作動態連結的程序與 Windows 相接，一個 Windows 的 .EXE 檔案擁有它使用不同動態連結庫的引用，所以使用上只要提供 DLL 本體就可以。</p>
+<h3 id="託管與非託管"><a class="markdownIt-Anchor" href="#託管與非託管">#</a> 託管與非託管</h3>
+<p>平台叫用服務，可讓受控碼呼叫實作在動態連結程式庫 (DLL) 中的非受控函式，如 Windows API 中的函式。 它會找出並叫用匯出的函式，並且在需要的時候於交互操作界限之間封送處理其引數。</p>
+<ul>
+<li>託管：透過 .NET (CLI) 達成</li>
+<li>非託管：透過 Windows API 達成</li>
+</ul>
+<h2 id="c-靜態連結"><a class="markdownIt-Anchor" href="#c-靜態連結">#</a> C++ 靜態連結</h2>
+<h3 id="確認檔案"><a class="markdownIt-Anchor" href="#確認檔案">#</a> 確認檔案</h3>
+<p>首先要想辦法取得正確的標頭檔 (.h) 與連結檔 (.lib)，最好要另外留下這些檔案，以免不小心被覆蓋，導致程式無法使用的窘境。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230828104359.png" alt="image.png"></p>
+<h3 id="專案設定"><a class="markdownIt-Anchor" href="#專案設定">#</a> 專案設定</h3>
+<p>標頭檔資料夾中加入，目標 DLL 的標頭檔 (.h)。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230828103327.png" alt="image.png"></p>
+<p>加入 DLL 的連結檔 (.lib)，專案設定 =&gt; 連結器 =&gt; 輸入。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230828103556.png" alt="image.png"></p>
+<h3 id="範例程式"><a class="markdownIt-Anchor" href="#範例程式">#</a> 範例程式</h3>
+<p>與一般外部函數的用法一樣，沒什麼區別。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;mydll.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">mydll_StartLog</span>(<span class="string">&quot;log.csv&quot;</span>);</span><br><span class="line">  <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">mydll_StopLog</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="c-動態連結"><a class="markdownIt-Anchor" href="#c-動態連結">#</a> C++ 動態連結</h2>
+<h3 id="確認-dll-本體"><a class="markdownIt-Anchor" href="#確認-dll-本體">#</a> 確認 DLL 本體</h3>
+<p>有鑑於 DLL 地獄的特殊文化，我一定會去確認呼叫的 DLL 是否正確，去確定 DLL 到底存不存在，一般 DLL 都會放在 System32 裡，而另一個優先權更高的位置，是應用程式的同個資料夾中，兩個地方都要去確認，不過就算本體存在，還是要小心版本這個大魔王。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230828101900.png" alt="image.png"></p>
+<h3 id="確認-api-名稱"><a class="markdownIt-Anchor" href="#確認-api-名稱">#</a> 確認 API 名稱</h3>
+<p>你以為 API 使用手冊是正確的嗎？不只手冊會不正確，標頭檔不正確的都有遇過，最妥當的方式還是直接問 DLL 到底支援那些 API，若使用中出現錯誤碼序列數 XXX 錯誤，此時只要對照一下就可以知道哪個 API 被移除了，圖片中使用 VS2005 的命令提示字元，下 dumpbin 指令，一般 VS 的工具中都會有此功能。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230828101928.png" alt="image.png"></p>
+<h3 id="範例程式-2"><a class="markdownIt-Anchor" href="#範例程式-2">#</a> 範例程式</h3>
+<p>關鍵的函式只有  <code>LoadLibrary()</code>  跟  <code>GetProcAddress()</code> ，一個用來取得 dll，如果找不到 DLL 那 hModule 就會是 null ，另一個用來取得 API 名稱，如果找不到該名稱，fp 就會是 null ，如果都有找到就將 fp 賦型就可以使用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">short</span><span class="params">(*voidFun)</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">// typedef short(*voidFun2)(short A, short B);</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">  HMODULE hModule = <span class="built_in">LoadLibrary</span>(_T(<span class="string">&quot;wdapi1040.dll&quot;</span>));</span><br><span class="line">  <span class="keyword">if</span>(!hModule)</span><br><span class="line">  &#123;</span><br><span class="line">    _tprintf(_T(<span class="string">&quot;LoadLibray error!\n&quot;</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  FARPROC fp = <span class="built_in">GetProcAddress</span>(hModule, <span class="string">&quot;WDC_Version&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span>(!fp)</span><br><span class="line">  &#123;</span><br><span class="line">    DWORD err = <span class="built_in">GetLastError</span>();</span><br><span class="line">    _tprintf(_T(<span class="string">&quot;%x\n&quot;</span>), err);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  voidFun WDC_Version = (<span class="built_in">short</span>(*)())fp;</span><br><span class="line">  <span class="built_in">FreeLibrary</span>(hModule);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="csharp-非託管"><a class="markdownIt-Anchor" href="#csharp-非託管">#</a> Csharp 非託管</h2>
+<p>Csharp 應用程式呼叫 C++ 的 DLL 時會使用 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/dotnet/framework/interop/consuming-unmanaged-dll-functions">非託管調用 DLL</a>，需要維護對應配置文件，我的習慣是會將  <code>DllImport</code>  相關的函數做成一個獨立的檔案，類似 C++ 標頭檔的方式來進行使用，如果 DLL 的設計不改，那該做的事一件都省不了。</p>
+<h3 id="範例程式-3"><a class="markdownIt-Anchor" href="#範例程式-3">#</a> 範例程式</h3>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line">[<span class="meta">DllImport(<span class="string">&quot;mydll.dll&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">extern</span> Int16 <span class="title">mydll_StopLog</span>()</span>;</span><br><span class="line"></span><br><span class="line">mydll_StopLog();</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/dotnet/framework/interop/platform-invoke-examples">微軟的範例程式</a></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Win32</span> &#123;</span><br><span class="line">  [<span class="meta">DllImport(<span class="string">&quot;user32.dll&quot;</span>, CharSet=CharSet.Auto)</span>]</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">extern</span> IntPtr <span class="title">MessageBox</span>(<span class="params"><span class="built_in">int</span> hWnd, String text, String caption, <span class="built_in">uint</span> type</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">HelloWorld</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</span> &#123;</span><br><span class="line">    Win32.MessageBox(<span class="number">0</span>, <span class="string">&quot;Hello World&quot;</span>, <span class="string">&quot;Platform Invoke Sample&quot;</span>, <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="csharp-託管"><a class="markdownIt-Anchor" href="#csharp-託管">#</a> Csharp 託管</h2>
+<p>這個用法就方便許多，直接加入參考就完事，不過要 DLL 本身有支援這種使用方式，該範例的 DLL 是用 Csharp 寫的，跟前面的範例並不是同一個檔案，再往後可以跳脫出 DLL 的思維，善加利用託管的特性 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/dotnet/framework/interop/importing-a-type-library-as-an-assembly">匯入類型程式庫做為組件</a>，不過就跟這篇文章沒什麼關係了。</p>
+<h3 id="加入參考"><a class="markdownIt-Anchor" href="#加入參考">#</a> 加入參考</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230828133545.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230828133627.png" alt="image.png"></p>
+<h3 id="範例程式-4"><a class="markdownIt-Anchor" href="#範例程式-4">#</a> 範例程式</h3>
+<p>與一般外部函數的用法一樣，沒什麼區別。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> mydll;</span><br><span class="line"></span><br><span class="line">mydll.StartLog(<span class="string">&quot;log.csv&quot;</span>);</span><br><span class="line">mydll.StopLog();</span><br></pre></td></tr></table></figure>
+<h2 id="如何確認-dll-的真偽"><a class="markdownIt-Anchor" href="#如何確認-dll-的真偽">#</a> 如何確認 DLL 的真偽</h2>
+<p>基本上所有的資訊都在 DLL 的內容裡了，包含數位簽章、版本等等，以此可以確保 DLL 沒有被亂改過。</p>
+<p>土師傅都看檔案大小跟日期，不要不信。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/202308291448092.png" alt="image.png"></p>
+<p>數位簽章，可以確保簽證後沒有被竄改。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/202308291452052.png" alt="image.png"></p>
+<p>檔案版本，供應商自由心證，參考就好。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/202308291453183.png" alt="image.png"></p>
+<h2 id="型別轉換問題"><a class="markdownIt-Anchor" href="#型別轉換問題">#</a> 型別轉換問題</h2>
+<p>標頭檔 (.h) 中的 int 要特別小心，因為你根本不知道 DLL 當初編的是 x64 還是 x86，編譯器檢查不出差異，寫錯還不一定每次都發生問題，所以很難查，建議正名 INT16、INT32、INT64。</p>
+<p>如果是傳遞某個指標，那你要確定該容器的實作是相同的，不同語言同類別名稱的實作不一定相同，所以不是找個同名的塞過去就完事，比較理想的情況是 DLL 有附上使用的類別，沒有就只能自己刻。</p>
+<h2 id="函式的裝飾名稱"><a class="markdownIt-Anchor" href="#函式的裝飾名稱">#</a> 函式的裝飾名稱</h2>
+<p>這跟 DLL 本身 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/cpp/build/determining-which-exporting-method-to-use?view=msvc-170">決定要使用的匯出方法</a> 有關，使用  <code>__declspec (dllexport)</code>  匯出的函式會有裝飾名稱，可參考圖片中的函數，原本的名稱外還有其他符號，而且您使用不同版本的編譯器重建它時可能會變更。所以 C++ 函式的名稱並不是固定的，若名稱錯誤自然無法成功進行動態連結。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/202308291050685.png" alt="image.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/02/24/%E9%80%A3%E7%8C%B4%E5%AD%90%E9%83%BD%E6%87%82%E7%9A%84%20DLL%20%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8/">http://example.com/2023/02/24/%E9%80%A3%E7%8C%B4%E5%AD%90%E9%83%BD%E6%87%82%E7%9A%84%20DLL%20%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/01/HDLbits%20Getting%20Started/" title="HDLbits Getting Started"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">HDLbits Getting Started</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/06/Vivado%20-%20Xilinx%20FPGA%20%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%20Debug%20%E6%95%99%E5%AD%B8/" title="Vivado - Xilinx FPGA 開發工具 Debug 教學"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vivado - Xilinx FPGA 開發工具 Debug 教學</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023/05/06/cplusplus-stl-deque/" title="C++ 學習筆記 - 雙向佇列(Deque)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">C++ 學習筆記 - 雙向佇列(Deque)</div></div></a></div><div><a href="/2023/04/28/cplusplus-stl-list/" title="C++ 學習筆記 - 清單(List)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-28</div><div class="title">C++ 學習筆記 - 清單(List)</div></div></a></div><div><a href="/2023/05/13/cplusplus-stl-map-unordered_map/" title="C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-13</div><div class="title">C++ 學習筆記 - 映射(Map)、無序映射(Unordered Map)</div></div></a></div><div><a href="/2023/05/05/cplusplus-stl-queue/" title="C++ 學習筆記 - 佇列(Queue)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-05</div><div class="title">C++ 學習筆記 - 佇列(Queue)</div></div></a></div><div><a href="/2023/05/12/cplusplus-stl-set-unordered_set/" title="C++ 學習筆記 - 集合(Set)、無序集合(Unordered Set)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-12</div><div class="title">C++ 學習筆記 - 集合(Set)、無序集合(Unordered Set)</div></div></a></div><div><a href="/2023/04/29/cplusplus-stl-stack/" title="C++ 學習筆記 - 堆疊(Stack)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-29</div><div class="title">C++ 學習筆記 - 堆疊(Stack)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dll-%E7%9B%B8%E9%97%9C%E8%AA%AA%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text"> DLL 相關說明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9C%E6%85%8B%E9%80%A3%E7%B5%90-dll-%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text"> 靜態連結 DLL 的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8B%95%E6%85%8B%E9%80%A3%E7%B5%90-dll-%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text"> 動態連結 DLL 的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A8%97%E7%AE%A1%E8%88%87%E9%9D%9E%E8%A8%97%E7%AE%A1"><span class="toc-number">1.3.</span> <span class="toc-text"> 託管與非託管</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E9%9D%9C%E6%85%8B%E9%80%A3%E7%B5%90"><span class="toc-number">2.</span> <span class="toc-text"> C++ 靜態連結</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%BA%E8%AA%8D%E6%AA%94%E6%A1%88"><span class="toc-number">2.1.</span> <span class="toc-text"> 確認檔案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%88%E6%A1%88%E8%A8%AD%E5%AE%9A"><span class="toc-number">2.2.</span> <span class="toc-text"> 專案設定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text"> 範例程式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E5%8B%95%E6%85%8B%E9%80%A3%E7%B5%90"><span class="toc-number">3.</span> <span class="toc-text"> C++ 動態連結</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%BA%E8%AA%8D-dll-%E6%9C%AC%E9%AB%94"><span class="toc-number">3.1.</span> <span class="toc-text"> 確認 DLL 本體</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%BA%E8%AA%8D-api-%E5%90%8D%E7%A8%B1"><span class="toc-number">3.2.</span> <span class="toc-text"> 確認 API 名稱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F-2"><span class="toc-number">3.3.</span> <span class="toc-text"> 範例程式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#csharp-%E9%9D%9E%E8%A8%97%E7%AE%A1"><span class="toc-number">4.</span> <span class="toc-text"> Csharp 非託管</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F-3"><span class="toc-number">4.1.</span> <span class="toc-text"> 範例程式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#csharp-%E8%A8%97%E7%AE%A1"><span class="toc-number">5.</span> <span class="toc-text"> Csharp 託管</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5%E5%8F%83%E8%80%83"><span class="toc-number">5.1.</span> <span class="toc-text"> 加入參考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F-4"><span class="toc-number">5.2.</span> <span class="toc-text"> 範例程式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%A2%BA%E8%AA%8D-dll-%E7%9A%84%E7%9C%9F%E5%81%BD"><span class="toc-number">6.</span> <span class="toc-text"> 如何確認 DLL 的真偽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%8B%E5%88%A5%E8%BD%89%E6%8F%9B%E5%95%8F%E9%A1%8C"><span class="toc-number">7.</span> <span class="toc-text"> 型別轉換問題</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E5%BC%8F%E7%9A%84%E8%A3%9D%E9%A3%BE%E5%90%8D%E7%A8%B1"><span class="toc-number">8.</span> <span class="toc-text"> 函式的裝飾名稱</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/27/Git%20%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Git 常用指令介紹">Git 常用指令介紹</a><time datetime="2024-02-26T16:00:00.000Z" title="發表於 2024-02-27 00:00:00">2024-02-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)/" title="Keil-C 退出許可證(LIC)">Keil-C 退出許可證(LIC)</a><time datetime="2023-10-29T16:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/06/%E9%9B%BB%E8%85%A6%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%EF%BC%8C%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F/" title="電腦中的生命，細胞自動機">電腦中的生命，細胞自動機</a><time datetime="2023-10-05T16:00:00.000Z" title="發表於 2023-10-06 00:00:00">2023-10-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/22/%E8%87%AA%E8%A3%BD%E5%89%AA%E8%B2%BC%E7%B0%BF%E5%B7%A5%E5%85%B7(Clipboard)/" title="自製剪貼簿工具(Clipboard)">自製剪貼簿工具(Clipboard)</a><time datetime="2023-09-21T16:00:00.000Z" title="發表於 2023-09-22 00:00:00">2023-09-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/01/EtherCAT%20%E7%94%A2%E5%93%81%E9%96%8B%E7%99%BC%E8%80%85%E7%9A%84%E5%BF%83%E5%BE%97/" title="EtherCAT 產品開發者的心得">EtherCAT 產品開發者的心得</a><time datetime="2023-08-31T16:00:00.000Z" title="發表於 2023-09-01 00:00:00">2023-09-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
