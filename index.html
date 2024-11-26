@@ -51,7 +51,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-11-22 09:27:03'
+  postUpdate: '2024-11-26 07:03:17'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -148,7 +148,107 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Kevin的學習筆記</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/13/Linux%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Linux 基本指令介紹">Linux 基本指令介紹</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></span></div><div class="content"># 常用的指令表
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Kevin的學習筆記</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/01/OpenBMC(5)-Bitbake_Execution/" title="OpenBMC(5)-Bitbake_Execution">OpenBMC(5)-Bitbake_Execution</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-06-01T00:00:00.000Z" title="發表於 2024-06-01 00:00:00">2024-06-01</time></span></div><div class="content"># 準備作業
+
+概述 Bitbake Execution，解釋專案的建置過程。
+依照 Bitbake 手冊中的執行部分的流程撰寫。
+針對關鍵性步驟進行說明，流程細節仍有待考據。
+
+# 變數解析
+BitBake 做的第一件事是解析基本組態元資料。基本配置元資料由專案 bblayers.conf 文件組成，以確定 BitBake 需要識別哪些層、所有必要的 layer.conf 文件和 bitbake.conf。
+BitBake =&gt; bblayers.conf =&gt; layer.conf and bitbake.conf
+
+BBPATH 用於分別搜尋 conf 、 classes
+BBFILES 用於定位配 .bb 、 .bbappend
+
+名為 “something_1.2.3.bb” 的配方會將
+
+PN 設為 “something”
+PV 設為 “1.2.3”
+
+了解執行環境中使用的設定檔和類別檔案的好方法是執行以下 BitBake 命令，檢查頂部 mybb.log 會顯示執行環境中使用的許多設定檔和類別檔案。
+1$ bitbake -e &gt; mybb.log
+#  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/25/OpenBMC(4)-Bitbake_Operators/" title="OpenBMC(4)-Bitbake_Operators">OpenBMC(4)-Bitbake_Operators</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-05-25T00:00:00.000Z" title="發表於 2024-05-25 00:00:00">2024-05-25</time></span></div><div class="content"># 準備作業
+
+介紹 bitbake 運算子
+舉例說明運算子該如何使用
+整理運算子處理的優先順序
+
+堆疊處理懶人包
+
+處理變數常數賦值  Y = &quot;abc&quot;
+處理強預設值賦值  Y ?= &quot;abc&quot;
+處理變數常數操作  Y += &quot;abc&quot;  、  Y .= &quot;abc&quot;
+處理弱預設值賦值  Y ??= &quot;abc&quot;
+處理變數拓展賦值  Y2 = &quot;$&#123;Y&#125;&quot;  =&gt; 拓展 Y 時將工作加入堆疊
+ (立即拓展的差異是在拓展的時機，而非堆疊的優先度)
+處理覆寫語法操作  F:append = &quot;abc&quot; 
+(處理時間點為 Bitbake 解析完成後)
+
+
+BECAUSE WINDOWS “RETURN SYMBOL” CAN NOT BE EXECUTED, SO MAKE SURE YOUR “RETURN SYMBOL” IN LOCAL.CONF IS LINUX TYPE. THAT CAN AVOID ANNOYING ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/18/OpenBMC(3)-setup_Script/" title="OpenBMC(3)-setup_Script">OpenBMC(3)-setup_Script</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-05-18T00:00:00.000Z" title="發表於 2024-05-18 00:00:00">2024-05-18</time></span></div><div class="content"># 準備作業
+
+setup 的功能為 openBMC 的建置前先設定環境
+分析 setup 的原始碼，並整理相依姓
+紀錄有關 Shell 語法的學習筆記
+
+# Shell 相關知識
+# zsh
+自 2019 年起，macOS 的預設 Shell 已從 Bash 改為 Zsh。
+原始碼中出現 ZSH_NAME 是為了解決 Bash 與 Zsh 兼容性的問題。
+# 判定字串的資料
+
+test -z string
+ 判定字串是否為 0 ? 若 string 為空字串，則為 true
+test -n string
+ 判定字串是否非為 0 ? 若 string 為空字串，則為 false，-n 可省略。
+test str1 == str2
+ 判定 str1 是否等於 str2 ，若相等，則回傳 true
+test str1 != str2
+ 判定 str1 是否不等於 str2 ，若相等，則回傳 false
+ 參考資料 : 鳥哥私房菜
+
+# 利用判斷符號  [ ]
+除了 test 之外，其實可以利用判斷符號 [ ]  來進行資料的判斷，舉例來說，如果我想要知道 ${HOME} 這個變數是否為空的 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/11/OpenBMC(2)-QEMU/" title="OpenBMC(2)-QEMU">OpenBMC(2)-QEMU</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-05-11T00:00:00.000Z" title="發表於 2024-05-11 00:00:00">2024-05-11</time></span></div><div class="content"># 準備作業
+
+QEMU 是一種虛擬機，可支援用來搭建 OpenBMC。
+必須先完成 OpenBMC(1)-1stBuild 並取得可用的二進位檔。
+使用 QEMU (Quick Emulator) 來模擬系統上閃爍的影像。
+在不同架構上進行快速測試、偵錯和驗證應用程式 / 特性 / 功能
+
+# Windows 中使用 QEMU
+QEMU 是一種虛擬機，可支援用來搭建 OpenBMC。
+QEMU 下載 https://www.qemu.org/download/#windows
+Windows 版 QEMU 是實驗性軟體，甚至可能包含嚴重的錯誤，因此使用二進位檔案需要您自擔風險。根據你的作業系統，QEMU 的目錄可能會有所不同。
+
+Ubuntu  $BUILDDIR/$MACHINE/tmp/work/x86_64-linux/
+iOS  $BUILDDIR/$MACHINE/tmp/work/aarch64-linux/
+
+# OpenBMC 中使用 QEMU
+OpenBMC 版本的教學
+ https://github.com/openbmc/docs/blob/master/che ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/04/OpenBMC(1)-1stBuild/" title="OpenBMC(1)-1stBuild">OpenBMC(1)-1stBuild</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-05-04T00:00:00.000Z" title="發表於 2024-05-04 00:00:00">2024-05-04</time></span></div><div class="content"># 準備作業
+取得 openBMC github 上的原始碼，在 GitLab 上建立 OpenBMC 的副本。依照 openBMC 中的 README.md 建構影像檔。
+
+# SSH 遠端 server 方案
+測試 Build server 權限已啟動可以成功登入。
+1ssh kevin@10.34.57.52   password: kevin
+檢查 Build server 上的遠端。
+12git clone --bare https://github.com/openbmc/u-boot.gitgit clone --bare https://github.com/openbmc/linux.git
+
+將 Build server 上的遠端改成 GitLab OpenBMC，遇到問題調整一下設定。
+12SSL certificate problem: self-signed certificategit config --global http.sslVerify false
+
+# 本地 Ubuntu 方案
+根據 Yocto Doc 的說法，每個作業系統環境都有要求。 如果我 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/27/VirtualBox%20%E5%AE%89%E8%A3%9D%20Ubuntu%20%E7%AD%86%E8%A8%98/" title="VirtualBox 安裝 Ubuntu 筆記">VirtualBox 安裝 Ubuntu 筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-27T00:00:00.000Z" title="發表於 2024-04-27 00:00:00">2024-04-27</time></span></div><div class="content"># 安裝 VirtualBox
+下載 VirtualBox，使用映像檔版本 Ubuntu 22.04.3 LTS。
+1pip install pywin32
+# pip 指令失效
+
+VirtualBox 安裝中顯示 pip 失效，只要手動加環境變數即可
+1C:\\Users\\11212706\\AppData\\Local\\Programs\\Python\\Python312\\Scripts
+
+加完後就能安裝 pywin32
+123456789C:\\Windows\\system32&gt;pip install pywin32Collecting pywin32Downloading pywin32-306-cp312-cp312-win_amd64.whl (9.2 MB)---------------------------------------- 9.2/9.2 MB 7.5 MB/s eta 0:00:00Installing collected packages: pywin32Successfully installed pywin32-306    [not ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/20/Linux%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Linux 基本指令介紹">Linux 基本指令介紹</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-20T00:00:00.000Z" title="發表於 2024-04-20 00:00:00">2024-04-20</time></span></div><div class="content"># 常用的指令表
 
 
 
@@ -240,9 +340,8 @@ cd / 桌面 &lt;== 到 / 桌面 這一個目錄
 
 1234vboxuser@Ubuntu:~$ cd ..vboxuser@Ubuntu:/home$ cdvboxuser@Ubuntu:~$ cd 桌面vboxuser@Ubuntu:~/桌面$
 # pwd 顯示當前目錄
-12vboxuser@U ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/13/Linux%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" title="Linux 學習筆記">Linux 學習筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></span></div><div class="content">Linux 是作業系統核心，CentOS 是 Linux 作業系統發佈套件，作業系統核心的目的第一是管理硬體、第二是提供系統呼叫給程式設計師開發軟體。 Linux 作業系統發佈套件則更提供常用軟體與工具及一個快速安裝的程序，讓操作者可以輕鬆的使用系統。
-# Linux 是什麼
-Linux 是一個作業系統『核心 (kernel)』的部份，目的除管理硬體分配資源之外，還需要提供軟體開發者一個可以遵循的開發標準， 讓程式開發人員可以在這個核心上面開發出人們所需要的軟體，諸如伺服器軟體、生產力軟體等等。
+12vboxuser@U ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/13/Linux%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" title="Linux 學習筆記">Linux 學習筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></span></div><div class="content"># Linux 是什麼
+Linux 是作業系統核心，目的除管理硬體分配資源之外，還需要提供軟體開發者一個可以遵循的開發標準， 讓程式開發人員可以在這個核心上面開發出人們所需要的軟體，諸如伺服器軟體、生產力軟體等等。
 硬體與作業系統
 
 硬體 : X86 個人電腦、ARM 手持式裝置
@@ -250,16 +349,11 @@ Linux 是一個作業系統『核心 (kernel)』的部份，目的除管理硬�
 系統呼叫：核心提供的函式庫，程式設計師只要參考此部份的系統呼叫即可設計相關的應用程式。
 應用程式：在系統呼叫的環境中的 binary code 程式。
 
-現代的作業系統主要的目的就是在控管硬體的資源，並且提供一組開發環境讓其他第三方協力廠商可以方便的在該作業系統上面開發相關的軟體。 故作業系統主要包含的 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/13/VirtualBox%20%E6%9E%B6%E8%A8%AD%20Ubuntu%20%E7%AD%86%E8%A8%98/" title="VirtualBox 架設 Linux 筆記">VirtualBox 架設 Linux 筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></span></div><div class="content"># 安裝 VirtualBox
-下載 VirtualBox，使用映像檔版本 Ubuntu 22.04.3 LTS。
-1pip install pywin32
-# pip 指令失效
+現代的作業系統主要的目的就是在控管硬體的資源，並且提供一組開發環境讓其他第三方協力廠商可以方便的在該作業系統上面開發相關的軟體。 故作業系統主要包含的部份是『核心 + 系統呼叫』
 
-VirtualBox 安裝中顯示 pip 失效，只要手動加環境變數即可
-1C:\\Users\\11212706\\AppData\\Local\\Programs\\Python\\Python312\\Scripts
+超級電腦可以說是一個國力的展現，而 top500 每年會有兩次去調查全世界跑得最快的超級電腦，台灣在 2019/11 的調查中，有一部超級電腦名列 21 名。
 
-加完後就能安裝 pywin32
-123456789C:\\Windows\\system32&gt;pip install pywin32Collecting pywin32Downloading pywin32-306-cp312-cp312-win_amd64.whl (9.2 MB)---------------------------------------- 9.2/9.2 MB 7.5 MB/s eta 0:00:00Installing collected packages: pywin32Successfully installed pywin32-306    [not ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/07/Git%20Error%20Could%20not%20get%20HEAD%20hash/" title="Git Error Could not get HEAD hash">Git Error Could not get HEAD hash</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-07T00:00:00.000Z" title="發表於 2024-04-07 00:00:00">2024-04-07</time></span></div><div class="content"># 異常現象
+Taiwania 2 - QCT QuantaGrid D52G-4U/LC, Xeon G ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/07/Git%20Error%20Could%20not%20get%20HEAD%20hash/" title="Git Error Could not get HEAD hash">Git Error Could not get HEAD hash</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-07T00:00:00.000Z" title="發表於 2024-04-07 00:00:00">2024-04-07</time></span></div><div class="content"># 異常現象
 該異常可能會遇到以下情況，遠端分支消失或遠端標籤消失、拉取或推送到遠端失敗，無法開啟遠端的 log，並出現如下錯誤信息，這通常表示 Git 在處理遠端存儲庫時遇到了權限或安全性問題。以下是解決此問題的步驟。
 1Could not get HEAD hash returned: repository path is not owned by current user.
 # 檢查遠端分支的 HEAD
@@ -269,136 +363,5 @@ VirtualBox 安裝中顯示 pip 失效，只要手動加環境變數即可
 Git Clone 失敗，這個錯誤顯示 Git 無法找到指定的 repository。可能的原因包括 URL 錯誤、repository 已經被刪除或移動、你沒有訪問該 repository 的權限。
 12345user@DESKTOP-GBPGS6P MINGW64 /c/kevinchen/project$ git clone http://192.168.1.168/vcu-config-tool-inhosue.git/Cloning into &#x27;vcu3-config-tool-inhosue&#x27;...remote: The project you were looking for could not be found.fatal: repository &#x27;http://192.168.1.168/vcu-config-tool-inhosue.git/&#x27; not found
 # 解決方法
-確認 URL，確保 repository URL 正確無誤。檢查權限，確保你有足夠的權限來訪問該 repository，測試刪除使用者的 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/23/Git%20Error%20clone%20invalid%20path/" title="Git Error clone invalid path">Git Error clone invalid path</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-03-23T00:00:00.000Z" title="發表於 2024-03-23 00:00:00">2024-03-23</time></span></div><div class="content"># 異常現象
-在 Windows 上 clone 內核某分支源碼時報錯，錯誤信息如下。
-1234git.exe checkout -b master remotes/origin/master -- error: invalid path &#x27;drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c&#x27; error: invalid path &#x27;drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h&#x27; error: invalid path &#x27;include/soc/arc/aux.h&#x27;
-# 異常原因
-在 NTFS 檔案系統中，存在一個路徑保護機制，防止某些不合法或潛在會導致檔案系統出錯的檔案路徑被創建或使用。這種機制可能會對 Git 操作中的某些路徑造成影響，特別是當這些路徑含有特殊字符或不符合 NTFS 文件系統規則時。
-# 解決方法
-關閉 NTFS 路徑保護機制，使用以下 Git 命令來關閉 NTFS 路徑保護機制，此命令將告訴 Git 忽略 NTFS 路 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/16/Git%20Error%20%E7%84%A1%E6%B3%95%E5%BB%BA%E7%AB%8B%20index.lock%20%E9%8C%AF%E8%AA%A4/" title="Git Error 無法建立 index.lock 錯誤">Git Error 無法建立 index.lock 錯誤</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-03-16T00:00:00.000Z" title="發表於 2024-03-16 00:00:00">2024-03-16</time></span></div><div class="content"># 異常現象
-當你在使用 Git 時遇到以下錯誤，這通常表示 Git 的操作被鎖定，可能是因為另一個 Git 進程正在運行，或者先前的進程崩潰留下了鎖定文件。以下是解決此問題的步驟：
-123456789git.exe pull --progress -v --no-rebase &quot;origin&quot;POST git-upload-pack (165 bytes)error: cannot lock ref &#x27;refs/remotes/origin/main&#x27;: Unable to create &#x27;C:/Obsidian/.git/refs/remotes/origin/main.lock&#x27;: File exists.Another git process seems to be running in this repository, e.g.an editor opened by &#x27;git commit&#x27;. Please make sure all processesare terminated then tr ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/09/Git%20Error%20%E4%B8%8D%E6%98%AF%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%B9%9F%E4%B8%8D%E6%98%AF%E5%8F%AF%E7%94%A8%E7%A8%8B%E5%BA%8F/" title="Git Error 不是命令，也不是可用程序">Git Error 不是命令，也不是可用程序</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-03-09T00:00:00.000Z" title="發表於 2024-03-09 00:00:00">2024-03-09</time></span></div><div class="content"># 異常現象
-當你完成了 Git 的安裝後，若命令提示符仍顯示 “不是內部或外部命令，也不是可運行的程序”，那可能是環境變數配置有問題。請按以下步驟進行處理。
-# 異常原因
-CMD 找不到 Git 或是 Git 功能出現異常，第一步要找出 Git 安裝路徑，通常預設安裝路徑如下，並嘗試以管理員權限開啟 git-cmd.exe、git-bash.exe，確認路徑位置有 Git 資料夾，然後確認 Git 本體的功能正常。
-1C:\Program Files\Git
-然後輸入 git --version 來確認 Git 是否正確安裝並能夠被識別。如果以上步驟未能解決問題，建議重新安裝 Git，你可以從 Git - Downloads 下載對應版本進行重新安裝。
-# 解決方法
-將 Git 添加到環境變數，在編輯環境變數窗口中添加以下兩個路徑。
-12C:\Program Files\Git\mingw64\binC:\Program Files\Git\mingw64\libexec\git-core
-
-CMD 下命令 sysdm.cpl 開系統環境變數
-在系統屬性窗口中，點擊高級標籤，再點擊環 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/27/Git%20%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Git 常用指令介紹">Git 常用指令介紹</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-02-27T00:00:00.000Z" title="發表於 2024-02-27 00:00:00">2024-02-27</time></span></div><div class="content"># 事前準備工作
-# terminal 指令表
-
-
-
-Windows
-MacOS/Linux
-功能
-
-
-
-
-cd
-cd
-切換目錄
-
-
-cd
-pwd
-顯示目前所在資料夾
-
-
-dir
-ls
-目前資料夾的檔案列表
-
-
-md
-mkdir
-創建資料夾
-
-
-type nul&gt;
-touch
-建立檔案
-
-
-copy
-cp
-複製檔案
-
-
-move
-mv
-移動檔案
-
-
-del
-rm
-刪除檔案
-
-
-cls
-clear
-清除 Terminal 內容
-
-
-
-# git 常用指令表
-
-
-
-git cmd
-功能
-
-
-
-
-git clone
-• Copy from REMOTE repo
-
-
-git branch
-• Review how many branches have • Create NEW branch from current/specific branch
-
-
-git status
-• Check the status of your LOCAL GIT repository
-
-
-git pull
-• Bring LOCAL branch up-to-date
-
-
-git checkout
-•  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)/" title="Keil-C 退出許可證(LIC)">Keil-C 退出許可證(LIC)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-10-30T00:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></span></div><div class="content"># 解除安裝 LIC
-卸載單用戶許可證需要管理權限。然後，您可以將許可證轉移到另一台電腦。
-
-
-在 µVision 中，開啟檔案，許可證管理，對話方塊的單一使用者授權頁面。
-
-
-
-從清單中選擇您要卸載的產品。
-
-
-
-按一下卸載按鈕，然後根據提示選擇是。
-
-
-
-您的原始許可證 ID 代碼 (LIC) 已替換為以 TRN 開頭的卸載許可證 ID 代碼。µVision 在 Keil 網站上開啟一個網頁並自動輸入該 TRN 號碼。
-
-
-
-您必須按一下提交按鈕才能完成卸載程序。
-
-
-
-# 官方信件教學
-You may uninstall a LIC yourself using µVision. To do this, please see the following page in our Licensing Users Guide:
-https://developer.arm.com/documentation/101454/0110/License-Management/Single-User-License/Uninstalling-a-LIC
-For more information  ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#content-inner">8</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/13/Linux%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Linux 基本指令介紹">Linux 基本指令介紹</a><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/13/Linux%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" title="Linux 學習筆記">Linux 學習筆記</a><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/13/VirtualBox%20%E6%9E%B6%E8%A8%AD%20Ubuntu%20%E7%AD%86%E8%A8%98/" title="VirtualBox 架設 Linux 筆記">VirtualBox 架設 Linux 筆記</a><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/07/Git%20Error%20Could%20not%20get%20HEAD%20hash/" title="Git Error Could not get HEAD hash">Git Error Could not get HEAD hash</a><time datetime="2024-04-07T00:00:00.000Z" title="發表於 2024-04-07 00:00:00">2024-04-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/30/Git%20Error%20clone%20The%20project%20could%20not%20be%20found/" title="Git Error clone The project could not be found">Git Error clone The project could not be found</a><time datetime="2024-03-30T00:00:00.000Z" title="發表於 2024-03-30 00:00:00">2024-03-30</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/job/" style="font-size: 1.1em; color: #999">job</a> <a href="/tags/git/" style="font-size: 1.39em; color: #99a4b4">git</a> <a href="/tags/%E9%9F%8C%E9%AB%94%E9%96%8B%E7%99%BC/" style="font-size: 1.27em; color: #99a0a9">韌體開發</a> <a href="/tags/Verilog/" style="font-size: 1.44em; color: #99a7ba">Verilog</a> <a href="/tags/PCI-e/" style="font-size: 1.1em; color: #999">PCI/e</a> <a href="/tags/Vivado/" style="font-size: 1.33em; color: #99a2af">Vivado</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C++</a> <a href="/tags/Linux/" style="font-size: 1.21em; color: #999ea4">Linux</a> <a href="/tags/%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" style="font-size: 1.1em; color: #999">志工活動</a> <a href="/tags/EtherCAT/" style="font-size: 1.21em; color: #999ea4">EtherCAT</a> <a href="/tags/PLC/" style="font-size: 1.16em; color: #999b9e">PLC</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">76</div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-11-22T09:27:02.823Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
+確認 URL，確保 repository URL 正確無誤。檢查權限，確保你有足夠的權限來訪問該 repository，測試刪除使用者的 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/01/OpenBMC(5)-Bitbake_Execution/" title="OpenBMC(5)-Bitbake_Execution">OpenBMC(5)-Bitbake_Execution</a><time datetime="2024-06-01T00:00:00.000Z" title="發表於 2024-06-01 00:00:00">2024-06-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/25/OpenBMC(4)-Bitbake_Operators/" title="OpenBMC(4)-Bitbake_Operators">OpenBMC(4)-Bitbake_Operators</a><time datetime="2024-05-25T00:00:00.000Z" title="發表於 2024-05-25 00:00:00">2024-05-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/18/OpenBMC(3)-setup_Script/" title="OpenBMC(3)-setup_Script">OpenBMC(3)-setup_Script</a><time datetime="2024-05-18T00:00:00.000Z" title="發表於 2024-05-18 00:00:00">2024-05-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/11/OpenBMC(2)-QEMU/" title="OpenBMC(2)-QEMU">OpenBMC(2)-QEMU</a><time datetime="2024-05-11T00:00:00.000Z" title="發表於 2024-05-11 00:00:00">2024-05-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/04/OpenBMC(1)-1stBuild/" title="OpenBMC(1)-1stBuild">OpenBMC(1)-1stBuild</a><time datetime="2024-05-04T00:00:00.000Z" title="發表於 2024-05-04 00:00:00">2024-05-04</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/OpenBMC/" style="font-size: 1.3em; color: #99a1ac">OpenBMC</a> <a href="/tags/PLC/" style="font-size: 1.17em; color: #999c9f">PLC</a> <a href="/tags/%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" style="font-size: 1.1em; color: #999">志工活動</a> <a href="/tags/Verilog/" style="font-size: 1.43em; color: #99a6b9">Verilog</a> <a href="/tags/Linux/" style="font-size: 1.23em; color: #999ea6">Linux</a> <a href="/tags/PCI-e/" style="font-size: 1.1em; color: #999">PCI/e</a> <a href="/tags/%E9%9F%8C%E9%AB%94%E9%96%8B%E7%99%BC/" style="font-size: 1.3em; color: #99a1ac">韌體開發</a> <a href="/tags/git/" style="font-size: 1.37em; color: #99a4b2">git</a> <a href="/tags/Vivado/" style="font-size: 1.3em; color: #99a1ac">Vivado</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C++</a> <a href="/tags/EtherCAT/" style="font-size: 1.23em; color: #999ea6">EtherCAT</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">81</div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-11-26T07:03:17.449Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>

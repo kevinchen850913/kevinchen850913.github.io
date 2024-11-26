@@ -51,7 +51,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-11-22 09:27:03'
+  postUpdate: '2024-11-26 07:03:17'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -148,7 +148,97 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Kevin的學習筆記</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/12/28/PCI%20Configuration%20Space%20%E6%A0%BC%E5%BC%8F%E8%AA%AA%E6%98%8E/" title="PCI Configuration Space 格式說明">PCI Configuration Space 格式說明</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-12-28T00:00:00.000Z" title="發表於 2021-12-28 00:00:00">2021-12-28</time></span></div><div class="content"># PCI Configuration Space
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Kevin的學習筆記</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/06/24/TwinCAT%20%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8%E8%88%87%E4%BD%BF%E7%94%A8%E7%AF%84%E4%BE%8B/" title="TwinCAT 安裝教學與使用範例">TwinCAT 安裝教學與使用範例</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2022-06-24T00:00:00.000Z" title="發表於 2022-06-24 00:00:00">2022-06-24</time></span></div><div class="content"># TwinCAT 介紹
+TwinCAT 是 Beckhoff 推出基於 PC 的控制系統，系統的核心採用 Windows 控制和自動化技術與自動化套件的形式。本篇文章會教你如何安裝 TwinCAT，以及使用 TwinCAT 去測試 EtherCAT 從站的方法，而非 EtherCAT 主站的開發發法。
+# VS2017 安裝
+先安裝 VS2017 再安裝 TwinCAT
+
+建議相關元件也都裝一裝
+
+# TwinCAT 安裝
+此處以 TC31-FULL-Setup.3.1.4024.32.exe  為範例
+
+建議參考圖片中設定勾選
+
+
+
+# TwinCAT 連接從站
+
+開啟專案或新建專案
+
+# 導入 ESI 檔
+需要把從站 ESI 檔放到這個位置，部分簡單的裝置在不提供 ESI 檔的狀況下，可以直接被判定成 IO 模組，即可使用。
+
+每次導入新 ESI 都必須刷新專案
+
+# 檢查網路卡
+
+更新網路卡清單，並加入網路卡
+
+
+掃描 EtherCAT 從站，記得要將 EtherCAT 從站接到正確的網路孔上
+
+# TwinCAT 常用功能
+# 檢查從站是否進 OP
+
+# 查閱從站物件字典
+
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/14/EtherCAT%20%E5%BE%9E%E7%AB%99%E6%A8%A1%E7%B5%84%E9%96%8B%E7%99%BC%E7%B4%80%E9%8C%84/" title="EtherCAT 從站模組開發紀錄">EtherCAT 從站模組開發紀錄</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2022-04-14T00:00:00.000Z" title="發表於 2022-04-14 00:00:00">2022-04-14</time></span></div><div class="content"># 硬體開發環境
+這篇文章是紀錄 AX58200 開發環境架設，圖文版本的筆記，只要照著做就可以順利架設環境。使用 SSC 產生出 Keil 所需的檔案，Keil-C 的安裝與認證，而 Keil 產生檔案後就能燒錄開發版，接著使用開發版來測試功能。
+亞信的產品 AX58200
+
+亞信的產品 AX58200 開發板 (主板)
+
+亞信的產品 AX58200 開發板 (IO 板)
+
+AX58200 開發板的 Port 配置
+
+插上 USB 後可再裝置管理員找到正確裝置
+
+# 如何建立專案
+# SSC Tool
+SSC Tool 是 beckhoff 提供的 EtherCAT 設備開發工具，在前幾篇文章中有提到，只要提供物件字典表單加上填入軟體中的欄位，就可產生 ESI 跟相對應的程式碼，此時 EtherCAT 通訊相關程式碼就完成了。
+
+使用 SSC 匯入 AX58200_GPIO_8Bit_AIO 專案資料
+
+AX58200_GPIO_8Bit_AIO 專案資料位置
+
+使用 SSC 匯入 AX58200_GPIO_8Bit_AIO 配置資料
+
+導入 Excel 大致內容截圖，對象物件字典配 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/02/20/Icarus%20Verilog%20%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8/" title="Icarus Verilog 使用教學">Icarus Verilog 使用教學</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2022-02-20T00:00:00.000Z" title="發表於 2022-02-20 00:00:00">2022-02-20</time></span></div><div class="content"># icarus verilog 介紹
+icarus verilog 為輕量且功能齊全的 verilog 編譯軟體，可用於 Windows 環境，且持續發布新版本，要學習 FPGA 開發，也就是學習 verilog 要怎麼寫，十分的麻煩又很貴，需要有開發版才能燒錄測試功能，整套買起來需要好幾萬，不過後來工作中就有這些工具，就沒有再繼續玩模擬工具了。
+
+# icarus verilog 安裝
+下載適用於 Windows 的 Icarus Verilog，下載後執行安裝程序，安裝成功後執行命令提示字元鍵入 “iverilog” 如果成功會跑出類似下面的資訊，這種依賴較低的軟體安裝不會太難。
+
+安裝位置中有提供範例，hello.vl 有使用說明，看一看大概就會使用了，如果還是不會，那真巧，下方有我練習用的範例。
+
+123456789101112131415161718/**  Here we have the canonical &quot;Hello, World&quot; program written in Verilog.*  We simply print to the prog ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/01/25/Windows%20debugger%20-%20WinDbg%20%E4%BD%BF%E7%94%A8%E7%AD%86%E8%A8%98/" title="Windows debugger - WinDbg 使用筆記">Windows debugger - WinDbg 使用筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2022-01-25T00:00:00.000Z" title="發表於 2022-01-25 00:00:00">2022-01-25</time></span></div><div class="content"># WinDbg 介紹
+WinDbg 是微軟發布的 Windows debug 工具，這套軟體的功能是幫 Windows 除錯，是從作業系統的角度來排除問題，除了排除作業系統本身的問題外，在處裡某些較為底層的軟體也會有奇效，如果軟體出現牽涉到電腦硬體相關的錯誤，或是踩到作業系統本身的地雷，就會用到這個神器，不過畢竟 Windows 都被暫停了，所以該套軟體必須要有兩台電腦搭配使用，一台是出事了的電腦，另一台安裝 WinDbg 用來檢測出問題的電腦，注意連線之前應確認勿連線多個網段，避免無法連線。
+
+名詞解釋
+
+Host Computer : 安裝除錯器的電腦。
+Target Computer : 安裝待測驅動程式的電腦
+
+# WinDbg 實戰
+# 設定 Target Computer
+開啟 command line  輸入下列指令
+123bcdedit /debug onbcdedit /dbgsettings net hostip:w.x.y.z port: n key: Key
+hostip : Host Computer 的 IP address 要看仔細，注意不是使用 Tar ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/01/22/%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83%E5%BB%BA%E7%BD%AE/" title="驅動程式開發環境建置">驅動程式開發環境建置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2022-01-22T00:00:00.000Z" title="發表於 2022-01-22 00:00:00">2022-01-22</time></span></div><div class="content"># 參考資料 Microsoft 文件
+想在 Windows 上開發驅動程式，總是躲不過要讀 Windows 硬體開發人員文檔，開發驅動程式相關的內容又多又雜，所以才整理這份筆記，以便幫助自己能快速的找到對應的文檔。
+
+# 確認開發目標對象
+非常重要，一定要看清楚版本，而且最好準備兩台電腦，方便後續進行錯誤排除，要用電腦 Debug 電腦，感覺就又是滿滿的資安違規，如果公司有相關流程，最好先知會一下主管及 MIS，看需不需要申請什麼權限。
+# Visual Studio 版本
+
+# WDK 版本
+
+Windows 驅動程序工具包 (最新版本)
+ Windows 驅動程序工具包 (歷史版本)
+ 微軟分類邏輯，最新版與其他版會分開放，然後某天舊版本就消失無蹤，所以本地可以考慮留個檔案存底，有時候看載點就可以知道微軟對產品的態度，例如 WINXP 後面就是 WIN7，WIN7 後面就是 WIN10，直接抹除黑歷史。
+# 安裝對應版本的 VS + WDK
+下載並安裝 Visual Studio，安裝時需選擇使用 C++ 的桌面開發，Windows 10 軟體開發工具包 (SDK) 會自動包含在 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/12/28/PCI%20Configuration%20Space%20%E6%A0%BC%E5%BC%8F%E8%AA%AA%E6%98%8E/" title="PCI Configuration Space 格式說明">PCI Configuration Space 格式說明</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2021-12-28T00:00:00.000Z" title="發表於 2021-12-28 00:00:00">2021-12-28</time></span></div><div class="content"># PCI Configuration Space
 PCI 標准定義了三種空間，其中 Configuration address space 專門用於配置 PCI 設備，每個 PCI 設備都必須實現，PCI 設備必須支持供應商 ID、設備 ID、命令和狀態、修訂 ID、類代碼和標頭類型，其他寄存器的實現是可選的，具體取決於設備的功能，透過 Config Registers 可以對 device 進行配置。
 
 IO address space
@@ -245,25 +335,5 @@ R4 : STOP
 
 # BUSY 判斷狀態
 
-</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/09/01/2020%E5%B9%B4%E5%9C%8B%E9%9A%9B%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E6%A5%AD%E5%A4%A7%E5%B1%95/" title="2020 台北國際自動化工業大展">2020 台北國際自動化工業大展</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2020-09-01T00:00:00.000Z" title="發表於 2020-09-01 00:00:00">2020-09-01</time></span></div><div class="content"># 自動化工業大展
-展覽日期 : 2020/8/19 (三) - 8/22 (六)
- 開放時間 : 9:30 AM ~ 5:00 PM
- 活動地址：台北南港展覽館 1&amp;2 館 (台北市南港區經貿二路 1 號、2 號)
-簡單紀錄當初參展的照片，放這篇的主要目標是測試圖床的功能，還有紀念我今年踏如職場，想想去年我還是學生來走馬看花，今年卻變成參展人員整裝待發，由於當時活動人數眾多，照片多數都是展覽品的近拍，想體驗活動的人潮，可以看官方的相簿，體驗一下傳統慘業光鮮亮麗的一面。
-# 展前活動
-這是入場證的背面，因為這是我第一次參與展覽工作，當下有意點簡章，所以時刻緊盯著時間，怕不小心就錯過重要的集合時間。
-
-事先拍下地圖以防逛街時迷路，不過這個擔心是多餘的，稍微逛了幾圈後就大致記得幾個主要攤位的位置，展覽開始幾天後更是熟門熟路。
-
-展前進出貨物的碼頭，各家廠商高效的建立展場。
-
-# Panasonic
-當然是因為日系大廠所以放在最前面。
-
-展覽就是要有大螢幕介紹產品。
-
-積極參與互動才能拿到紀念品。
-
-# Advantech
-特別多人的攤位，研華想搭建硬體平台，再找解決方案的合作廠商， ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/7/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><span class="page-number current">8</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/13/Linux%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Linux 基本指令介紹">Linux 基本指令介紹</a><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/13/Linux%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" title="Linux 學習筆記">Linux 學習筆記</a><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/13/VirtualBox%20%E6%9E%B6%E8%A8%AD%20Ubuntu%20%E7%AD%86%E8%A8%98/" title="VirtualBox 架設 Linux 筆記">VirtualBox 架設 Linux 筆記</a><time datetime="2024-04-13T00:00:00.000Z" title="發表於 2024-04-13 00:00:00">2024-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/07/Git%20Error%20Could%20not%20get%20HEAD%20hash/" title="Git Error Could not get HEAD hash">Git Error Could not get HEAD hash</a><time datetime="2024-04-07T00:00:00.000Z" title="發表於 2024-04-07 00:00:00">2024-04-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/30/Git%20Error%20clone%20The%20project%20could%20not%20be%20found/" title="Git Error clone The project could not be found">Git Error clone The project could not be found</a><time datetime="2024-03-30T00:00:00.000Z" title="發表於 2024-03-30 00:00:00">2024-03-30</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/job/" style="font-size: 1.1em; color: #999">job</a> <a href="/tags/git/" style="font-size: 1.39em; color: #99a4b4">git</a> <a href="/tags/%E9%9F%8C%E9%AB%94%E9%96%8B%E7%99%BC/" style="font-size: 1.27em; color: #99a0a9">韌體開發</a> <a href="/tags/Verilog/" style="font-size: 1.44em; color: #99a7ba">Verilog</a> <a href="/tags/PCI-e/" style="font-size: 1.1em; color: #999">PCI/e</a> <a href="/tags/Vivado/" style="font-size: 1.33em; color: #99a2af">Vivado</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C++</a> <a href="/tags/Linux/" style="font-size: 1.21em; color: #999ea4">Linux</a> <a href="/tags/%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" style="font-size: 1.1em; color: #999">志工活動</a> <a href="/tags/EtherCAT/" style="font-size: 1.21em; color: #999ea4">EtherCAT</a> <a href="/tags/PLC/" style="font-size: 1.16em; color: #999b9e">PLC</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">76</div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-11-22T09:27:02.823Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/7/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/9/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/01/OpenBMC(5)-Bitbake_Execution/" title="OpenBMC(5)-Bitbake_Execution">OpenBMC(5)-Bitbake_Execution</a><time datetime="2024-06-01T00:00:00.000Z" title="發表於 2024-06-01 00:00:00">2024-06-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/25/OpenBMC(4)-Bitbake_Operators/" title="OpenBMC(4)-Bitbake_Operators">OpenBMC(4)-Bitbake_Operators</a><time datetime="2024-05-25T00:00:00.000Z" title="發表於 2024-05-25 00:00:00">2024-05-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/18/OpenBMC(3)-setup_Script/" title="OpenBMC(3)-setup_Script">OpenBMC(3)-setup_Script</a><time datetime="2024-05-18T00:00:00.000Z" title="發表於 2024-05-18 00:00:00">2024-05-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/11/OpenBMC(2)-QEMU/" title="OpenBMC(2)-QEMU">OpenBMC(2)-QEMU</a><time datetime="2024-05-11T00:00:00.000Z" title="發表於 2024-05-11 00:00:00">2024-05-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/04/OpenBMC(1)-1stBuild/" title="OpenBMC(1)-1stBuild">OpenBMC(1)-1stBuild</a><time datetime="2024-05-04T00:00:00.000Z" title="發表於 2024-05-04 00:00:00">2024-05-04</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/OpenBMC/" style="font-size: 1.3em; color: #99a1ac">OpenBMC</a> <a href="/tags/PLC/" style="font-size: 1.17em; color: #999c9f">PLC</a> <a href="/tags/%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" style="font-size: 1.1em; color: #999">志工活動</a> <a href="/tags/Verilog/" style="font-size: 1.43em; color: #99a6b9">Verilog</a> <a href="/tags/Linux/" style="font-size: 1.23em; color: #999ea6">Linux</a> <a href="/tags/PCI-e/" style="font-size: 1.1em; color: #999">PCI/e</a> <a href="/tags/%E9%9F%8C%E9%AB%94%E9%96%8B%E7%99%BC/" style="font-size: 1.3em; color: #99a1ac">韌體開發</a> <a href="/tags/git/" style="font-size: 1.37em; color: #99a4b2">git</a> <a href="/tags/Vivado/" style="font-size: 1.3em; color: #99a1ac">Vivado</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C++</a> <a href="/tags/EtherCAT/" style="font-size: 1.23em; color: #999ea6">EtherCAT</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">81</div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-11-26T07:03:17.449Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
