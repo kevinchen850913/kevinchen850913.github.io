@@ -51,7 +51,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2025-01-02 01:20:14'
+  postUpdate: '2025-01-02 01:35:43'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -148,104 +148,157 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Kevin的學習筆記</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/09/01/EtherCAT%20%E7%94%A2%E5%93%81%E9%96%8B%E7%99%BC%E8%80%85%E7%9A%84%E5%BF%83%E5%BE%97/" title="EtherCAT 產品開發者的心得">EtherCAT 產品開發者的心得</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-09-01T00:00:00.000Z" title="發表於 2023-09-01 00:00:00">2023-09-01</time></span></div><div class="content"># EtherCAT 介紹
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Kevin的學習筆記</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/02/BMC(4)-Bitbake%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" title="BMC(4)-Bitbake 學習筆記">BMC(4)-Bitbake 學習筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-12-02T00:00:00.000Z" title="發表於 2023-12-02 00:00:00">2023-12-02</time></span></div><div class="content"># Bitbake 簡介
+讀取元資料並執行任務的工具。
+https://docs.yoctoproject.org/bitbake/2.6/index.html
+Yocto Project 中的主要建立工具。它是一個用於執行 build 任務和管理軟體包 build 過程的命令行工具，bitbake 會根據相應的配方 recipe 文件執行 build 流程。現在 BitBake 由 Yocto 與 OpenEmbedded 負責維護。
+
+Python 語言實作，功能類似於 make，特別針對於嵌入式 Linux 交叉編譯器環境所設計研發。
+從根本上來說，BitBake 是一個通用任務執行引擎，允許 shell 和 Python 任務在複雜的任務間依賴約束下高效並行運行。
+BitBake 包含客戶端 / 伺服器抽象，可以從命令列使用，也可以作為 XML-RPC 上的服務使用，並且具有多種不同的使用者介面。
+
+Bitbake 工作流程
+
+Bitbake 透過平行調度任務來建立配方
+它在 BBFILES 中查找配方 “.bb”
+每個配方定義建置任務
+
+每個建置任務可以依賴其他任務
+每個配方 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/25/BMC(3)-Yocto%20Project/" title="BMC(3)-Yocto Project">BMC(3)-Yocto Project</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-11-25T00:00:00.000Z" title="發表於 2023-11-25 00:00:00">2023-11-25</time></span></div><div class="content"># Yocto Project 簡介
+https://www.yoctoproject.org/
+Yocto Project 是大型協作項目，Linux 基金會下的組織，用於開發和建構嵌入式 Linux 系統的框架。Yocto Project 主要由三個元件組成 OpenEmbedded-Core，BitBake，PokyYocto ，其中 Project 與 OpenEmbedded 共同維護 OpenEmbedded Core 和 Bitbake 。
+# Yocto 縫合範圍
+https://www.yoctoproject.org/development/technical-overview/
+
+Layer (層) : 相關食譜的集合。層可讓您整合相關元資料以自訂您的構建，並隔離多個架構建構的資訊。層在涵蓋先前規範的能力方面是分層的。您可以包含 Yocto 專案中任意數量的可用層，並透過在它們後面新增層來自訂建置。
+Metadata (元資料) : Yocto 專案的一個關鍵元素是用於建立 Linux 發行版的元數據，包含在建置系統在建置映像時解析的檔案中。一般來說，元資料包括配 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/18/BMC(2)-IPMI%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" title="BMC(2)-IPMI 學習筆記">BMC(2)-IPMI 學習筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-11-18T00:00:00.000Z" title="發表於 2023-11-18 00:00:00">2023-11-18</time></span></div><div class="content"># IPMI Overview
+IPMI（Intelligent Platform Management Interface，智慧型平臺管理介面）就是一個可以監看硬體資訊，同時又可直接在系統關閉情況下，遠端遙控系統開啟的標準。
+
+在平台管理硬體和韌體中實現的自主監控和復原功能。
+當系統斷電時，平台管理功能也可使用。
+當系統管理軟體和正常管理機制不可用時，也可以使用平台管理功能。
+可以取得平台狀態資訊並發起恢復操作
+提供獨立於主機處理器、BIOS 和作業系統的清單、監控、日誌和復原。
+
+# IPMI Block Diagram
+IPMI Block Diagram 概述了 IPMI 設定的關鍵元素。 其核心是底板管理控制器 (BMC)，這是一個驅動智慧平台管理的微控制器。BMC 管理系統管理軟體和硬體之間的通信，處理監控、事件記錄和復原控制。 它可作為軟體與智慧平台管理匯流排（IPMB）和智慧機箱管理匯流排（ICMB）之間的橋樑。IPMI 允許透過基於 I2C 的序列匯流排 IPMB 將額外的控制器連接到系統來擴展平台管理。 這種標準化方法有利於將機箱功能與基板整合。
+
+# IPMI 系 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/11/BMC(1)-BMC%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" title="BMC(1)-BMC 學習筆記">BMC(1)-BMC 學習筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-11-11T00:00:00.000Z" title="發表於 2023-11-11 00:00:00">2023-11-11</time></span></div><div class="content"># BMC 是什麼
+基板管理控制器（BMC）是一種小型專用處理器，主要用於遠端監控和管理伺服器或其他主機系統。BMC 通常基於 ARM 架構的系統單晶片（SoC），並內建圖形處理和邏輯控制功能。它一般安裝在電腦、伺服器、網路設備或儲存裝置的主機板上，並可透過專用或共用網路進行遠端存取。
+BMC 具有多個連接介面，能夠通過感應器、快閃記憶體（如 BIOS/UEFI）來監控硬體狀況。它還可以透過序列接口或實體／虛擬 KVM（鍵盤、顯示器、滑鼠）來提供主控台存取權限，並記錄主機的事件和電力循環日誌。
+# BMC 的主要功能
+BMC（基板管理控制器）具備多項遠端管理和監控功能，以下是其主要功能：
+
+遠程電源控制（開關電源 / 重啟 / 狀態監控）
+用戶可以遠端開啟、關閉或重啟伺服器，並且監控伺服器的電源狀態。
+串口重定向（Serial over LAN, SOL）
+允許透過網路對伺服器的串口進行遠端重定向，使使用者可以像直接連接到伺服器的串口一樣進行操作。
+KVM / 虛擬化管理（KVM/VM）
+提供虛擬鍵盤、顯示器和滑鼠（KVM）功能，遠端控制伺服器，即便伺服器的操作系統無法啟動，仍可進行管 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/04/BMC%20MOC/" title="BMC MOC">BMC MOC</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-11-04T00:00:00.000Z" title="發表於 2023-11-04 00:00:00">2023-11-04</time></span></div><div class="content">本篇文章是我學習 BMC 技術筆記的索引，因為學習路線是從 OpenBMC 專案切入，後續才慢慢補上 BMC 的基礎知識。
+# 筆記連結
+# BMC 筆記連結
+BMC (1)-BMC 學習筆記
+ BMC (2)-IPMI 學習筆記
+ BMC (3)-Yocto Project
+BMC (4)-Bitbake 學習筆記
+ BMC (5)-Bitbake​ 指令與功能
+ BMC (6)-Metadata 學習筆記
+ BMC (7)- 找檔案技巧
+ BMC (8)- 名詞解釋筆記
+# OpenBMC 筆記連結
+OpenBMC(1)-1stBuild
+OpenBMC(2)-QEMU
+OpenBMC(3)-setup_Script
+OpenBMC(4)-Bitbake_Operators
+OpenBMC(5)-Bitbake_Execution
+OpenBMC(6)-Devtool_Cmd
+OpenBMC(7)-Devtool_Modifying
+OpenBMC(8)-Devtool_NewRecipe
+OpenBMC(9)-QA
+# AspeedPFR 筆記連結
+# 其他筆記連結
+# 筆記架構 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/10/30/Keil-C%20%E9%80%80%E5%87%BA%E8%A8%B1%E5%8F%AF%E8%AD%89(LIC)/" title="Keil-C 退出許可證(LIC)">Keil-C 退出許可證(LIC)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-10-30T00:00:00.000Z" title="發表於 2023-10-30 00:00:00">2023-10-30</time></span></div><div class="content"># 解除安裝 LIC
+卸載單用戶許可證需要管理權限。然後，您可以將許可證轉移到另一台電腦。
+
+
+在 µVision 中，開啟檔案，許可證管理，對話方塊的單一使用者授權頁面。
+
+
+
+從清單中選擇您要卸載的產品。
+
+
+
+按一下卸載按鈕，然後根據提示選擇是。
+
+
+
+您的原始許可證 ID 代碼 (LIC) 已替換為以 TRN 開頭的卸載許可證 ID 代碼。µVision 在 Keil 網站上開啟一個網頁並自動輸入該 TRN 號碼。
+
+
+
+您必須按一下提交按鈕才能完成卸載程序。
+
+
+
+# 官方信件教學
+You may uninstall a LIC yourself using µVision. To do this, please see the following page in our Licensing Users Guide:
+https://developer.arm.com/documentation/101454/0110/License-Management/Single-User-License/Uninstalling-a-LIC
+For more information  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/10/21/%E5%8F%83%E5%8A%A0%E6%84%9B%E5%BF%83%E5%9C%92%E9%81%8A%E6%9C%83%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" title="參加愛心園遊會志工活動">參加愛心園遊會志工活動</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-10-21T00:00:00.000Z" title="發表於 2023-10-21 00:00:00">2023-10-21</time></span></div><div class="content"># 會前說明
+慢飛天使愛心園遊會
+
+# 活動時間
+10/21 彰化慢飛天使愛心園遊會 (兒童新樂園)
+ 07:00-08:00 廠商進場
+ 08:00-08:10 志工集合
+ 08:10-09:00 充氣球、協助場佈
+ 09:00-11:00 遊樂園開園、發氣球
+ 09:30-12:30 闖關活動 (可以輪流休息吃飯)
+ 12:30-13:00 主舞台基金會活動
+ 13:00-14:00 主舞台基金會上下背板
+ 14:15-15:30 2 樓淑麗主播簽名會開始
+ 15:30-16:00 陸續整理、撤場
+關門前大家可以去玩設施，遊樂園 1800 關門
+# 注意事項
+
+安全第一、想吃便當就吃便當、想喝水一定要喝水、想上廁所一定要趕快去
+誰手上沒氣球塞給他！努力塞！有 600 顆發憤圖強發完！！
+如果聖家機構的小朋友家長、或是旁邊捐款攤位有需要都可以依手邊作業狀況協助！
+
+# 開園前準備
+到現場就開始充氣球，要準備 600 顆氣球，對於幾乎沒碰過氣球的我是一大考驗，稍微嘗試後還是不太會用打氣機，所以就去幫忙綁汽球跟整理氣球，一開始大家工作不太熟練，周圍一直有氣球爆炸，熟練後氣球尺寸開始慢慢統 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/10/06/%E9%9B%BB%E8%85%A6%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%EF%BC%8C%E7%B4%B0%E8%83%9E%E8%87%AA%E5%8B%95%E6%A9%9F/" title="電腦中的生命，細胞自動機">電腦中的生命，細胞自動機</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-10-06T00:00:00.000Z" title="發表於 2023-10-06 00:00:00">2023-10-06</time></span></div><div class="content"># 生命遊戲介紹
+生命遊戲不是真正的遊戲。沒有勝利或失敗，也沒有在精神上和精神上摧毀你的對手。生命是一個細胞自動機，一個生活在網格上的細胞系統，它們根據統治其世界的規則生活、死亡和進化，它包括一個二維矩形世界，這個世界中的每個方格居住著一個活著的或死了的細胞。一個細胞在下一個時刻生死取決於相鄰八個方格中活著的或死了的細胞的數量，比賽按回合進行。在每一輪中，每個細胞都會查看其 8 個最接近的鄰居，並計算當前存活的細胞數量。
+生命遊戲中，對於任意細胞，規則如下：
+
+當前細胞為存活狀態時，當周圍的存活細胞低於 2 個時，該細胞變成死亡狀態。
+當前細胞為存活狀態時，當周圍有 2 個或 3 個存活細胞時，該細胞保持原樣。
+當前細胞為存活狀態時，當周圍有超過 3 個存活細胞時，該細胞變成死亡狀態。
+當前細胞為死亡狀態時，當周圍有 3 個存活細胞時，該細胞變成存活狀態。
+
+# 儲存板狀態
+生活遊戲是一個二維網格，其中每個單元格都為 ALIVE (1) 或 DEAD (0)。
+12345#include &lt;vector&gt;using namespace std;int board_y = 2 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/09/22/%E8%87%AA%E8%A3%BD%E5%89%AA%E8%B2%BC%E7%B0%BF%E5%B7%A5%E5%85%B7(Clipboard)/" title="自製剪貼簿工具(Clipboard)">自製剪貼簿工具(Clipboard)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-09-22T00:00:00.000Z" title="發表於 2023-09-22 00:00:00">2023-09-22</time></span></div><div class="content"># 故事起因
+我習慣使用 md 檔撰寫筆記，而文字外的檔案就由連結來管理，但時間一久資料越來越多，於是一直想把文字跟其他資料進行切割，讓筆記庫只有文字，其他檔案都該放在其他地方，但是跨工作區的資料連結，造成我不小的麻煩，如果使用預設的相對路徑 md 檔與資料無法分離，只能從絕對路徑下手，工人智慧處理路徑，操作起來十分繁瑣又浪費時間。
+
+想了解 Clipboard，可以右邊目錄選 Clipboard
+想直接看成果，可以右邊目錄選 成品範例
+如果想聽我說故事，那就繼續往下看
+
+md 檔外部路徑的範例
+1234567891011Obsidian 提供的寫法[[檔案名稱]][[123.txt]]相對路徑的寫法[顯示文字](檔案路徑)[123](123.txt)絕對路徑的寫法[顯示文字](檔案路徑)[123](C:\SynologyDrive\桌面\123.txt)
+逐步冒出的問題
+
+無法使用工具原生的索引
+無法動態更新路路徑
+相對路徑還是無法切割檔案
+路徑越長，遇到越多特殊字元
+引用越來越麻煩，我越來越懶
+
+總之該來正視這個問題了，所以才有了這篇文章。
+# 解決思路
+在尋找工具前，先想像有可能 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/09/01/EtherCAT%20%E7%94%A2%E5%93%81%E9%96%8B%E7%99%BC%E8%80%85%E7%9A%84%E5%BF%83%E5%BE%97/" title="EtherCAT 產品開發者的心得">EtherCAT 產品開發者的心得</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-09-01T00:00:00.000Z" title="發表於 2023-09-01 00:00:00">2023-09-01</time></span></div><div class="content"># EtherCAT 介紹
 EtherCAT 是一個開放架構，以 Ethernet 為基礎為現場總線應用提供支持，CAT 在 EtherCAT 中代表控制自動化技術 Control Automation Technology，EtherCAT 這個技術是由德國的 Beckhoff 公司所研發。
 自動化應用通常對通信有一些特定的要求，如較短的資料更新時間、低通信抖動量以確保資料同步，同時成本也需要保持在合理範圍內。EtherCAT 系統的出現旨在取代傳統的總線接線系統，以更好地滿足這些需求。那麼，EtherCAT 是否成功地取代了傳統系統呢？
 這個問題的答案可能會因應不同的使用情境而有所不同。實際的差異和效果可能會受到多種因素的影響，包括應用的性質、硬體和軟體的選擇，以及相關的維護需求。對我來說，我會根據我在產品開發方面的經驗以及客戶的反饋，來進行比較，以確定 EtherCAT 在特定情境下的優勢和不足。
-因此，這篇文章並不是一篇嚴格的技術文章，而是我身為產品開發者和使用者的角度，來探討關於泛 EtherCAT 生態系統及其未來發展的看法。這樣的觀點可以提供有價值的見解，幫助我們更好地理 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/08/01/Hexo%20%E6%9E%B6%E8%A8%AD%E6%95%99%E5%AD%B8%E8%88%87%E8%B8%A9%E5%9D%91%E7%B4%80%E9%8C%84/" title="Hexo 架設教學與踩坑紀錄">Hexo 架設教學與踩坑紀錄</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-08-01T00:00:00.000Z" title="發表於 2023-08-01 00:00:00">2023-08-01</time></span></div><div class="content"># Node.js 安裝
-https://nodejs.org/en/download/
-Node.js 是一個 JavaScript 執行環境 (run-time environment)。原本 JavaScript 檔案只能在瀏覽器上被執行，但是當我們在電腦上安裝了 Node.js 之後，就可以執行副檔名為 .js 的 JavaScript 的檔案。
-123# 安裝 node.js$ brew update$ brew install node
-在 cmd 輸入 node -v 來檢查是否工作正常，有返回就行。
-12C:\Users&gt;node -vv18.13.0
-# Git 安裝
-我每台電腦都有裝，所以不需要處理這一步，需要的人可以去 Git 官網下載。
-# Hexo 安裝
-hexo 官方文件
-
-在合適的位置新建一個文件夾 ，用於存放你的 hexo 博客文件位置。
-進入文件夾，按住 shift 的同時點擊右鍵 ，在右鍵菜單中點擊 在此處打開 powershell 窗口
-輸入命令 npm i -g hexo-cli 進行安裝
-
-123# 安裝 Hexo$ npm instal ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/07/28/%E4%BA%8C%E5%88%86%E6%90%9C%E5%B0%8B%E6%B3%95(Binary%20Search)%E7%AF%84%E4%BE%8B/" title="二分搜尋法(Binary Search)範例">二分搜尋法(Binary Search)範例</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-07-28T00:00:00.000Z" title="發表於 2023-07-28 00:00:00">2023-07-28</time></span></div><div class="content">二分搜索法是一種高效的搜索算法，通常用於在一個有序陣列中查找特定的值，它不斷將目標值與陣列中間的元素進行比較，縮小搜索範圍直至找到目標值或確定其不存在，由於每次比較都可以將搜索範圍減半，時間複雜度為 O (log n)，所以二分搜索法比線性搜索更快。
-# 簡易版本
-123456789101112131415int binary_search(vector&lt;int&gt; &amp;nums, int target) &#123;    int left = 0;    int right = nums.size() - 1; // array 長度 -1    while (left &lt;= right) &#123;        int mid = (left + right) / 2; // 用 int 的性質做無條件捨去        if (nums[mid] &gt; target) &#123;            right = mid - 1;        &#125; else if (nums[mid] &lt; target) &#123;     ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/07/21/cplusplus-tutorial-polymorphism/" title="C++ 學習筆記 - 多形">C++ 學習筆記 - 多形</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-07-21T00:00:00.000Z" title="發表於 2023-07-21 00:00:00">2023-07-21</time></span></div><div class="content"># 指向基類的指標
-類繼承的關鍵特徵之一是指向派生類的指針與其基類的指針是類型兼容的。多型是利用這種簡單但強大且通用的功能的藝術。
-1234567891011121314151617181920212223242526272829303132333435// pointers to base class#include &lt;iostream&gt;using namespace std;class Polygon &#123;  protected:    int width, height;  public:    void set_values (int a, int b)      &#123; width=a; height=b; &#125;&#125;;class Rectangle: public Polygon &#123;  public:    int area()      &#123; return width*height; &#125;&#125;;class Triangle: public Polygon &#123;  public:    int ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/07/14/cplusplus-tutorial-inheritance/" title="C++ 學習筆記 - 友誼與繼承">C++ 學習筆記 - 友誼與繼承</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-07-14T00:00:00.000Z" title="發表於 2023-07-14 00:00:00">2023-07-14</time></span></div><div class="content"># Friend Functions - 友誼函數
-原則上，類的私有成員和受保護成員不能從聲明它們的同一類的外部訪問。不過，這條規則不適用於 friend 。
-如果非成員函數被聲明為該類的朋友，則它可以訪問該類的私有成員和受保護成員。這是通過在類中包含此外部函數的聲明並在其前面加上關鍵字 friend  來完成。
-12345678910111213141516171819202122232425262728// friend functions#include &lt;iostream&gt;using namespace std;class Rectangle &#123;    int width, height;  public:    Rectangle() &#123;&#125;    Rectangle (int x, int y) : width(x), height(y) &#123;&#125;    int area() &#123;return width * height;&#125;    friend Rectangle duplicate (const  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/07/07/cplusplus-tutorial-special-members/" title="C++ 學習筆記 - 特殊成員函數">C++ 學習筆記 - 特殊成員函數</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-07-07T00:00:00.000Z" title="發表於 2023-07-07 00:00:00">2023-07-07</time></span></div><div class="content"># 特殊成員函數介紹
-特殊成員函式是類別成員函式，在某些情況下，編譯器會自動為您產生。些函式是預設建構函式 (Default constructor)、 解構函式 (Destructor)、複製建構函式 (Copy constructor)、複製指派運算子 (Copy assignment)、移動建構函式 (Move constructor) 和移動指派運算子 (Move assignment)。
-
-
-
-Member function
-typical form for class  C :
-
-
-
-
-Default constructor
-C::C();
-
-
-Destructor
-C::~C();
-
-
-Copy constructor
-C::C (const C&amp;);
-
-
-Copy assignment
-C&amp; operator= (const C&amp;);
-
-
-Move constructor
-C::C (C&amp;&amp;);
-
-
-Move assignment
-C&amp; operator= (C&amp;&amp;);
-
-
-
-Rule of three ( ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/06/30/cplusplus-tutorial-classes/" title="C++ 學習筆記 - 類別">C++ 學習筆記 - 類別</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-06-30T00:00:00.000Z" title="發表於 2023-06-30 00:00:00">2023-06-30</time></span></div><div class="content"># 類別
-類與數據結構一樣可以包含數據成員，但它還可以包含函數作為成員。
-具有相同的格式，除了它們還可以包含函數並具有這些稱為訪問說明符的新事物。
-訪問說明符是以下三個關鍵字之一 private、public、protected
-
-private : 類的成員只能從同一類的其他成員訪問。
-protected : 成員可以從同一類的其他成員訪問，也可以從他們的派生類的成員訪問。
-public : 可以從對象可見的任何地方訪問成員。
-
-默認情況下，使用關鍵字聲明的類的所有成員 class 對其所有成員都具有私有訪問權限。
-123456class Rectangle &#123;    int width, height;  public:    void set_values (int,int);    int area (void);&#125; rect;
-只需在對象名稱和成員名稱之間插入一個點，就可以像訪問普通函數或普通變量一樣使用。
-12rect.set_values (3,4);myarea = rect.area();
-rect  不能從類外部訪問的成員是 width 、  h ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/06/17/cplusplus-tutorial-other_types/" title="C++ 學習筆記 - 其他數據類型">C++ 學習筆記 - 其他數據類型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-06-17T00:00:00.000Z" title="發表於 2023-06-17 00:00:00">2023-06-17</time></span></div><div class="content"># 類型別名 (typedef /using)
-C 語言繼承而來的關鍵字 typedef
-123456789typedef char C;typedef unsigned int WORD;typedef char * pChar;typedef char field [50];C mychar, anotherchar, *ptc1;WORD myword;pChar ptc2;field name;
-C++ 新增的關鍵字 using
-12345// using new_type_name = existing_type;using C = char;using WORD = unsigned int;using pChar = char *;using field = char [50];
-typedef 和 using 在語義上是等價的，唯一的區別是在沒有 typedef 模板的領域中有某些限制。常見的用法是抽像底層類型，通過使用別名來引用特定類型的參數，以後可較輕鬆替換類型。
-# 聯合 (Unions)
-聯合允許將內存的一部分作為不同的數據類型進行訪問。它的聲明和使用類似於結構 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/06/11/cplusplus-tutorial-dynamic/" title="C++ 學習筆記 - 動態配置(dynamic)">C++ 學習筆記 - 動態配置(dynamic)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-06-11T00:00:00.000Z" title="發表於 2023-06-11 00:00:00">2023-06-11</time></span></div><div class="content">若程式需要在執行後才會知道資料長度，此時需要動態分配內存，為此 C++ 語言集成了運算符 new 和 delete。
-# 運算符  new  和  new[]
-12int * foo;foo = new int [5];
-在這種情況下，五個元素動態分配空間，並返回指向序列第一個元素的指標， foo  與 foo[0]  兩者是等價的，可以使用 foo[1]  或 *(foo+1)  訪問第二個元素，依此類推。
-C++ 提供了兩種標準機制來檢查分配是否成功。
-一種是通過處理異常，分配失敗時會拋出該類型的異常。
-另一種方法稱為 nothrow ，當內存分配失敗時，不拋出異常，而是返回空指標，程序繼續正常執行。
-12345int * foo;foo = new (nothrow) int [5];if (foo == nullptr) &#123;  // error assigning memory. Take measures.&#125;
-# 運算符  delete  和  delete[]
-在大多數情況下，動態分配的內存僅在程序的特定時間段內才需要，一旦不再需要它，它就可以被釋放，這 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/06/10/cplusplus-tutorial-arrays/" title="C++ 學習筆記 - 陣列(arrays)">C++ 學習筆記 - 陣列(arrays)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2023-06-10T00:00:00.000Z" title="發表於 2023-06-10 00:00:00">2023-06-10</time></span></div><div class="content"># 陣列介紹
-陣列就是放置在連續內存位置中的同類型的元素。
-1int foo [5];
-陣列中的元素可以在聲明時顯式初始化為特定值，方法是將這些初始值括在大括號 {} 中。
-12345int A[5] = &#123; 16, 2, 77, 40, 12071 &#125;;int B[5] = &#123; 10, 20, 30 &#125;;int C[5] = &#123; &#125;;int D[] = &#123; 10, 20, 30 &#125;;int E[] &#123; 10, 20, 30 &#125;; // 通用初始化
-靜態陣列及那些直接在命名空間中聲明的陣列，總是被初始化的。如果未指定顯式初始化程序，則所有元素都默認初始化為零。
-# 訪問陣列的值
-可以像訪問相同類型的常規變量的值一樣訪問陣列中任何元素的值。
-123456789101112int foo[5];foo [2] = 75;x = foo[2];foo[0] = a;foo[a] = 75;b = foo [a+2];foo[foo[a]] = foo[2] + 5;// 迴圈應用範例for(n ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#content-inner">10</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/22/OpenBMC(8)-Devtool_NewRecipe/" title="OpenBMC(8)-Devtool_NewRecipe">OpenBMC(8)-Devtool_NewRecipe</a><time datetime="2024-06-22T00:00:00.000Z" title="發表於 2024-06-22 00:00:00">2024-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/15/OpenBMC(7)-Devtool_Modifying/" title="OpenBMC(7)-Devtool_Modifying">OpenBMC(7)-Devtool_Modifying</a><time datetime="2024-06-15T00:00:00.000Z" title="發表於 2024-06-15 00:00:00">2024-06-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/08/OpenBMC(6)-Devtool_Cmd/" title="OpenBMC(6)-Devtool_Cmd">OpenBMC(6)-Devtool_Cmd</a><time datetime="2024-06-08T00:00:00.000Z" title="發表於 2024-06-08 00:00:00">2024-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/01/OpenBMC(5)-Bitbake_Execution/" title="OpenBMC(5)-Bitbake_Execution">OpenBMC(5)-Bitbake_Execution</a><time datetime="2024-06-01T00:00:00.000Z" title="發表於 2024-06-01 00:00:00">2024-06-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/25/OpenBMC(4)-Bitbake_Operators/" title="OpenBMC(4)-Bitbake_Operators">OpenBMC(4)-Bitbake_Operators</a><time datetime="2024-05-25T00:00:00.000Z" title="發表於 2024-05-25 00:00:00">2024-05-25</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/EtherCAT/" style="font-size: 1.2em; color: #999da3">EtherCAT</a> <a href="/tags/PCI-e/" style="font-size: 1.1em; color: #999">PCI/e</a> <a href="/tags/%E9%9F%8C%E9%AB%94%E9%96%8B%E7%99%BC/" style="font-size: 1.25em; color: #999fa7">韌體開發</a> <a href="/tags/Vivado/" style="font-size: 1.3em; color: #99a1ac">Vivado</a> <a href="/tags/OpenBMC/" style="font-size: 1.45em; color: #99a7ba">OpenBMC</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C++</a> <a href="/tags/Verilog/" style="font-size: 1.4em; color: #99a5b6">Verilog</a> <a href="/tags/Linux/" style="font-size: 1.2em; color: #999da3">Linux</a> <a href="/tags/git/" style="font-size: 1.35em; color: #99a3b1">git</a> <a href="/tags/%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" style="font-size: 1.1em; color: #999">志工活動</a> <a href="/tags/PLC/" style="font-size: 1.15em; color: #999b9e">PLC</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">3</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">93</div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-01-02T01:20:13.721Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
+因此，這篇文章並不是一篇嚴格的技術文章，而是我身為產品開發者和使用者的角度，來探討關於泛 EtherCAT 生態系統及其未來發展的看法。這樣的觀點可以提供有價值的見解，幫助我們更好地理 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#content-inner">11</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/31/AspeedPFR(8)-Error_Log/" title="AspeedPFR(8)-Error_Log">AspeedPFR(8)-Error_Log</a><time datetime="2024-08-31T00:00:00.000Z" title="發表於 2024-08-31 00:00:00">2024-08-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/24/AspeedPFR(7)-Other/" title="AspeedPFR(7)-Other">AspeedPFR(7)-Other</a><time datetime="2024-08-24T00:00:00.000Z" title="發表於 2024-08-24 00:00:00">2024-08-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/17/AspeedPFR(6)-Recovery/" title="AspeedPFR(6)-Recovery">AspeedPFR(6)-Recovery</a><time datetime="2024-08-17T00:00:00.000Z" title="發表於 2024-08-17 00:00:00">2024-08-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/10/AspeedPFR(5)-SDK%20Tool/" title="AspeedPFR(5)-SDK Tool">AspeedPFR(5)-SDK Tool</a><time datetime="2024-08-10T00:00:00.000Z" title="發表於 2024-08-10 00:00:00">2024-08-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/03/AspeedPFR(4)-AspeedSDK/" title="AspeedPFR(4)-AspeedSDK">AspeedPFR(4)-AspeedSDK</a><time datetime="2024-08-03T00:00:00.000Z" title="發表於 2024-08-03 00:00:00">2024-08-03</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/%E9%9F%8C%E9%AB%94%E9%96%8B%E7%99%BC/" style="font-size: 1.25em; color: #999fa7">韌體開發</a> <a href="/tags/Verilog/" style="font-size: 1.4em; color: #99a5b6">Verilog</a> <a href="/tags/PCI-e/" style="font-size: 1.1em; color: #999">PCI/e</a> <a href="/tags/Vivado/" style="font-size: 1.3em; color: #99a1ac">Vivado</a> <a href="/tags/Linux/" style="font-size: 1.2em; color: #999da3">Linux</a> <a href="/tags/%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" style="font-size: 1.1em; color: #999">志工活動</a> <a href="/tags/PLC/" style="font-size: 1.15em; color: #999b9e">PLC</a> <a href="/tags/git/" style="font-size: 1.35em; color: #99a3b1">git</a> <a href="/tags/EtherCAT/" style="font-size: 1.2em; color: #999da3">EtherCAT</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C++</a> <a href="/tags/OpenBMC/" style="font-size: 1.45em; color: #99a7ba">OpenBMC</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">5</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">102</div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-01-02T01:35:43.106Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>

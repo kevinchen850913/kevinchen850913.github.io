@@ -51,7 +51,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2025-01-02 01:20:14'
+  postUpdate: '2025-01-02 01:35:43'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -148,217 +148,103 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Kevin的學習筆記</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/22/OpenBMC(8)-Devtool_NewRecipe/" title="OpenBMC(8)-Devtool_NewRecipe">OpenBMC(8)-Devtool_NewRecipe</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-06-22T00:00:00.000Z" title="發表於 2024-06-22 00:00:00">2024-06-22</time></span></div><div class="content"># 建立新的層 (Layer)
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin的學習筆記"><span class="site-name">Kevin的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Kevin的學習筆記</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/31/AspeedPFR(8)-Error_Log/" title="AspeedPFR(8)-Error_Log">AspeedPFR(8)-Error_Log</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-08-31T00:00:00.000Z" title="發表於 2024-08-31 00:00:00">2024-08-31</time></span></div><div class="content"># AST2600 Image 產生失敗
+# 切換工作環境失敗
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748ssh kevin@10.34.57.52//清掉現有的修改git reset aspeed-master git reset AspeedTech/aspeed-master --hard//切換分支git checkout aspeed-masterkevin@es71-OpenBMC:~/openbmc$ git checkout aspeed-master -fSwitched to branch &#x27;aspeed-master&#x27;Your branch is up to date with &#x27;AspeedTech/aspeed-master&#x27;.//確認成功切換環境kevin@es71-OpenBMC:~/openbmc$ . setupTarget machine must be specified. Us ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/24/AspeedPFR(7)-Other/" title="AspeedPFR(7)-Other">AspeedPFR(7)-Other</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-08-24T00:00:00.000Z" title="發表於 2024-08-24 00:00:00">2024-08-24</time></span></div><div class="content"># 資安補給站
+# Openssl
+一般產生對鑰的流程，私鑰 ⇒ 公鑰
+ Generating keys using OpenSSL
+橢圓曲線密碼 ECC，EC 是一種密碼。
+Generating a private EC key
+12openssl ecparam -name prime256v1 -genkey -noout -out key.pemopenssl ecparam -name secp384r1 -genkey -out csk384_prv.pem
+-noout 這個關鍵字影響 BEGIN EC PARAMETERS 的產生
+用私鑰產生公鑰
+1openssl ec -in csk384_prv.pem -pubout -out csk384_pub.pem
+憑證的種類，在此選 secp384r1
+ 憑證金鑰類型 (Sun Java System Web Server 7.0 Update 3 管理員指南)
+# Roots of Trust
+信任的根源 Roots of Trust (RoT)
+ 本節提供有關信任根 (RoT) 和信任鏈的基本準則 (CoT) 支援後 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/17/AspeedPFR(6)-Recovery/" title="AspeedPFR(6)-Recovery">AspeedPFR(6)-Recovery</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-08-17T00:00:00.000Z" title="發表於 2024-08-17 00:00:00">2024-08-17</time></span></div><div class="content"># AST1060 規格書
+Firmware SPI Memory Controller (BSPI)
+ 此 SPI 控制器提供 2 個片選引腳 (CE0 ∼ CE1) 來控制最多 2 個快閃記憶體元件。 CE0 ∼ CE1 可以透過可程式分配到不同的不重疊且連續的位址區域起始 / 結束位址。 允許的快閃記憶體位址空間為：0x8000 0000 ∼ 0x8FFF FFFF
+# 開機恢復功能（ABR）
+
+備用啟動復原功能由 strap OTP trap en bspiabr 啟用。
+當韌體啟動成功後，應停用 FMC WDT2 以停止啟動開關。
+啟動切換的預設過期時間設定為 22 秒。 如果韌體啟動時間長於
+ 22 秒，應該更改過期時間並在 22 秒內重新開始計數。
+支援 2 種模式的交替啟動功能：
+
+使用 2 個 SPI 快閃記憶體零件，CE0 和 CE1。 CE0 是主要啟動來源，並從 CE1 備用啟動。對於此引導模式，閃存大小資訊是可選的。
+使用 1 個 SPI 快閃記憶體部分，CE0。 將快閃記憶體空間均勻分割為大小相同的 2 部分。 下隔板是預設引導區，並且從上分區交替引導。此引 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/10/AspeedPFR(5)-SDK%20Tool/" title="AspeedPFR(5)-SDK Tool">AspeedPFR(5)-SDK Tool</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-08-10T00:00:00.000Z" title="發表於 2024-08-10 00:00:00">2024-08-10</time></span></div><div class="content"># aspeed-pfr-tool
+BMC UART 下 aspeed-pfr-tool 指令即可使用 AST1060 的功能。
+aspeed-pfr-tool 圍繞著 Intel SMBus 的規範設計，實作主要是在 AST1060 的程式碼，雙方搭配才能使用，aspeed-pfr-tool 就像是  Intel SMBus 的範例程式。
+
+PFR 的三項核心功能都放在 write_reg，這份筆記 aspeed-pfr-tool 可以優先看這一段，其他用到再來查。
+
+檔案位置 : project\openbmc\meta-aspeed-sdk\meta-ast2600-pfr\recipes-aspeed\aspeed-pfr-tool\aspeed-pfr-tool，aspeed-sdk 中其實就只有 aspeed-pfr-tool。
+# main
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/03/AspeedPFR(4)-AspeedSDK/" title="AspeedPFR(4)-AspeedSDK">AspeedPFR(4)-AspeedSDK</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-08-03T00:00:00.000Z" title="發表於 2024-08-03 00:00:00">2024-08-03</time></span></div><div class="content"># Aspeed Zephyr SDK
+# AspeedTech-SDK
+
+
+# Sign BMC Image
+簽署 BMC 影像，該過程透過 build_bmc_spi.py 腳本實現自動化。
+
+準備完整 256MB 的 BMC 活動鏡像
+準備 OpenSSL 產生的金鑰對
+JSON 檔案定義韌體表現形式，包括 SPI 映像佈局、SMBus 或 I2C* 規則以及映像建置資訊。
+生成 PFM
+簽署 PFM
+將簽名的 PFM 加入 Active 鏡像中
+建立 BMC 鏡像更新膠囊
+簽署更新膠囊
+將簽署的 BMC 更新膠囊加入到清單 JSON 檔案中定義的偏移位址處的完整 ROM 映像中。
+
+# Intel PFR
+這篇文章跟我遇到幾乎一樣的問題，從頭翻到尾都是驗證 BMC 或 PCH 的 flash 的過程，而不是自己製作 KEY 的過程，問就是沒有，我們沒有使用 ROT 雙重配置的具體文件。
+Max10 FPGA ROT real example
+ 適用於英特爾的 SPI 影像產生工具，請下載英特爾平台韌體彈性（Intel PFR）工具指南和工具包，並依照指示建立 BMC、BIOS  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/27/AspeedPFR(3)-AST1060EVB/" title="AspeedPFR(3)-AST1060EVB">AspeedPFR(3)-AST1060EVB</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-07-27T00:00:00.000Z" title="發表於 2024-07-27 00:00:00">2024-07-27</time></span></div><div class="content"># AST1060 DCSCM EVB 介紹
+# DC-SCM 2.0 架構
+https://www.opencompute.org/documents/cloudfare-lenovo-project-argus-dc-scm2-0-module-design-spec-rev1-0-pdf
+
+DC-SCM Rev2.0 模組整合 Axiado 的創新 TCU 與人工智慧（AI）/ 機器學習（ML）功能，包括基板管理控制器（BMC）、平台信任根（PRoT）、可信任平台模組（TPM）和複雜的可程式化邏輯裝置（CPLD）等關鍵功能，從而實現基於單晶片的 DC-SCM 解決方案。
+Intel® Max® V CPLD - Intel® FPGA
+
+# AST1060 DC-SCM EVB
+
+
+ASPEED DC-SCM 2.0 模組卡
+ DC-SCI 0.95l 腳位排列，DC SCM v0.7 規格
+DC SCM 2.0 基板
+模擬 CPU/PCH SPI/eSPI 主機（例如 SF 600 排針類比 QSPI 主機）
+用於 BMC 測試的 I3C/I2C 主機 / 裝置介面。
+橋接 L ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/20/AspeedPFR(2)-Zephyr/" title="AspeedPFR(2)-Zephyr">AspeedPFR(2)-Zephyr</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-07-20T00:00:00.000Z" title="發表於 2024-07-20 00:00:00">2024-07-20</time></span></div><div class="content"># Zephyr 簡介
+Zephyr 專案是一個可擴展的即時作業系統 (RTOS)，支援多種硬體架構，針對資源受限的裝置進行了最佳化，並在建置時考慮了安全性。Zephyr OS 基於小佔用內核，設計用於資源受限的系統：從簡單的嵌入式環境感測器和 LED 穿戴式裝置到複雜的智慧手錶和物聯網無線網關。
+AspeedPFR 的專案會使用 Zephyr 來建置，所以必須先完成 Zephyr 環境的搭建，Ubuntu、Windows 的環境我都有成功搭建，Ubuntu 的建置難度較低，不過考量到可能會使用到 Zephyr 的 dbg 支援裝況，我在本地的 Windows 上也搭建了開發環境， Zephyr 網站教學完整，可參考文件 Getting Started Guide — Zephyr Project Documentation。
+# 安裝 Zephyr (Ubuntu)
+
+依照 Zephyr 網站教學操作安裝在 Ubuntu 虛擬機
+啟動虛擬環境： source ~/zephyrproject/.venv/bin/activate  ，啟動後，您的 shell 將以 (.venv) .  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/13/AspeedPFR(1)-Introduction/" title="AspeedPFR(1)-Introduction">AspeedPFR(1)-Introduction</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-07-13T00:00:00.000Z" title="發表於 2024-07-13 00:00:00">2024-07-13</time></span></div><div class="content"># PFR 介紹
+在 2017 年有個病毒 BrickerBot，他是透過網路刷機將 IoT 設備上的韌體變成磚頭 (Brick)，這種攻擊手法被稱為 PDoS (Permanent denial-of-service attacks /phlashing)，和 DDoS 讓服務器暫時癱瘓的攻擊手法相比，這是永久性的讓硬件癱瘓，必須重新更新才能復原。
+隔年 (2018) 美國國家標準暨技術研究院 (NIST) 發布了 NIST SP 800 193 標準 (Platform Firmware Resiliency Guidelines)，裡面提及 Platform 上的 Firmware 應該要符合三項安全措施。
+
+保護 Protection，擋來路不明的命令。
+偵測 Detection，檢查檔案是否被更改。
+恢復 Recovery，回燒上一次的檔案。
+
+# Intel PFR
+英特爾平台韌體彈性 (Intel® Platform Firmware Resilience)，使用 FPGA 實作。
+
+
+DETECT : PFR FPGA 會驗證 SPI flash 中的數字簽章，再比對每 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/29/OpenBMC(9)-QA/" title="OpenBMC(9)-QA">OpenBMC(9)-QA</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-06-29T00:00:00.000Z" title="發表於 2024-06-29 00:00:00">2024-06-29</time></span></div><div class="content"># How to set BBPATH in OpenBMC
+openbmc 使用 TOPDIR 來定義路徑，bblayers.conf 中加入  BBPATH := &quot;$&#123;TOPDIR&#125;&quot; ，執行專案時即可將當前目錄加入環境變數。
+123456789101112131415LAYERSERIES_CORENAMES = &quot;sumo&quot;# LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf# changes incompatiblyLCONF_VERSION = &quot;7&quot;BBPATH = &quot;$&#123;TOPDIR&#125;&quot;BBFILES ?= &quot;&quot;BBLAYERS ?= &quot; \  $&#123;TOPDIR&#125;/layer1 \  $&#123;TOPDIR&#125;/layer2 \  $&#123;TOPDIR&#125;/layer3 \  $&#123;T ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/22/OpenBMC(8)-Devtool_NewRecipe/" title="OpenBMC(8)-Devtool_NewRecipe">OpenBMC(8)-Devtool_NewRecipe</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-06-22T00:00:00.000Z" title="發表於 2024-06-22 00:00:00">2024-06-22</time></span></div><div class="content"># 建立新的層 (Layer)
 New Recipe and New Layer 在專案中產生新的 Layer
 bitbake-layers create-layer meta-helloworld
 123kevin@OpenBMC:~/openbmc$ bitbake-layers create-layer meta-helloworldNOTE: Starting bitbake server...Add your new layer with &#x27;bitbake-layers add-layer meta-helloworld&#x27;
 bitbake-layers add-layer meta-helloworld
 12kevin@OpenBMC:~/openbmc$ bitbake-layers add-layer meta-helloworldNOTE: Starting bitbake server...
 可以看到 openbmc 資料夾中多了 meta-helloworld
-1234567kevin@OpenBMC:~/openbmc$ lsbitbake   ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/15/OpenBMC(7)-Devtool_Modifying/" title="OpenBMC(7)-Devtool_Modifying">OpenBMC(7)-Devtool_Modifying</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-06-15T00:00:00.000Z" title="發表於 2024-06-15 00:00:00">2024-06-15</time></span></div><div class="content"># 取得 linux-aspeed
-# modifying machine
-Modifying evb-ast2600 kernel
- 確認當前環境已經設置成功 (ast2600-evb)
-openbmc/meta-evb/meta-evb-aspeed/meta-evb-ast2600/conf/machine
-123456789101112131415161718192021222324252627282930kevin@OpenBMC:~/openbmc/meta-evb/meta-evb-aspeed/meta-evb-ast2600/conf/machine$ lltotal 8drwxrwxr-x 2 kevin kevin 4096 十二 27 18:02 ./drwxrwxr-x 4 kevin kevin 4096 十二 27 18:02 ../lrwxrwxrwx 1 kevin kevin   56 十二 27 18:02 evb-ast2600.conf -&gt; ../../../../../meta-aspeed/conf/machine/evb-ast2 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/08/OpenBMC(6)-Devtool_Cmd/" title="OpenBMC(6)-Devtool_Cmd">OpenBMC(6)-Devtool_Cmd</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-06-08T00:00:00.000Z" title="發表於 2024-06-08 00:00:00">2024-06-08</time></span></div><div class="content"># devtool 基本介紹
-# devtool 是什麼
-devtool 是一個命令列工具，提供了許多功能來建置、測試和打包軟體，此指令與 bitbake 指令一起使用，devtool 指令是可擴充 SDK 的關鍵部分。
-使用 devtool 的好處，在過去，開發者會直接修改專案中的檔案，然後重新編譯，但這實在不是一個好主意：
-
-你必須使用 bitbake -c compile -fbitbake -C compile 或強制重新編譯，因為建置系統不知道你已經做了任何更改，這很尷尬。
-如果不小心，您很容易丟失更改，例如運行 bitbake -c clean 會清除目錄
-
-devtool 可以執行建立補丁、檔案等步驟，bbappend 作為建立配方的一部分，Yocto 會建立一個 tmp/work/&lt;architecture&gt;/&lt;recipe&gt;/&lt;version&gt;  目錄，稱為「工作目錄」。這是建立配方的所有工作發生的地方，可以與 bitbake 的工作範圍做出區隔，命令 devtool 列的組織方式與 Git 類似，每個功能都有許多子命令。您可以運行 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/01/OpenBMC(5)-Bitbake_Execution/" title="OpenBMC(5)-Bitbake_Execution">OpenBMC(5)-Bitbake_Execution</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-06-01T00:00:00.000Z" title="發表於 2024-06-01 00:00:00">2024-06-01</time></span></div><div class="content"># 準備作業
-
-概述 Bitbake Execution，解釋專案的建置過程。
-依照 Bitbake 手冊中的執行部分的流程撰寫。
-針對關鍵性步驟進行說明，流程細節仍有待考據。
-
-# 變數解析
-BitBake 做的第一件事是解析基本組態元資料。基本配置元資料由專案 bblayers.conf 文件組成，以確定 BitBake 需要識別哪些層、所有必要的 layer.conf 文件和 bitbake.conf。
-BitBake =&gt; bblayers.conf =&gt; layer.conf and bitbake.conf
-
-BBPATH 用於分別搜尋 conf 、 classes
-BBFILES 用於定位配 .bb 、 .bbappend
-
-名為 “something_1.2.3.bb” 的配方會將
-
-PN 設為 “something”
-PV 設為 “1.2.3”
-
-了解執行環境中使用的設定檔和類別檔案的好方法是執行以下 BitBake 命令，檢查頂部 mybb.log 會顯示執行環境中使用的許多設定檔和類別檔案。
-1$ bitbake -e &gt; mybb.log
-#  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/25/OpenBMC(4)-Bitbake_Operators/" title="OpenBMC(4)-Bitbake_Operators">OpenBMC(4)-Bitbake_Operators</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-05-25T00:00:00.000Z" title="發表於 2024-05-25 00:00:00">2024-05-25</time></span></div><div class="content"># 準備作業
-
-介紹 bitbake 運算子
-舉例說明運算子該如何使用
-整理運算子處理的優先順序
-
-堆疊處理懶人包
-
-處理變數常數賦值  Y = &quot;abc&quot;
-處理強預設值賦值  Y ?= &quot;abc&quot;
-處理變數常數操作  Y += &quot;abc&quot;  、  Y .= &quot;abc&quot;
-處理弱預設值賦值  Y ??= &quot;abc&quot;
-處理變數拓展賦值  Y2 = &quot;$&#123;Y&#125;&quot;  =&gt; 拓展 Y 時將工作加入堆疊
- (立即拓展的差異是在拓展的時機，而非堆疊的優先度)
-處理覆寫語法操作  F:append = &quot;abc&quot; 
-(處理時間點為 Bitbake 解析完成後)
-
-
-BECAUSE WINDOWS “RETURN SYMBOL” CAN NOT BE EXECUTED, SO MAKE SURE YOUR “RETURN SYMBOL” IN LOCAL.CONF IS LINUX TYPE. THAT CAN AVOID ANNOYING ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/18/OpenBMC(3)-setup_Script/" title="OpenBMC(3)-setup_Script">OpenBMC(3)-setup_Script</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-05-18T00:00:00.000Z" title="發表於 2024-05-18 00:00:00">2024-05-18</time></span></div><div class="content"># 準備作業
-
-setup 的功能為 openBMC 的建置前先設定環境
-分析 setup 的原始碼，並整理相依姓
-紀錄有關 Shell 語法的學習筆記
-
-# Shell 相關知識
-# zsh
-自 2019 年起，macOS 的預設 Shell 已從 Bash 改為 Zsh。
-原始碼中出現 ZSH_NAME 是為了解決 Bash 與 Zsh 兼容性的問題。
-# 判定字串的資料
-
-test -z string
- 判定字串是否為 0 ? 若 string 為空字串，則為 true
-test -n string
- 判定字串是否非為 0 ? 若 string 為空字串，則為 false，-n 可省略。
-test str1 == str2
- 判定 str1 是否等於 str2 ，若相等，則回傳 true
-test str1 != str2
- 判定 str1 是否不等於 str2 ，若相等，則回傳 false
- 參考資料 : 鳥哥私房菜
-
-# 利用判斷符號  [ ]
-除了 test 之外，其實可以利用判斷符號 [ ]  來進行資料的判斷，舉例來說，如果我想要知道 ${HOME} 這個變數是否為空的 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/11/OpenBMC(2)-QEMU/" title="OpenBMC(2)-QEMU">OpenBMC(2)-QEMU</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-05-11T00:00:00.000Z" title="發表於 2024-05-11 00:00:00">2024-05-11</time></span></div><div class="content"># 準備作業
-
-QEMU 是一種虛擬機，可支援用來搭建 OpenBMC。
-必須先完成 OpenBMC(1)-1stBuild 並取得可用的二進位檔。
-使用 QEMU (Quick Emulator) 來模擬系統上閃爍的影像。
-在不同架構上進行快速測試、偵錯和驗證應用程式 / 特性 / 功能
-
-# Windows 中使用 QEMU
-QEMU 是一種虛擬機，可支援用來搭建 OpenBMC。
-QEMU 下載 https://www.qemu.org/download/#windows
-Windows 版 QEMU 是實驗性軟體，甚至可能包含嚴重的錯誤，因此使用二進位檔案需要您自擔風險。根據你的作業系統，QEMU 的目錄可能會有所不同。
-
-Ubuntu  $BUILDDIR/$MACHINE/tmp/work/x86_64-linux/
-iOS  $BUILDDIR/$MACHINE/tmp/work/aarch64-linux/
-
-# OpenBMC 中使用 QEMU
-OpenBMC 版本的教學
- https://github.com/openbmc/docs/blob/master/che ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/04/OpenBMC(1)-1stBuild/" title="OpenBMC(1)-1stBuild">OpenBMC(1)-1stBuild</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-05-04T00:00:00.000Z" title="發表於 2024-05-04 00:00:00">2024-05-04</time></span></div><div class="content"># 準備作業
-取得 openBMC github 上的原始碼，在 GitLab 上建立 OpenBMC 的副本。依照 openBMC 中的 README.md 建構影像檔。
-
-# SSH 遠端 server 方案
-測試 Build server 權限已啟動可以成功登入。
-1ssh kevin@10.34.57.52   password: kevin
-檢查 Build server 上的遠端。
-12git clone --bare https://github.com/openbmc/u-boot.gitgit clone --bare https://github.com/openbmc/linux.git
-
-將 Build server 上的遠端改成 GitLab OpenBMC，遇到問題調整一下設定。
-12SSL certificate problem: self-signed certificategit config --global http.sslVerify false
-
-# 本地 Ubuntu 方案
-根據 Yocto Doc 的說法，每個作業系統環境都有要求。 如果我 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/27/VirtualBox%20%E5%AE%89%E8%A3%9D%20Ubuntu%20%E7%AD%86%E8%A8%98/" title="VirtualBox 安裝 Ubuntu 筆記">VirtualBox 安裝 Ubuntu 筆記</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-27T00:00:00.000Z" title="發表於 2024-04-27 00:00:00">2024-04-27</time></span></div><div class="content"># 安裝 VirtualBox
-下載 VirtualBox，使用映像檔版本 Ubuntu 22.04.3 LTS。
-1pip install pywin32
-# pip 指令失效
-
-VirtualBox 安裝中顯示 pip 失效，只要手動加環境變數即可
-1C:\\Users\\11212706\\AppData\\Local\\Programs\\Python\\Python312\\Scripts
-
-加完後就能安裝 pywin32
-123456789C:\\Windows\\system32&gt;pip install pywin32Collecting pywin32Downloading pywin32-306-cp312-cp312-win_amd64.whl (9.2 MB)---------------------------------------- 9.2/9.2 MB 7.5 MB/s eta 0:00:00Installing collected packages: pywin32Successfully installed pywin32-306    [not ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/20/Linux%20%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9/" title="Linux 基本指令介紹">Linux 基本指令介紹</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2024-04-20T00:00:00.000Z" title="發表於 2024-04-20 00:00:00">2024-04-20</time></span></div><div class="content"># 常用的指令表
-
-
-
-指令
-說明
-
-
-
-
-ls
-列出資料夾與檔案名稱
-
-
-pwd
-顯示當下工作路徑
-
-
-cd
-變換工作路徑
-
-
-mv
-移動檔案
-
-
-rm
-刪除檔案
-
-
-cat
-列出檔案內容
-
-
-cp
-複製檔案
-
-
-scp
-在不同 Linux 主機間複製檔案
-
-
-mkdir
-建立資料夾
-
-
-touch
-建立檔案
-
-
-vi
-新增、修改、搜尋並取代文字
-
-
-sudo
-使用最高權限執行
-
-
-man
-查看指令說明文件
-
-
-help
-查看指令說明
-
-
-clear
-清除終端機上的訊息
-
-
-which
-查詢指令的來源路徑
-
-
-find
-尋找資料夾或檔案
-
-
-exit
-離開系統
-
-
-
-# 檔案與目錄管理
-# cd 變換工作路徑
-
-cd … &lt;== 回到上一層
-cd &lt;== 回到使用者目錄
-cd / 桌面 &lt;== 到 / 桌面 這一個目錄
-
-1234vboxuser@Ubuntu:~$ cd ..vboxuser@Ubuntu:/home$ cdvboxuser@Ubuntu:~$ cd 桌面vboxuser@Ubuntu:~/桌面$
-# pwd 顯示當前目錄
-12vboxuser@U ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#content-inner">10</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/22/OpenBMC(8)-Devtool_NewRecipe/" title="OpenBMC(8)-Devtool_NewRecipe">OpenBMC(8)-Devtool_NewRecipe</a><time datetime="2024-06-22T00:00:00.000Z" title="發表於 2024-06-22 00:00:00">2024-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/15/OpenBMC(7)-Devtool_Modifying/" title="OpenBMC(7)-Devtool_Modifying">OpenBMC(7)-Devtool_Modifying</a><time datetime="2024-06-15T00:00:00.000Z" title="發表於 2024-06-15 00:00:00">2024-06-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/08/OpenBMC(6)-Devtool_Cmd/" title="OpenBMC(6)-Devtool_Cmd">OpenBMC(6)-Devtool_Cmd</a><time datetime="2024-06-08T00:00:00.000Z" title="發表於 2024-06-08 00:00:00">2024-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/01/OpenBMC(5)-Bitbake_Execution/" title="OpenBMC(5)-Bitbake_Execution">OpenBMC(5)-Bitbake_Execution</a><time datetime="2024-06-01T00:00:00.000Z" title="發表於 2024-06-01 00:00:00">2024-06-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/25/OpenBMC(4)-Bitbake_Operators/" title="OpenBMC(4)-Bitbake_Operators">OpenBMC(4)-Bitbake_Operators</a><time datetime="2024-05-25T00:00:00.000Z" title="發表於 2024-05-25 00:00:00">2024-05-25</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/EtherCAT/" style="font-size: 1.2em; color: #999da3">EtherCAT</a> <a href="/tags/PCI-e/" style="font-size: 1.1em; color: #999">PCI/e</a> <a href="/tags/%E9%9F%8C%E9%AB%94%E9%96%8B%E7%99%BC/" style="font-size: 1.25em; color: #999fa7">韌體開發</a> <a href="/tags/Vivado/" style="font-size: 1.3em; color: #99a1ac">Vivado</a> <a href="/tags/OpenBMC/" style="font-size: 1.45em; color: #99a7ba">OpenBMC</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C++</a> <a href="/tags/Verilog/" style="font-size: 1.4em; color: #99a5b6">Verilog</a> <a href="/tags/Linux/" style="font-size: 1.2em; color: #999da3">Linux</a> <a href="/tags/git/" style="font-size: 1.35em; color: #99a3b1">git</a> <a href="/tags/%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" style="font-size: 1.1em; color: #999">志工活動</a> <a href="/tags/PLC/" style="font-size: 1.15em; color: #999b9e">PLC</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">3</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">93</div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-01-02T01:20:13.721Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
+1234567kevin@OpenBMC:~/openbmc$ lsbitbake   ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#content-inner">11</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/31/AspeedPFR(8)-Error_Log/" title="AspeedPFR(8)-Error_Log">AspeedPFR(8)-Error_Log</a><time datetime="2024-08-31T00:00:00.000Z" title="發表於 2024-08-31 00:00:00">2024-08-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/24/AspeedPFR(7)-Other/" title="AspeedPFR(7)-Other">AspeedPFR(7)-Other</a><time datetime="2024-08-24T00:00:00.000Z" title="發表於 2024-08-24 00:00:00">2024-08-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/17/AspeedPFR(6)-Recovery/" title="AspeedPFR(6)-Recovery">AspeedPFR(6)-Recovery</a><time datetime="2024-08-17T00:00:00.000Z" title="發表於 2024-08-17 00:00:00">2024-08-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/10/AspeedPFR(5)-SDK%20Tool/" title="AspeedPFR(5)-SDK Tool">AspeedPFR(5)-SDK Tool</a><time datetime="2024-08-10T00:00:00.000Z" title="發表於 2024-08-10 00:00:00">2024-08-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/03/AspeedPFR(4)-AspeedSDK/" title="AspeedPFR(4)-AspeedSDK">AspeedPFR(4)-AspeedSDK</a><time datetime="2024-08-03T00:00:00.000Z" title="發表於 2024-08-03 00:00:00">2024-08-03</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/%E9%9F%8C%E9%AB%94%E9%96%8B%E7%99%BC/" style="font-size: 1.25em; color: #999fa7">韌體開發</a> <a href="/tags/Verilog/" style="font-size: 1.4em; color: #99a5b6">Verilog</a> <a href="/tags/PCI-e/" style="font-size: 1.1em; color: #999">PCI/e</a> <a href="/tags/Vivado/" style="font-size: 1.3em; color: #99a1ac">Vivado</a> <a href="/tags/Linux/" style="font-size: 1.2em; color: #999da3">Linux</a> <a href="/tags/%E5%BF%97%E5%B7%A5%E6%B4%BB%E5%8B%95/" style="font-size: 1.1em; color: #999">志工活動</a> <a href="/tags/PLC/" style="font-size: 1.15em; color: #999b9e">PLC</a> <a href="/tags/git/" style="font-size: 1.35em; color: #99a3b1">git</a> <a href="/tags/EtherCAT/" style="font-size: 1.2em; color: #999da3">EtherCAT</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C++</a> <a href="/tags/OpenBMC/" style="font-size: 1.45em; color: #99a7ba">OpenBMC</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">5</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">102</div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-01-02T01:35:43.106Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
