@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
 <meta property="article:published_time" content="2023-08-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-02-12T07:37:37.700Z">
+<meta property="article:modified_time" content="2025-02-24T04:07:07.850Z">
 <meta property="article:author" content="Kevin Chen">
 <meta property="article:tag" content="韌體開發">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2025-02-12 07:37:37'
+  postUpdate: '2025-02-24 04:07:07'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -153,7 +153,7 @@
         }
       }
       detectApple()
-    })(window)</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">110</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin Chen 的學習筆記"><span class="site-name">Kevin Chen 的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PCIE 學習筆記</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-08-15T00:00:00.000Z" title="發表於 2023-08-15 00:00:00">2023-08-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-02-12T07:37:37.700Z" title="更新於 2025-02-12 07:37:37">2025-02-12</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="isa-pci-pcie"><a class="markdownIt-Anchor" href="#isa-pci-pcie">#</a> ISA、PCI、PCIE</h2>
+    })(window)</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">110</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin Chen 的學習筆記"><span class="site-name">Kevin Chen 的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PCIE 學習筆記</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-08-15T00:00:00.000Z" title="發表於 2023-08-15 00:00:00">2023-08-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-02-24T04:07:07.850Z" title="更新於 2025-02-24 04:07:07">2025-02-24</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="isa-pci-pcie"><a class="markdownIt-Anchor" href="#isa-pci-pcie">#</a> ISA、PCI、PCIE</h2>
 <p>多年來，ISA 和 PCI 是等效的。由於 PCI 是作為 ISA 的補充而不是直接競爭對手而引入的，因此主機板同時具有 ISA 和 PCI 端口的情況並不罕見。 ISA 至少在一段時間內與 PCI 標準是並行的。 ISA 在某些方面會提供更好的效能，而 PCI 在其他方面會提供更好的效能。</p>
 <p>當正面對比時，PCI 絕對是更好、更快的選擇。考慮到 PCI 已經更新了整整十年，這是可以預料到的。儘管 2010 年 ISA 幾乎已經過時，並且隨著 PCI-E 和 Mini-PCI-E 的興起，PCI 也即將消亡，但許多消費者和行業仍在使用它們。 ISA 和 PCI 對電腦產業產生了重大影響。</p>
 <p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B7%A5%E4%B8%9A%E6%A0%87%E5%87%86%E7%BB%93%E6%9E%84">ISA (工業標準架構)</a> 在 PC 和筆記型電腦上幾乎已經絕跡，但主機板仍採用 ISA 生產。許多專業工業和軍事場合仍然需要舊的備用 ISA。 ISA 也被證明是一個可靠的標準，已被後續技術所利用。</p>
