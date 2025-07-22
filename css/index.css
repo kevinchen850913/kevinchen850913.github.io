@@ -579,11 +579,12 @@ body {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 *::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 12px;
+  height: 12px;
 }
 *::-webkit-scrollbar-thumb {
   background: var(--scrollbar-color);
+  border-radius: 8px;
 }
 *::-webkit-scrollbar-track {
   background-color: transparent;
@@ -598,6 +599,16 @@ input::-moz-placeholder {
 input::placeholder {
   color: var(--font-color);
 }
+p {
+  margin: 0 0 2em;
+  line-height: 1.6;
+}
+ol,
+ul,
+li {
+  margin-top: 0.2em;
+  margin-bottom: 1em;
+}
 h1,
 h2,
 h3,
@@ -605,7 +616,7 @@ h4,
 h5,
 h6 {
   position: relative;
-  margin: 20px 0 14px;
+  margin: 0.8em 0 0.4em;
   color: var(--text-highlight-color);
   font-weight: bold;
 }
@@ -616,6 +627,13 @@ h4 code,
 h5 code,
 h6 code {
   font-size: inherit !important;
+}
+p code,
+li code,
+span code {
+  font-size: 1em;
+  line-height: inherit;
+  vertical-align: baseline;
 }
 * {
   box-sizing: border-box;
@@ -701,6 +719,14 @@ blockquote footer cite:before {
 }
 blockquote > :last-child {
   margin-bottom: 0 !important;
+}
+#article-container code,
+#article-container p code,
+#article-container li code,
+#article-container span code {
+  font-size: 0.8em !important;
+  vertical-align: baseline;
+  line-height: inherit;
 }
 :root {
   --hl-color: #90a4ae;
@@ -1285,7 +1311,7 @@ figure.highlight pre .javascript .function {
   font-size: 1.5em;
 }
 #recent-posts > .recent-post-item:not(:first-child) {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 #recent-posts > .recent-post-item {
   display: -ms-flexbox;
@@ -1454,14 +1480,14 @@ h1.page-title + .tag-cloud-list {
   position: relative;
   overflow: hidden;
   margin-top: 20px;
-  padding: 20px 24px;
+  padding: 12px 18px;
 }
 #aside-content .card-info .author-info__name {
   font-weight: 500;
-  font-size: 1.57em;
 }
 #aside-content .card-info .author-info__description {
-  margin-top: -0.42em;
+  margin-top: 0em;
+  font-size: 0.8em;
 }
 #aside-content .card-info .card-info-data {
   margin: 14px 0 4px;
@@ -1472,7 +1498,7 @@ h1.page-title + .tag-cloud-list {
 #aside-content .card-info .card-info-social-icons .social-icon {
   margin: 0 10px;
   color: var(--font-color);
-  font-size: 1.4em;
+  font-size: 1em;
 }
 #aside-content .card-info .card-info-social-icons i {
   transition: all 0.3s;
@@ -1496,7 +1522,7 @@ h1.page-title + .tag-cloud-list {
 }
 #aside-content .item-headline {
   padding-bottom: 6px;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 #aside-content .item-headline span {
   margin-left: 6px;
@@ -1557,13 +1583,13 @@ h1.page-title + .tag-cloud-list {
 #aside-content .aside-list > .aside-list-item .content > .name {
   display: block;
   color: #858585;
-  font-size: 85%;
+  font-size: 60%;
 }
 #aside-content .aside-list > .aside-list-item .content > .title,
 #aside-content .aside-list > .aside-list-item .content > .comment {
   color: var(--font-color);
-  font-size: 95%;
-  line-height: 1.5;
+  font-size: 80%;
+  line-height: 1.2;
   -webkit-line-clamp: 2;
 }
 #aside-content .aside-list > .aside-list-item .content > .title:hover,
@@ -1665,7 +1691,7 @@ h1.page-title + .tag-cloud-list {
   margin-top: -9px;
   color: #a9a9a9;
   font-style: italic;
-  font-size: 140%;
+  font-size: 120%;
 }
 #aside-content #card-toc .toc-content {
   overflow-y: scroll;
@@ -1673,6 +1699,7 @@ h1.page-title + .tag-cloud-list {
   margin: 0 -24px;
   max-height: calc(100vh - 120px);
   width: calc(100% + 48px);
+  font-size: 16px;
 }
 @media screen and (max-width: 900px) {
   #aside-content #card-toc .toc-content {
@@ -1773,7 +1800,7 @@ h1.page-title + .tag-cloud-list {
 .site-data > a .length-num {
   margin-top: -0.32em;
   color: var(--text-highlight-color);
-  font-size: 1.4em;
+  font-size: 1em;
 }
 @media screen and (min-width: 900px) {
   html.hide-aside .layout {
@@ -1901,6 +1928,7 @@ h1.page-title + .tag-cloud-list {
   padding: 40px 20px;
   color: var(--light-grey);
   text-align: center;
+  font-size: 0.8em;
 }
 #footer-wrap a {
   color: var(--light-grey);
@@ -2408,15 +2436,15 @@ h1.page-title + .tag-cloud-list {
 }
 #article-container img {
   display: block;
-  margin: 0 auto 20px;
+  margin: 0 auto 14px;
   max-width: 100%;
   transition: filter 375ms ease-in 0.2s;
 }
 #article-container p {
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 #article-container iframe {
-  margin: 0 0 20px;
+  margin: 0 0 14px;
 }
 #article-container kbd {
   margin: 0 3px;
@@ -2450,7 +2478,7 @@ h1.page-title + .tag-cloud-list {
   margin-bottom: 0 !important;
 }
 #article-container hr {
-  margin: 20px 0;
+  margin: 16px 0;
 }
 #post .tag_share:after {
   display: block;
@@ -2499,6 +2527,7 @@ h1.page-title + .tag-cloud-list {
   padding: 10px 16px;
   border: 1px solid var(--light-grey);
   transition: box-shadow 0.3s ease-in-out;
+  font-size: 0.8em;
 }
 #post .post-copyright:before {
   position: absolute;

@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>BMC(1)-BMC 學習筆記 | Kevin Chen 的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# BMC 是什麼 基板管理控制器（BMC）是一種小型專用處理器，主要用於遠端監控和管理伺服器或其他主機系統。BMC 通常基於 ARM 架構的系統單晶片（SoC），並內建圖形處理和邏輯控制功能。它一般安裝在電腦、伺服器、網路設備或儲存裝置的主機板上，並可透過專用或共用網路進行遠端存取。 BMC 具有多個連接介面，能夠通過感應器、快閃記憶體（如 BIOS&#x2F;UEFI）來監控硬體狀況。它還可以透過序列接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BMC(1)-BMC 學習筆記">
+<meta property="og:url" content="http://example.com/2023/11/10/cmde9uzvg001nlp9bhspnhp72/index.html">
+<meta property="og:site_name" content="Kevin Chen 的學習筆記">
+<meta property="og:description" content="# BMC 是什麼 基板管理控制器（BMC）是一種小型專用處理器，主要用於遠端監控和管理伺服器或其他主機系統。BMC 通常基於 ARM 架構的系統單晶片（SoC），並內建圖形處理和邏輯控制功能。它一般安裝在電腦、伺服器、網路設備或儲存裝置的主機板上，並可透過專用或共用網路進行遠端存取。 BMC 具有多個連接介面，能夠通過感應器、快閃記憶體（如 BIOS&#x2F;UEFI）來監控硬體狀況。它還可以透過序列接">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-11-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-07-22T08:27:24.232Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="OpenBMC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/11/10/cmde9uzvg001nlp9bhspnhp72/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-ELXXL0FKFN"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ELXXL0FKFN');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BMC(1)-BMC 學習筆記',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-07-22 16:27:24'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">112</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin Chen 的學習筆記"><span class="site-name">Kevin Chen 的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BMC(1)-BMC 學習筆記</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-11-10T16:00:00.000Z" title="發表於 2023-11-11 00:00:00">2023-11-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-07-22T08:27:24.232Z" title="更新於 2025-07-22 16:27:24">2025-07-22</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="bmc-是什麼"><a class="markdownIt-Anchor" href="#bmc-是什麼">#</a> BMC 是什麼</h3>
+<p>基板管理控制器（BMC）是一種小型專用處理器，主要用於遠端監控和管理伺服器或其他主機系統。BMC 通常基於 ARM 架構的系統單晶片（SoC），並內建圖形處理和邏輯控制功能。它一般安裝在電腦、伺服器、網路設備或儲存裝置的主機板上，並可透過專用或共用網路進行遠端存取。</p>
+<p>BMC 具有多個連接介面，能夠通過感應器、快閃記憶體（如 BIOS/UEFI）來監控硬體狀況。它還可以透過序列接口或實體／虛擬 KVM（鍵盤、顯示器、滑鼠）來提供主控台存取權限，並記錄主機的事件和電力循環日誌。</p>
+<h3 id="bmc-的主要功能"><a class="markdownIt-Anchor" href="#bmc-的主要功能">#</a> BMC 的主要功能</h3>
+<p>BMC（基板管理控制器）具備多項遠端管理和監控功能，以下是其主要功能：</p>
+<ol>
+<li><strong>遠程電源控制（開關電源 / 重啟 / 狀態監控）</strong><br>
+用戶可以遠端開啟、關閉或重啟伺服器，並且監控伺服器的電源狀態。</li>
+<li><strong>串口重定向（Serial over LAN, SOL）</strong><br>
+允許透過網路對伺服器的串口進行遠端重定向，使使用者可以像直接連接到伺服器的串口一樣進行操作。</li>
+<li><strong>KVM / 虛擬化管理（KVM/VM）</strong><br>
+提供虛擬鍵盤、顯示器和滑鼠（KVM）功能，遠端控制伺服器，即便伺服器的操作系統無法啟動，仍可進行管理。</li>
+<li><strong>硬體資訊獲取及資源管理</strong><br>
+包括監控伺服器的溫度、風扇轉速和電壓等硬體狀況，幫助管理員及時發現潛在的硬體故障。</li>
+<li><strong>系統事件日誌（SEL，System Log）</strong><br>
+記錄伺服器的系統事件，包括硬體故障、警告訊息等，幫助管理員追蹤伺服器狀態和進行故障排查。</li>
+<li><strong>集群管理</strong><br>
+支援多台伺服器的集中管理，提升大規模伺服器環境中的管理效率。</li>
+<li><strong>調試與定位</strong><br>
+提供遠端的故障診斷和問題定位功能，協助系統管理員快速解決伺服器故障。</li>
+</ol>
+<p><strong>註：</strong> 儘管上述許多功能並不完全符合 IPMI（智慧平台管理接口）的標準協議，但為了使用方便，各廠商逐步開發並完善這些功能，並將其作為現今伺服器管理中不可或缺的工具，例如 KVM 功能。</p>
+<p>由於 BMC 軟體的開發相對複雜且投入成本較高，因此許多廠商會選擇購買第三方的 BMC 軟體，再根據自己的需求進行開發。當前能夠提供完整 BMC 軟體的公司主要有兩家：愛迪生（Edison）和 AMI（American Megatrends）。</p>
+<p>市場上獨立開發完整 BMC 功能的廠商並不多，這些廠商的大多數 BMC 軟體都是基於 Emulex、愛迪生或 AMI 的代碼進行開發和改進的。</p>
+<h3 id="bmc-和-ipmi-的關係"><a class="markdownIt-Anchor" href="#bmc-和-ipmi-的關係">#</a> BMC 和 IPMI 的關係</h3>
+<p>BMC（基板管理控制器）與 IPMI（智慧平台管理接口）息息相關，兩者的關係如下：</p>
+<p>BMC 是一種硬體模組，專門用於伺服器的帶外管理。最早，每個廠商的 BMC 模組都是私有的，這使得不同廠商的伺服器管理變得十分麻煩。假設一個機房中有多個不同廠商的伺服器，管理員就需要安裝每個廠商不同的管理軟體，且這些管理軟體的功能和操作方式也各不相同。為了解決這一問題，Intel 主導制定了 IPMI 協議標準，這使得不同廠商的 BMC 可以通過統一的接口進行管理，極大地提高了伺服器的兼容性。</p>
+<p>然而，對於 BMC 而言，IPMI 協議只規範了一些基本功能，例如開關電源、獲取傳感器狀態等。許多進階功能，如 KVM 控制和功耗管理等，仍需要各家廠商根據自己的需求進行實現。因此，儘管 BMC 可以遵循 IPMI 協議進行基本管理，許多高級功能還是需要廠商自行開發。</p>
+<h3 id="伺服器管理帶內管理與帶外管理"><a class="markdownIt-Anchor" href="#伺服器管理帶內管理與帶外管理">#</a> 伺服器管理：帶內管理與帶外管理</h3>
+<p>在伺服器領域，管理方式可分為「帶內管理」和「帶外管理」兩種：</p>
+<ul>
+<li><strong>帶內管理</strong>：帶內管理是通過伺服器的主 CPU 進行監控，通常需要在主機上安裝管理軟體（稱為 Agent）。由於管理是由主 CPU 執行，因此可以取得所有伺服器的資訊，功能相對完整。</li>
+<li><strong>帶外管理</strong>：帶外管理則不依賴主 CPU 進行監控，而是通過 BMC 處理。這意味著不需要在主 CPU 上安裝任何軟體，因此也稱為無代理（Agentless）管理。由於 BMC 無法直接訪問伺服器的所有資源，帶外管理的功能相對較弱，但它仍能提供基本的遠端監控和控制。</li>
+</ul>
+<h3 id="bmc-如何實現帶外管理"><a class="markdownIt-Anchor" href="#bmc-如何實現帶外管理">#</a> BMC 如何實現帶外管理</h3>
+<p>從上述介紹可以看出，BMC 實現的正是帶外管理功能。這意味著 BMC 能夠在伺服器未啟動操作系統的情況下，仍然提供遠端管理功能。例如，當伺服器操作系統無法啟動時，BMC 仍然能夠進行硬體監控和故障診斷。</p>
+<p>需要注意的是，BMC 並非伺服器中必須具備的元件。事實上，許多低成本的伺服器可能沒有配備 BMC 模組，或者僅具備 BMC 的部分功能。原因在於 BMC 模組和相關軟體開發的成本相對較高，而在某些應用場景中，這些功能可能並非必須。這樣的系統仍然可以正常運行，只是缺乏帶外管理功能。</p>
+<h3 id="不同廠商的命名方式"><a class="markdownIt-Anchor" href="#不同廠商的命名方式">#</a> 不同廠商的命名方式</h3>
+<p>不同伺服器廠商會根據自身需要對 BMC 模組進行命名，以區別於其他廠商。例如，惠普（HP）將其 BMC 系統稱為 iLO（Integrated Lights-Out），戴爾（Dell）則稱為 DRAC（Dell Remote Access Controller），而某些其他廠商則可能使用不同的名稱，如 HMD。雖然這些名稱不同，但實際上它們都是基於相同的 BMC 技術，只是在功能和特色上有所區別。</p>
+<h3 id="l1-l11-伺服器製造流程"><a class="markdownIt-Anchor" href="#l1-l11-伺服器製造流程">#</a> L1 - L11 伺服器製造流程</h3>
+<p>在伺服器的製造過程中，根據不同階段的需求，通常會分為 11 個等級，這些等級被用來描述伺服器從初步製造到最終完成的過程。以下是各等級的簡要介紹：</p>
+<h4 id="製造流程l1-至-l6"><a class="markdownIt-Anchor" href="#製造流程l1-至-l6">#</a> 製造流程：L1 至 L6</h4>
+<p>L1 至 L6 代表伺服器製造過程的初期階段，這些階段是業界標準的術語，用來描述伺服器製造過程的不同層級。這些階段通常涵蓋了基本的硬體組裝、測試和初步設置，為後續的更高階製造階段奠定基礎。</p>
+<h4 id="製造流程l6-至-l10"><a class="markdownIt-Anchor" href="#製造流程l6-至-l10">#</a> 製造流程：L6 至 L10</h4>
+<p>L6 至 L10 是由超大規模企業（如原始設備製造商，OEM）負責執行的製造階段。在這些階段，企業會：</p>
+<ul>
+<li>重塑系統、產品或組件的品牌。</li>
+<li>鎖定硬體系統、產品和組件。</li>
+<li>在硬體上預先載入並鎖定相關的軟體。<br>
+這些步驟通常涉及對硬體和軟體的深入整合，確保產品符合特定需求。</li>
+</ul>
+<h4 id="製造流程l10-至-l11"><a class="markdownIt-Anchor" href="#製造流程l10-至-l11">#</a> 製造流程：L10 至 L11</h4>
+<p>L10 至 L11 代表製造過程的最後階段。在這個階段，完整的硬體和軟體系統將形成一個可提供各種服務的設備，例如 IaaS（基礎設施即服務）、PaaS（平台即服務）、SaaS（軟體即服務）、AI（人工智慧）、HPC（高效能計算）、深度學習及機器學習等。這些設備包含了服務提供者啟動其服務所需的一切。</p>
+<h3 id="刀鋒伺服器-blade-server"><a class="markdownIt-Anchor" href="#刀鋒伺服器-blade-server">#</a> 刀鋒伺服器 (Blade Server)</h3>
+<p>刀鋒伺服器是一種單板伺服器，最早於 2001 年由 RLX 公司提出。與傳統的直立式伺服器相比，刀鋒伺服器具有更加緊湊和高效的設計，主要用於節省空間並提高管理效率。</p>
+<h4 id="傳統伺服器與機架式伺服器"><a class="markdownIt-Anchor" href="#傳統伺服器與機架式伺服器">#</a> 傳統伺服器與機架式伺服器</h4>
+<p>傳統的直立式伺服器通常體積較大，佔用的空間也較多。在企業使用多台伺服器時，這些伺服器的存放空間會變得非常可觀。為了解決這個問題，機架式伺服器應運而生，將數台伺服器集中安放在機櫃中進行統一管理，從而有效節省空間。</p>
+<h4 id="刀鋒伺服器的設計"><a class="markdownIt-Anchor" href="#刀鋒伺服器的設計">#</a> 刀鋒伺服器的設計</h4>
+<p>刀鋒伺服器是機架式伺服器的一種進化型設計，靈感來自網路和電信裝置的卡板式設計。它比機架式伺服器更能有效地節省空間，且具有更高的商業運用價值。刀鋒伺服器有一個完整的機座，提供集中式的電源、風扇散熱和網路通訊等功能。基座上可以安裝多張單板電腦，因其形狀像刀片（Blade），因此得名 “刀鋒伺服器”。</p>
+<h4 id="電源和散熱需求"><a class="markdownIt-Anchor" href="#電源和散熱需求">#</a> 電源和散熱需求</h4>
+<p>由於刀鋒伺服器的單板電腦密集安裝，對電源和散熱的需求比一般伺服器更高。在散熱不良的環境下，刀鋒伺服器比傳統伺服器更容易發生過熱並導致系統故障。因此，在設計和部署刀鋒伺服器時，需要特別注意其散熱問題。</p>
+<h4 id="刀鋒伺服器的應用"><a class="markdownIt-Anchor" href="#刀鋒伺服器的應用">#</a> 刀鋒伺服器的應用</h4>
+<p>在機房中，許多伺服器托管服務依照租用的頻寬進行計費，而非根據機櫃空間計費。因此，對於頻寬計費的伺服器代管機房來說，刀鋒伺服器並不是最常見的選擇。然而，對於按機櫃空間單位數計費的機房，或者在叢集運算等高密度計算需求的環境中，刀鋒伺服器則是一個理想的選擇。它可以在有限的空間內容納更多的伺服器，從而提高資源的使用效率。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/11/10/cmde9uzvg001nlp9bhspnhp72/">http://example.com/2023/11/10/cmde9uzvg001nlp9bhspnhp72/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin Chen 的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OpenBMC/">OpenBMC</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/17/cmde9uzvh001plp9bbs5pbhor/" title="BMC(2)-IPMI 學習筆記"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BMC(2)-IPMI 學習筆記</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/03/cmde9uzvf001klp9b5d98da74/" title="BMC MOC"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BMC MOC</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2024/09/12/cmde9uzvb0017lp9bfo9r20yn/" title="AspeedPFR 筆記整理版"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-13</div><div class="title">AspeedPFR 筆記整理版</div></div></a></div><div><a href="/2024/07/12/cmde9uzvb0019lp9bdi9k9n9r/" title="AspeedPFR(1)-Introduction"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-13</div><div class="title">AspeedPFR(1)-Introduction</div></div></a></div><div><a href="/2024/07/19/cmde9uzvc001alp9b8k818po8/" title="AspeedPFR(2)-Zephyr"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-20</div><div class="title">AspeedPFR(2)-Zephyr</div></div></a></div><div><a href="/2024/08/02/cmde9uzvc001blp9bhnci7bdo/" title="AspeedPFR(4)-AspeedSDK"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-03</div><div class="title">AspeedPFR(4)-AspeedSDK</div></div></a></div><div><a href="/2024/07/26/cmde9uzvd001elp9b7s6l4kgi/" title="AspeedPFR(3)-AST1060EVB"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-27</div><div class="title">AspeedPFR(3)-AST1060EVB</div></div></a></div><div><a href="/2024/08/16/cmde9uzve001flp9bg37efr2l/" title="AspeedPFR(6)-Recovery"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-17</div><div class="title">AspeedPFR(6)-Recovery</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description">Kevin 的私人筆記，記錄創作靈感、技術研究、生活觀察。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">112</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#bmc-%E6%98%AF%E4%BB%80%E9%BA%BC"><span class="toc-number">1.</span> <span class="toc-text"> BMC 是什麼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bmc-%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text"> BMC 的主要功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bmc-%E5%92%8C-ipmi-%E7%9A%84%E9%97%9C%E4%BF%82"><span class="toc-number">3.</span> <span class="toc-text"> BMC 和 IPMI 的關係</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%AE%A1%E7%90%86%E5%B8%B6%E5%85%A7%E7%AE%A1%E7%90%86%E8%88%87%E5%B8%B6%E5%A4%96%E7%AE%A1%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text"> 伺服器管理：帶內管理與帶外管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bmc-%E5%A6%82%E4%BD%95%E5%AF%A6%E7%8F%BE%E5%B8%B6%E5%A4%96%E7%AE%A1%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text"> BMC 如何實現帶外管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%BB%A0%E5%95%86%E7%9A%84%E5%91%BD%E5%90%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">6.</span> <span class="toc-text"> 不同廠商的命名方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#l1-l11-%E4%BC%BA%E6%9C%8D%E5%99%A8%E8%A3%BD%E9%80%A0%E6%B5%81%E7%A8%8B"><span class="toc-number">7.</span> <span class="toc-text"> L1 - L11 伺服器製造流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%BD%E9%80%A0%E6%B5%81%E7%A8%8Bl1-%E8%87%B3-l6"><span class="toc-number">7.1.</span> <span class="toc-text"> 製造流程：L1 至 L6</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%BD%E9%80%A0%E6%B5%81%E7%A8%8Bl6-%E8%87%B3-l10"><span class="toc-number">7.2.</span> <span class="toc-text"> 製造流程：L6 至 L10</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%BD%E9%80%A0%E6%B5%81%E7%A8%8Bl10-%E8%87%B3-l11"><span class="toc-number">7.3.</span> <span class="toc-text"> 製造流程：L10 至 L11</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%80%E9%8B%92%E4%BC%BA%E6%9C%8D%E5%99%A8-blade-server"><span class="toc-number">8.</span> <span class="toc-text"> 刀鋒伺服器 (Blade Server)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%82%B3%E7%B5%B1%E4%BC%BA%E6%9C%8D%E5%99%A8%E8%88%87%E6%A9%9F%E6%9E%B6%E5%BC%8F%E4%BC%BA%E6%9C%8D%E5%99%A8"><span class="toc-number">8.1.</span> <span class="toc-text"> 傳統伺服器與機架式伺服器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%80%E9%8B%92%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E8%A8%AD%E8%A8%88"><span class="toc-number">8.2.</span> <span class="toc-text"> 刀鋒伺服器的設計</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%BB%E6%BA%90%E5%92%8C%E6%95%A3%E7%86%B1%E9%9C%80%E6%B1%82"><span class="toc-number">8.3.</span> <span class="toc-text"> 電源和散熱需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%80%E9%8B%92%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E6%87%89%E7%94%A8"><span class="toc-number">8.4.</span> <span class="toc-text"> 刀鋒伺服器的應用</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/27/cmde9uzxf007klp9b6u8icibq/" title="2025 台北國際自行車展">2025 台北國際自行車展</a><time datetime="2025-03-27T16:00:00.000Z" title="發表於 2025-03-28 00:00:00">2025-03-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/cmde9uzxd007alp9bbthb5uln/" title="批次檔應用-軟體便條紙">批次檔應用-軟體便條紙</a><time datetime="2025-03-09T16:00:00.000Z" title="發表於 2025-03-10 00:00:00">2025-03-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/17/cmde9uzva0015lp9bapvi09bd/" title="2025 更換電腦固態硬碟紀錄">2025 更換電腦固態硬碟紀錄</a><time datetime="2025-01-17T16:00:00.000Z" title="發表於 2025-01-18 00:00:00">2025-01-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/10/cmde9uzv90014lp9b9c8t8zj2/" title="2025 更換電腦記憶體紀錄">2025 更換電腦記憶體紀錄</a><time datetime="2025-01-10T16:00:00.000Z" title="發表於 2025-01-11 00:00:00">2025-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/21/cmde9uzxd007clp9bduwsarda/" title="數位簽章補給站">數位簽章補給站</a><time datetime="2024-11-21T16:00:00.000Z" title="發表於 2024-11-22 00:00:00">2024-11-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
