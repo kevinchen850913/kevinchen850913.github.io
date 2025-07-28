@@ -693,6 +693,12 @@ a:hover {
 .pull-right {
   float: right;
 }
+img {
+  display: block;
+  margin: 1em auto;
+  max-width: 100%;
+  height: auto;
+}
 img[src=''],
 img:not([src]) {
   opacity: 0;
