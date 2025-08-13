@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>BMC(5)-Bitbake​ 指令與功能 | Kevin Chen 的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# Bitbake 指令介紹 # 執行 recipe 123456789bitbake myrecipekevin@OpenBMC:~&#x2F;openbmc&#x2F;build&#x2F;evb-ast2600$ bitbake myrecipeLoading cache: 100% |####################################################################">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BMC(5)-Bitbake​ 指令與功能">
+<meta property="og:url" content="http://example.com/2023/12/08/cme9pg2280022ln6s07xieca2/index.html">
+<meta property="og:site_name" content="Kevin Chen 的學習筆記">
+<meta property="og:description" content="# Bitbake 指令介紹 # 執行 recipe 123456789bitbake myrecipekevin@OpenBMC:~&#x2F;openbmc&#x2F;build&#x2F;evb-ast2600$ bitbake myrecipeLoading cache: 100% |####################################################################">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-12-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-13T08:24:35.261Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="OpenBMC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/12/08/cme9pg2280022ln6s07xieca2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-ELXXL0FKFN"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ELXXL0FKFN');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BMC(5)-Bitbake​ 指令與功能',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-08-13 16:24:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">122</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin Chen 的學習筆記"><span class="site-name">Kevin Chen 的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BMC(5)-Bitbake​ 指令與功能</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-12-08T16:00:00.000Z" title="發表於 2023-12-09 00:00:00">2023-12-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-08-13T08:24:35.261Z" title="更新於 2025-08-13 16:24:35">2025-08-13</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="bitbake-指令介紹"><a class="markdownIt-Anchor" href="#bitbake-指令介紹">#</a> Bitbake 指令介紹</h3>
+<h4 id="執行-recipe"><a class="markdownIt-Anchor" href="#執行-recipe">#</a> 執行 recipe</h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">bitbake myrecipe</span><br><span class="line"></span><br><span class="line">kevin@OpenBMC:~/openbmc/build/evb-ast2600$ bitbake myrecipe</span><br><span class="line">Loading cache: 100% |####################################################################################| Time: 0:00:00</span><br><span class="line">Loaded 4559 entries from dependency cache.</span><br><span class="line">Parsing recipes: 100% |##################################################################################| Time: 0:00:00</span><br><span class="line">Parsing of 2801 .bb files complete (2800 cached, 1 parsed). 4560 targets, 591 skipped, 0 masked, 0 errors.</span><br><span class="line">WARNING: No bb files <span class="keyword">in</span> default matched BBFILE_PATTERN_meta-evb-ast2600 <span class="string">&#x27;^/home/kevin/openbmc/meta-evb/meta-evb-aspeed/meta-evb-ast2600/&#x27;</span></span><br><span class="line">ERROR: Nothing PROVIDES <span class="string">&#x27;myrecipe&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>預設特定配方的建置任務</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake myrecipe</span><br></pre></td></tr></table></figure>
+<p>指示將執行哪個任務 (-c)，項告訴 BitBake 僅執行任務 do_clean</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake -c clean myrecipe</span><br><span class="line">$ bitbake -c cleanall myrecipe</span><br></pre></td></tr></table></figure>
+<p>執行清理任務，-b 選項明確不處理配方依賴性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake -b myrecipe -c clean</span><br></pre></td></tr></table></figure>
+<h4 id="刪除-recipe"><a class="markdownIt-Anchor" href="#刪除-recipe">#</a> 刪除 recipe</h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bitbake -c clean myrecipe</span><br><span class="line">Loading cache: 100% |####################################################################################| Time: 0:00:00</span><br><span class="line">Loaded 4559 entries from dependency cache.</span><br><span class="line">Parsing recipes: 100% |##################################################################################| Time: 0:00:00</span><br><span class="line">Parsing of 2801 .bb files complete (2800 cached, 1 parsed). 4560 targets, 591 skipped, 0 masked, 0 errors.</span><br><span class="line">WARNING: No bb files <span class="keyword">in</span> default matched BBFILE_PATTERN_meta-evb-ast2600 <span class="string">&#x27;^/home/kevin/openbmc/meta-evb/meta-evb-aspeed/meta-evb-ast2600/&#x27;</span></span><br><span class="line">ERROR: Nothing PROVIDES <span class="string">&#x27;myrecipe&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="指定版本建置"><a class="markdownIt-Anchor" href="#指定版本建置">#</a> 指定版本建置</h4>
+<p>建構食譜，預設最高版本配方的建置任務<br>
+ (可以使用 DEFAULT_PREFERENCE 或 PREFERRED_VERSION 覆蓋)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake myrecipe</span><br></pre></td></tr></table></figure>
+<p>指定要建置的套件的版本 (上游來源版本)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake myrecipe -1.0</span><br></pre></td></tr></table></figure>
+<p>建構包元資料的特定修訂版</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$bitbake myrecipe -1.0-r0</span><br></pre></td></tr></table></figure>
+<p>提供要建置的配方文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake -b mydir/ myrecipe.bb</span><br></pre></td></tr></table></figure>
+<h4 id="除錯建議對策"><a class="markdownIt-Anchor" href="#除錯建議對策">#</a> 除錯建議對策</h4>
+<p>第一次運行 bitbake 可使用 --continue (-k) 運行。<br>
+建置任務（bitbake）將在發現錯誤後盡可能繼續進行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake -k [core-image-minimal]</span><br></pre></td></tr></table></figure>
+<p>正常運作 bitbake 將在發現第一個錯誤時停止 (不含任何參數)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake [core-image-minimal]</span><br></pre></td></tr></table></figure>
+<h4 id="配方任務列表"><a class="markdownIt-Anchor" href="#配方任務列表">#</a> 配方任務列表</h4>
+<p>查看配方所有可能任務的列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake -c listtasks [recipe_name]</span><br></pre></td></tr></table></figure>
+<p>實際測試，因為自己做的配方沒有支援 do_listtasks 所以會報錯。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vboxuser@Ubuntu:~/kevinchen/mybitbake/hello$ bitbake -c listtasks helloworld</span><br><span class="line">Loading cache: 100% |############################################| Time: 0:00:00</span><br><span class="line">Loaded 1 entries from dependency cache.</span><br><span class="line">NOTE: Resolving any missing task queue dependencies</span><br><span class="line">ERROR: Task do_listtasks does not exist <span class="keyword">for</span> target helloworld (/home/vboxuser/kevinchen/mybitbake/hello/meta-mylayer/helloworld.bb:do_listtasks)</span><br><span class="line">ERROR: Command execution failed: 1</span><br></pre></td></tr></table></figure>
+<h4 id="產生依賴圖"><a class="markdownIt-Anchor" href="#產生依賴圖">#</a> 產生依賴圖</h4>
+<p>BitBake 能夠使用該 <code>dot</code>  語法產生依賴圖。您可以使用<a target="_blank" rel="noopener" href="http://www.graphviz.org/"> Graphviz</a> <code>dot</code>  的工具 將這些圖表轉換為圖像。<br>
+當您產生依賴關係圖時，BitBake 會將兩個檔案寫入目前工作目錄：</p>
+<ul>
+<li><code>task-depends.dot</code> ：顯示任務之間的依賴關係。這些依賴項與 BitBake 的內部任務執行清單相符。</li>
+<li><code>pn-buildlist</code> ：顯示要建置的目標的簡單清單。</li>
+</ul>
+<p>以下是建立依賴圖的兩個範例。第二個範例從圖中省略了 OpenEmbedded 中常見的依賴項：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ bitbake -g obmc-phosphor-image</span><br><span class="line">$ bitbake -g -I virtual/kernel -I eglibc foo</span><br></pre></td></tr></table></figure>
+<p>Ubuntu Graphviz 軟體包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install graphviz</span><br></pre></td></tr></table></figure>
+<p>測試資訊</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">dot -Tsvg task-depends.dot</span><br><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> standalone=<span class="string">&quot;no&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">svg</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD SVG 1.1//EN&quot;</span></span></span><br><span class="line"><span class="meta"> <span class="string">&quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Generated by graphviz version 2.43.0 (0)</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Title: depends Pages: 1 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">&quot;758pt&quot;</span> <span class="attr">height</span>=<span class="string">&quot;83pt&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">viewBox</span>=<span class="string">&quot;0.00 0.00 757.53 82.95&quot;</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span> <span class="attr">xmlns:xlink</span>=<span class="string">&quot;http://www.w3.org/1999/xlink&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">g</span> <span class="attr">id</span>=<span class="string">&quot;graph0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;graph&quot;</span> <span class="attr">transform</span>=<span class="string">&quot;scale(1 1) rotate(0) translate(4 78.95)&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>depends<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">polygon</span> <span class="attr">fill</span>=<span class="string">&quot;white&quot;</span> <span class="attr">stroke</span>=<span class="string">&quot;transparent&quot;</span> <span class="attr">points</span>=<span class="string">&quot;-4,4 -4,-78.95 753.53,-78.95 753.53,4 -4,4&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- helloworld.do_build --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">g</span> <span class="attr">id</span>=<span class="string">&quot;node1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;node&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>helloworld.do_build<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ellipse</span> <span class="attr">fill</span>=<span class="string">&quot;none&quot;</span> <span class="attr">stroke</span>=<span class="string">&quot;black&quot;</span> <span class="attr">cx</span>=<span class="string">&quot;374.77&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;-37.48&quot;</span> <span class="attr">rx</span>=<span class="string">&quot;374.53&quot;</span> <span class="attr">ry</span>=<span class="string">&quot;37.45&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span> <span class="attr">text-anchor</span>=<span class="string">&quot;middle&quot;</span> <span class="attr">x</span>=<span class="string">&quot;374.77&quot;</span> <span class="attr">y</span>=<span class="string">&quot;-48.78&quot;</span> <span class="attr">font-family</span>=<span class="string">&quot;Times,serif&quot;</span> <span class="attr">font-size</span>=<span class="string">&quot;14.00&quot;</span>&gt;</span>helloworld do_build<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span> <span class="attr">text-anchor</span>=<span class="string">&quot;middle&quot;</span> <span class="attr">x</span>=<span class="string">&quot;374.77&quot;</span> <span class="attr">y</span>=<span class="string">&quot;-33.78&quot;</span> <span class="attr">font-family</span>=<span class="string">&quot;Times,serif&quot;</span> <span class="attr">font-size</span>=<span class="string">&quot;14.00&quot;</span>&gt;</span>:1<span class="symbol">&amp;#45;</span><span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span> <span class="attr">text-anchor</span>=<span class="string">&quot;middle&quot;</span> <span class="attr">x</span>=<span class="string">&quot;374.77&quot;</span> <span class="attr">y</span>=<span class="string">&quot;-18.78&quot;</span> <span class="attr">font-family</span>=<span class="string">&quot;Times,serif&quot;</span> <span class="attr">font-size</span>=<span class="string">&quot;14.00&quot;</span>&gt;</span>/home/vboxuser/kevinchen/mybitbake/hello/meta<span class="symbol">&amp;#45;</span>mylayer/helloworld.bb<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>用 openbmc 測試，結果檔案打不開。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp kevin@10.34.57.52:/home/kevin/openbmc/build/evb-ast2600/task-depends.dot D:/kevinchen </span><br><span class="line"></span><br><span class="line">dot -Tsvg task-depends.dot</span><br></pre></td></tr></table></figure>
+<h3 id="bitbake-layers-指令"><a class="markdownIt-Anchor" href="#bitbake-layers-指令">#</a> Bitbake-layers 指令</h3>
+<p>OpenBMC Server setup evb-ast2600。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh kevin@10.34.57.52</span><br><span class="line">. setup evb-ast2600</span><br><span class="line">kevin@OpenBMC:~/openbmc/build/evb-ast2600$ </span><br></pre></td></tr></table></figure>
+<h4 id="列出-layer"><a class="markdownIt-Anchor" href="#列出-layer">#</a> 列出 layer</h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">kevin@OpenBMC:~/openbmc/build/evb-ast2600$ bitbake-layers show-layers</span><br><span class="line">NOTE: Starting bitbake server...</span><br><span class="line">layer path priority</span><br><span class="line">=================================================================</span><br><span class="line">core /home/kevin/openbmc/meta 5</span><br><span class="line">yocto /home/kevin/openbmc/meta-poky 5</span><br><span class="line">openembedded-layer /home/kevin/openbmc/meta-openembedded/meta-oe  5</span><br><span class="line">networking-layer /home/kevin/openbmc/meta-openembedded/meta-networking 5</span><br><span class="line">meta-python /home/kevin/openbmc/meta-openembedded/meta-python         5</span><br><span class="line">phosphor-layer /home/kevin/openbmc/meta-phosphor 6</span><br><span class="line">aspeed-layer /home/kevin/openbmc/meta-aspeed 6</span><br><span class="line">meta-evb-ast2600 /home/kevin/openbmc/meta-evb/meta-evb-aspeed/meta-evb-ast2600 6</span><br></pre></td></tr></table></figure>
+<h4 id="列出-recipe"><a class="markdownIt-Anchor" href="#列出-recipe">#</a> 列出 recipe</h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bitbake-layers show-recipes | grep ipmitool -A1</span><br><span class="line">ipmitool:</span><br><span class="line">  meta-oe              1.8.19</span><br></pre></td></tr></table></figure>
+<h4 id="列出-append"><a class="markdownIt-Anchor" href="#列出-append">#</a> 列出 append</h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bitbake-layers show-appends | grep ipmitool</span><br><span class="line">ipmitool_1.8.19.bb:</span><br><span class="line">  /home/kevin/openbmc/meta-phosphor/recipes-phosphor/ipmi/ipmitool_%.bbappend</span><br></pre></td></tr></table></figure>
+<h4 id="列出-help"><a class="markdownIt-Anchor" href="#列出-help">#</a> 列出 help</h4>
+<p>測試成功，內容過多不再此紀錄。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitbake-layers --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<h2 id="bitbake-語法"><a class="markdownIt-Anchor" href="#bitbake-語法">#</a> Bitbake 語法</h2>
+<p>BitBake 檔案有自己的語法。該語法與其他幾種語言有相似之處，但也有一些獨特的功能。本節介紹可用的語法和運算子並提供範例。<br>
+<a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2024/05/25/OpenBMC(4)-Bitbake_Operators/">OpenBMC(4)-Bitbake_Operators</a></p>
+<h2 id="bitbake-執行"><a class="markdownIt-Anchor" href="#bitbake-執行">#</a> Bitbake 執行</h2>
+<p>運行 BitBake 的主要目的是產生某種輸出。<br>
+<a target="_blank" rel="noopener" href="https://kevinchen850913.github.io/2024/06/01/OpenBMC(5)-Bitbake_Execution/">OpenBMC(5)-Bitbake_Execution</a></p>
+<h3 id="共享功能"><a class="markdownIt-Anchor" href="#共享功能">#</a> 共享功能</h3>
+<p>BitBake 允許透過包含檔案 (.inc) 和類別檔案 ( .bbclass) 進行元資料共用。例如，假設您有一項常見功能，例如您想要在多個配方之間共用的任務定義。在這種情況下，建立一個 .bbclass 包含通用功能的文件，然後使用 inherit 配方中的指令繼承該類別將是共享任務。</p>
+<p>本節介紹 BitBake 提供的機制，讓您在配方之間共用功能。這些機制包括 include、inherit、INHERIT、require。</p>
+<p>BitBake 使用 BBPATH 變數來定位所需的包含檔案和類別檔案。BitBake 會在位於 BBPATH 中的 classes 子目錄中搜尋 include 和 require 。</p>
+<h4 id="inherit"><a class="markdownIt-Anchor" href="#inherit">#</a> INHERIT</h4>
+<p>建立設定檔 (.conf) 時，可以使用 INHERIT 設定指令來繼承類別。BitBake 僅在設定檔中使用時支援此指令。</p>
+<h4 id="inherit-2"><a class="markdownIt-Anchor" href="#inherit-2">#</a> inherit</h4>
+<p>編寫配方或類別檔案時，可以使用指令 inherit 繼承類別的功能 (.bbclass)。.bbBitBake 僅在配方和類別檔案（即和）中使用時支援此指令.bbclass。</p>
+<h4 id="include"><a class="markdownIt-Anchor" href="#include">#</a> include</h4>
+<p>該命令使 BitBake 解析您指定的任何文件，並將該文件插入到該位置。該指令與 Make 中的等效指令非常相似，不同之處在於，如果包含行上指定的路徑是相對路徑，則 BitBake 會定位它可以在 BBPATH 中找到的第一個檔案。</p>
+<h4 id="require"><a class="markdownIt-Anchor" href="#require">#</a> require</h4>
+<p>該指令的行為與 include 類似，但如果找不到要包含的文件，BitBake 會引發解析錯誤。</p>
+<h3 id="其他語法"><a class="markdownIt-Anchor" href="#其他語法">#</a> 其他語法</h3>
+<h4 id="大括號語法"><a class="markdownIt-Anchor" href="#大括號語法">#</a> 大括號語法</h4>
+<p>如果配方在函數內右大括號沒有前導空格，則 BitBake 會產生錯誤。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&#125;  // NG</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"> &#125; // OK</span><br></pre></td></tr></table></figure>
+<h4 id="多行語法"><a class="markdownIt-Anchor" href="#多行語法">#</a> 多行語法</h4>
+<p>BitBake 在解析語句之前將任何以反斜線字元  <code>\</code>  結尾的行與以下行連接起來。  <code>\</code>  字元最常見的用途是將變數分配拆分為多行，  <code>\</code>  字元及其後面的換行符都會被刪除，因此值中不會出現換行符號。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FOO = &quot;bar \</span><br><span class="line">       baz \</span><br><span class="line">       qaz&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="bitbake-方法"><a class="markdownIt-Anchor" href="#bitbake-方法">#</a> Bitbake 方法</h2>
+<p>與大多數語言一樣，函數是用於將操作建構成任務的建構塊。無論函數類型為何，您都只能在類別 (.bbclass) 和配方 (.bb 或.inc) 檔案中定義它們。</p>
+<ul>
+<li>Shell 函數：以 shell 腳本編寫並直接作為函數、任務或兩者執行的函數。它們也可以被其他 shell 函數呼叫。</li>
+<li>BitBake 風格的 Python 函數：用 Python 編寫並由 BitBake 或其他使用 bb.build.exec_func ().</li>
+<li>Python 函數：用 Python 編寫並由 Python 執行的函數。</li>
+<li>匿名 Python 函數：在解析過程中自動執行的 Python 函數。</li>
+</ul>
+<h3 id="外殼函數"><a class="markdownIt-Anchor" href="#外殼函數">#</a> 外殼函數</h3>
+<p>用 shell 腳本編寫的函數可以直接當作函數、任務或兩者一起執行。它們也可以被其他 shell 函數呼叫。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">some_function</span></span> () &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Hello World&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更多範例程式</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">do_foo</span></span>() &#123;</span><br><span class="line">    bbplain first</span><br><span class="line">    fn</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn:<span class="function"><span class="title">prepend</span></span>() &#123;</span><br><span class="line">    bbplain second</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">fn</span></span>() &#123;</span><br><span class="line">    bbplain third</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">do_foo:<span class="function"><span class="title">append</span></span>() &#123;</span><br><span class="line">    bbplain fourth</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># recipename do_foo: first</span></span><br><span class="line"><span class="comment"># recipename do_foo: second</span></span><br><span class="line"><span class="comment"># recipename do_foo: third</span></span><br><span class="line"><span class="comment"># recipename do_foo: fourth</span></span><br></pre></td></tr></table></figure>
+<p>套用所有覆蓋後，您可以使用 bitbake -e recipename 命令查看最終組裝的函數。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/12/08/cme9pg2280022ln6s07xieca2/">http://example.com/2023/12/08/cme9pg2280022ln6s07xieca2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin Chen 的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OpenBMC/">OpenBMC</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/12/15/cme9pg2280024ln6sc6v5gcx7/" title="BMC(6)-Metadata 學習筆記"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BMC(6)-Metadata 學習筆記</div></div></a></div><div class="next-post pull-right"><a href="/2023/12/01/cme9pg2270020ln6s6b103vac/" title="BMC(4)-Bitbake 學習筆記"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BMC(4)-Bitbake 學習筆記</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2024/09/12/cme9pg21x001bln6scfhy1l3q/" title="AspeedPFR 筆記整理版"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-13</div><div class="title">AspeedPFR 筆記整理版</div></div></a></div><div><a href="/2024/07/12/cme9pg21y001cln6sg20ff1p8/" title="AspeedPFR(1)-Introduction"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-13</div><div class="title">AspeedPFR(1)-Introduction</div></div></a></div><div><a href="/2024/07/19/cme9pg21z001eln6s8gwy9s2a/" title="AspeedPFR(2)-Zephyr"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-20</div><div class="title">AspeedPFR(2)-Zephyr</div></div></a></div><div><a href="/2024/07/26/cme9pg21z001fln6s41ctd29k/" title="AspeedPFR(3)-AST1060EVB"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-27</div><div class="title">AspeedPFR(3)-AST1060EVB</div></div></a></div><div><a href="/2024/08/02/cme9pg220001gln6s10i96wn0/" title="AspeedPFR(4)-AspeedSDK"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-03</div><div class="title">AspeedPFR(4)-AspeedSDK</div></div></a></div><div><a href="/2024/08/09/cme9pg221001jln6s0dq1ertk/" title="AspeedPFR(5)-SDK Tool"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-10</div><div class="title">AspeedPFR(5)-SDK Tool</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description">Kevin 的私人筆記，記錄創作靈感、技術研究、生活觀察。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">122</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#bitbake-%E6%8C%87%E4%BB%A4%E4%BB%8B%E7%B4%B9"><span class="toc-number">1.</span> <span class="toc-text"> Bitbake 指令介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%B7%E8%A1%8C-recipe"><span class="toc-number">1.1.</span> <span class="toc-text"> 執行 recipe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%AA%E9%99%A4-recipe"><span class="toc-number">1.2.</span> <span class="toc-text"> 刪除 recipe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E5%BB%BA%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text"> 指定版本建置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%A4%E9%8C%AF%E5%BB%BA%E8%AD%B0%E5%B0%8D%E7%AD%96"><span class="toc-number">1.4.</span> <span class="toc-text"> 除錯建議對策</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E6%96%B9%E4%BB%BB%E5%8B%99%E5%88%97%E8%A1%A8"><span class="toc-number">1.5.</span> <span class="toc-text"> 配方任務列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A2%E7%94%9F%E4%BE%9D%E8%B3%B4%E5%9C%96"><span class="toc-number">1.6.</span> <span class="toc-text"> 產生依賴圖</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bitbake-layers-%E6%8C%87%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text"> Bitbake-layers 指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%87%BA-layer"><span class="toc-number">2.1.</span> <span class="toc-text"> 列出 layer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%87%BA-recipe"><span class="toc-number">2.2.</span> <span class="toc-text"> 列出 recipe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%87%BA-append"><span class="toc-number">2.3.</span> <span class="toc-text"> 列出 append</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%87%BA-help"><span class="toc-number">2.4.</span> <span class="toc-text"> 列出 help</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bitbake-%E8%AA%9E%E6%B3%95"><span class="toc-number"></span> <span class="toc-text"> Bitbake 語法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bitbake-%E5%9F%B7%E8%A1%8C"><span class="toc-number"></span> <span class="toc-text"> Bitbake 執行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E5%8A%9F%E8%83%BD"><span class="toc-number">1.</span> <span class="toc-text"> 共享功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#inherit"><span class="toc-number">1.1.</span> <span class="toc-text"> INHERIT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inherit-2"><span class="toc-number">1.2.</span> <span class="toc-text"> inherit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#include"><span class="toc-number">1.3.</span> <span class="toc-text"> include</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#require"><span class="toc-number">1.4.</span> <span class="toc-text"> require</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%AA%9E%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 其他語法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E6%8B%AC%E8%99%9F%E8%AA%9E%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text"> 大括號語法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E8%AA%9E%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text"> 多行語法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bitbake-%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text"> Bitbake 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E6%AE%BC%E5%87%BD%E6%95%B8"><span class="toc-number">1.</span> <span class="toc-text"> 外殼函數</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/07/cme9pg23m0057ln6se3alfb4r/" title="VirtualBox Gitlab 搬家筆記">VirtualBox Gitlab 搬家筆記</a><time datetime="2025-08-07T16:00:00.000Z" title="發表於 2025-08-08 00:00:00">2025-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/03/cme9pg248007kln6s50d33nnl/" title="職場上如何說再見">職場上如何說再見</a><time datetime="2025-08-03T16:00:00.000Z" title="發表於 2025-08-04 00:00:00">2025-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/19/cme9pg248007lln6s0wqk7rcf/" title="資安 CRA 準備與檢討筆記">資安 CRA 準備與檢討筆記</a><time datetime="2025-06-19T16:00:00.000Z" title="發表於 2025-06-20 00:00:00">2025-06-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/12/cme9pg22n0032ln6seggpgdkx/" title="Google Drive API 功能測試">Google Drive API 功能測試</a><time datetime="2025-06-12T16:00:00.000Z" title="發表於 2025-06-13 00:00:00">2025-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/05/cme9pg22h002kln6shcm6e0d6/" title="FMEA 沒用？你根本就不該用">FMEA 沒用？你根本就不該用</a><time datetime="2025-06-05T16:00:00.000Z" title="發表於 2025-06-06 00:00:00">2025-06-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">本站內容採用 CC BY-NC-SA 4.0 授權</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>

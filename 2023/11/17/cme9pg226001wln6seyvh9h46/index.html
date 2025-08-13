@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>BMC(2)-IPMI 學習筆記 | Kevin Chen 的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# IPMI Overview IPMI（Intelligent Platform Management Interface，智慧型平臺管理介面）就是一個可以監看硬體資訊，同時又可直接在系統關閉情況下，遠端遙控系統開啟的標準。  在平台管理硬體和韌體中實現的自主監控和復原功能。 當系統斷電時，平台管理功能也可使用。 當系統管理軟體和正常管理機制不可用時，也可以使用平台管理功能。 可以取得平台狀態資">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BMC(2)-IPMI 學習筆記">
+<meta property="og:url" content="http://example.com/2023/11/17/cme9pg226001wln6seyvh9h46/index.html">
+<meta property="og:site_name" content="Kevin Chen 的學習筆記">
+<meta property="og:description" content="# IPMI Overview IPMI（Intelligent Platform Management Interface，智慧型平臺管理介面）就是一個可以監看硬體資訊，同時又可直接在系統關閉情況下，遠端遙控系統開啟的標準。  在平台管理硬體和韌體中實現的自主監控和復原功能。 當系統斷電時，平台管理功能也可使用。 當系統管理軟體和正常管理機制不可用時，也可以使用平台管理功能。 可以取得平台狀態資">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2023-11-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-13T08:24:35.261Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="OpenBMC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/11/17/cme9pg226001wln6seyvh9h46/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-ELXXL0FKFN"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ELXXL0FKFN');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BMC(2)-IPMI 學習筆記',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-08-13 16:24:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">122</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin Chen 的學習筆記"><span class="site-name">Kevin Chen 的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BMC(2)-IPMI 學習筆記</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-11-17T16:00:00.000Z" title="發表於 2023-11-18 00:00:00">2023-11-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-08-13T08:24:35.261Z" title="更新於 2025-08-13 16:24:35">2025-08-13</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="ipmi-overview"><a class="markdownIt-Anchor" href="#ipmi-overview">#</a> IPMI Overview</h2>
+<p>IPMI（Intelligent Platform Management Interface，智慧型平臺管理介面）就是一個可以監看硬體資訊，同時又可直接在系統關閉情況下，遠端遙控系統開啟的標準。</p>
+<ul>
+<li>在平台管理硬體和韌體中實現的自主監控和復原功能。</li>
+<li>當系統斷電時，平台管理功能也可使用。</li>
+<li>當系統管理軟體和正常管理機制不可用時，也可以使用平台管理功能。</li>
+<li>可以取得平台狀態資訊並發起恢復操作</li>
+<li>提供獨立於主機處理器、BIOS 和作業系統的清單、監控、日誌和復原。</li>
+</ul>
+<h3 id="ipmi-block-diagram"><a class="markdownIt-Anchor" href="#ipmi-block-diagram">#</a> IPMI Block Diagram</h3>
+<p>IPMI Block Diagram 概述了 IPMI 設定的關鍵元素。 其核心是底板管理控制器 (BMC)，這是一個驅動智慧平台管理的微控制器。BMC 管理系統管理軟體和硬體之間的通信，處理監控、事件記錄和復原控制。 它可作為軟體與智慧平台管理匯流排（IPMB）和智慧機箱管理匯流排（ICMB）之間的橋樑。IPMI 允許透過基於 I2C 的序列匯流排 IPMB 將額外的控制器連接到系統來擴展平台管理。 這種標準化方法有利於將機箱功能與基板整合。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/IPMI_Block_Diagram.png" alt="IPMI_Block_Diagram.png"></p>
+<h3 id="ipmi系統介面"><a class="markdownIt-Anchor" href="#ipmi系統介面">#</a> IPMI 系統介面</h3>
+<ul>
+<li>鍵盤控制器風格（KCS）
+<ul>
+<li>以 Intel 8742 通用週邊介面微控制器為模型。</li>
+<li>用作 PC 架構中的傳統鍵盤控制器介面。</li>
+<li>透過 KCS 介面的資料傳輸涉及每個位元組握手。</li>
+</ul>
+</li>
+<li>系統管理介面晶片（SMIC）
+<ul>
+<li>當 BMC 的微控制器缺乏內建 KCS 硬體時，提供替代方案。</li>
+<li>利用三個 I/O 連接埠接口，可透過 ASIC、FPGA 或離散邏輯實現。</li>
+<li>與 KCS 一樣，透過 SMIC 的資料傳輸涉及每位元組握手。</li>
+</ul>
+</li>
+<li>區塊傳輸（BT）
+<ul>
+<li>提供更高效能的系統介面選項。</li>
+<li>與 KCS 和 SMIC 不同，採用每塊握手進行資料傳輸。</li>
+<li>三個 I/O 映射埠； 典型的實作包括硬體緩衝區。</li>
+<li>適合缺乏內建 KCS 介面的控制器，可透過 ASIC、FPGA 或客製化設計的管理控制器來實現。</li>
+</ul>
+</li>
+<li>SMBus 系統介面（SSIF）
+<ul>
+<li>用於存取連接到系統 SMBus 主機控制器的 BMC 的低引腳數選項。</li>
+<li>在具有少量引腳的低成本微控制器上實現經濟有效的 BMC 實施。</li>
+<li>與其他系統介面相比，BMC 的頻寬通常較低。</li>
+</ul>
+</li>
+<li>硬體介面<br>
+ I2C、GPIO、UART、ADC、TACH/PWM、PCIe、USB、LPC/eSPI、SD、eMMC、SPI、MAC、PECI、JTAG、DAC 等</li>
+</ul>
+<h3 id="ipmi-與-bmc"><a class="markdownIt-Anchor" href="#ipmi-與-bmc">#</a> IPMI 與 BMC</h3>
+<p>在 IPMI 的各項標準與規格中，最重要就是在主機板上的 BMC（Baseboard Management Controller，基板管理控制器）。這個控制器整合了許多監控電壓用的類比與數位資料轉換器、監測風扇速度用的計數器、驅動風扇的 PWM （Pulse Width Modulation，脈衝寬度調整)，或類比與數位資料輸出，以及和外部感應器與擴展元件介面溝通的通用 I/O、串列埠和 I2C 匯流排。此外，BMC 還有個最主要的功能，就是收集伺服器的運作情況，以及系統狀態資訊等，例如系統電壓、溫度與風扇速度等。當 BMC 監測到不符合安全狀態的情況，便會強制切斷系統電源，將過程記錄下來，並且透過 Lan 或串列數據機等發出警告。此外，BMC 的規格不同，也影響著監控與管理的功能等差異。</p>
+<h3 id="安裝-ipmitool"><a class="markdownIt-Anchor" href="#安裝-ipmitool">#</a> 安裝 IPMITOOL</h3>
+<p>安裝 <a target="_blank" rel="noopener" href="https://sourceforge.net/projects/ipmitool/">IPMItool</a></p>
+<ol>
+<li>scp ipmitool-1.8.18.tar.bz2 <a href="mailto:kevin@10.32.25.52">kevin@10.32.25.52</a>:/home/kevin</li>
+<li>tar -xvf ipmitool-1.8.18.tar.bz2</li>
+<li>cd ipmitool-1.8.18</li>
+<li>make</li>
+<li>sudo make install</li>
+</ol>
+<h2 id="ipmi-standard-command"><a class="markdownIt-Anchor" href="#ipmi-standard-command">#</a> IPMI Standard Command</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipmitool -I lanplus -U $&#123;username&#125; -P $&#123;password&#125; -H $&#123;IP&#125; raw &lt;NetFn&gt; &lt;CMD_ID&gt; &lt;Data…&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>NetFn : IPMI 手冊 Table 5-1</li>
+<li>CMD_ID : IPMI 手冊 Table G-1</li>
+<li>Data : IPMI 手冊 CMD 功能</li>
+<li>return cod : IPMI 手冊 Table 5-2</li>
+</ul>
+<h2 id="how-to-find-command"><a class="markdownIt-Anchor" href="#how-to-find-command">#</a> How to find command</h2>
+<ol>
+<li>
+<p>找出手冊 ipmi-intelligent-platform-mgt-interface-spec-2nd-gen-v2-0.pdf</p>
+</li>
+<li>
+<p>確認目標 bmc，取得 username、password、IP<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/ipmi(1).png" alt="ipmi(1).png"></p>
+</li>
+<li>
+<p>確認目標功能，手冊 Table G-1 查 CMD_ID<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/ipmi(2).png" alt="ipmi(2).png"></p>
+</li>
+<li>
+<p>確認 CMD_ID 分群 手冊 Table 5-1<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/ipmi(3).png" alt="ipmi(3).png"></p>
+</li>
+<li>
+<p>確認回傳碼分群 (Table 5-2) 與其功能<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/ipmi(5).png" alt="ipmi(5).png"></p>
+</li>
+<li>
+<p>分析回傳碼，轉換成有意義的資料<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/ipmi(6).png" alt="ipmi(6).png"></p>
+</li>
+</ol>
+<h2 id="get-device-id"><a class="markdownIt-Anchor" href="#get-device-id">#</a> Get Device ID</h2>
+<p>此指令用於擷取智慧型裝置的硬體版本、韌體 / 軟體版本以及感測器和事件介面指令規範版本訊息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ipmitool -I lanplus -U admin -P dgxluna.admin -H 10.32.51.47 raw 0x06 0x01</span><br></pre></td></tr></table></figure>
+<p>實際測試有機率失敗？可能是因為網路不好，畢竟是使用一般的網路，而非伺服器專用的網路。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kevin@Naomi-LTS13:~$ <span class="built_in">sudo</span> ipmitool -I lanplus -U admin -P dgxluna.admin -H 10.32.51.47 raw 0x06 0x01</span><br><span class="line"> 20 81 00 22 02 bf 47 16 00 00 00 05 00 00 00</span><br><span class="line"></span><br><span class="line">kevin@Naomi-LTS13:~$ <span class="built_in">sudo</span> ipmitool -I lanplus -U admin -P dgxluna.admin -H 10.32.51.47 raw 0x06 0x01</span><br><span class="line">Error: Unable to establish IPMI v2 / RMCP+ session</span><br></pre></td></tr></table></figure>
+<p>對虛擬機進行操作，會失敗，Error: Unable to establish IPMI v2 / RMCP+ session</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ipmitool -I lanplus -U root -P 0penBmc -H 10.0.2.15 raw 0x06 0x01</span><br></pre></td></tr></table></figure>
+<p>分析回傳值  <code>20 81 00 22 02 bf 47 16 00 00 00 05 00 00 00</code></p>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HEX</td>
+<td>ok</td>
+<td>20</td>
+<td>81</td>
+<td>00</td>
+<td>22</td>
+<td>02</td>
+<td>bf</td>
+<td>47</td>
+<td>16</td>
+<td>00</td>
+<td>00</td>
+<td>00</td>
+<td>05</td>
+<td>00</td>
+<td>00</td>
+<td>00</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/ipmi(11).png" alt="ipmi(11).png"></p>
+<ul>
+<li>Byte 1 =&gt; Completion Code : 用來判斷是否成功，不顯示。</li>
+<li>Byte 2 =&gt; Device ID. 20h</li>
+<li>Byte 3 =&gt; 設備版本 81h
+<ul>
+<li>Bit 7 =&gt; 設備提供設備 SDR</li>
+<li>Bit 0 =&gt; 設備版本 1</li>
+</ul>
+</li>
+<li>Byte 4 =&gt; 正常運行、韌體版本 0</li>
+<li>Byte 5 =&gt; 次要韌體修訂版 22</li>
+<li>Byte 6 =&gt; IPMI 版本 2.0</li>
+<li>Byte 7 =&gt; bfh : bf 附加設備支援 bfh = 1011 1111
+<ul>
+<li>Bit 7 =&gt; 機箱設備</li>
+<li>Bit 5 =&gt; IPMB 事件產生器</li>
+<li>Bit 4 =&gt; IPMB 事件接收器</li>
+<li>Bit 3 =&gt; FRU 庫存設備</li>
+<li>Bit 2 =&gt; SEL 裝置</li>
+<li>Bit 1 =&gt; SDR 儲存設備</li>
+<li>Bit 0 =&gt; 感測器設備</li>
+</ul>
+</li>
+<li>Byte 8:10 =&gt; 製造商 ID 16h 47h = 5,703</li>
+<li>Byte 11:12 =&gt; 產品 ID 0000h = 未指定</li>
+<li>Byte 13:16 =&gt; 輔助韌體修訂資訊，製造商提供</li>
+</ul>
+<h2 id="get-chassis-status"><a class="markdownIt-Anchor" href="#get-chassis-status">#</a> Get Chassis Status</h2>
+<p>機箱指令主要是為存取 BMC 的遠端管理卡和遠端控制台提供標準化的機箱狀態和控制功能，以下命令傳回有關係統機箱和主電源子系統的高階狀態的資訊。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kevin@Naomi-LTS13:~$ ipmitool -I lanplus -U admin -P dgxluna.admin -H 10.32.51.47 raw 0x00 0x01</span><br><span class="line">21 01 40 f0</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HEX</td>
+<td>ok</td>
+<td>21</td>
+<td>01</td>
+<td>40</td>
+<td>f0</td>
+</tr>
+<tr>
+<td>BIN</td>
+<td>ok</td>
+<td>0010 0001</td>
+<td>0000 0001</td>
+<td>0100 0000</td>
+<td>1111 0000</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/ipmi(12).png" alt="ipmi(12).png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/ipmi(13).png" alt="ipmi(13).png"></p>
+<ul>
+<li>Byte 1 =&gt; 完成程式碼</li>
+<li>Byte 2 =&gt; 目前電源狀態<br>
+ Bit 6:5 =&gt; 01b 交流電恢復後，電源恢復到斷電時的狀態<br>
+ Bit 0 =&gt; 系統電源已開啟</li>
+<li>Byte 3 =&gt; 最後一次電力事件<br>
+ Bit 1 =&gt; 上次因電源過載導致斷電</li>
+<li>Byte 4 =&gt; 雜項、底盤狀態<br>
+ Bit 6 =&gt; 支援機箱識別指令和狀態資訊<br>
+ Bit 5:4 =&gt; 00b 機箱識別狀態關閉</li>
+<li>Byte 5 =&gt; 前面板按鈕功能和停用 / 啟用狀態<br>
+ Bit 7 =&gt; 允許停用待機按鈕<br>
+ Bit 6 =&gt; 允許停用診斷中斷按鈕<br>
+ Bit 5 =&gt; 允許停用重設按鈕<br>
+ Bit 4 =&gt; 允許停用電源關閉按鈕</li>
+</ul>
+<h2 id="chassis-control"><a class="markdownIt-Anchor" href="#chassis-control">#</a> Chassis Control</h2>
+<p>以下命令提供了一種用於提供加電、斷電和重置控制的機制。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipmitool –U admin –P dgxluna.admin –I lanplus –H 10.32.51.43 raw 0x00 0x02 [data]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>data = 0h power down.</li>
+<li>data = 1h power up</li>
+<li>data = 2h power cycle</li>
+<li>data = 3h hard reset.</li>
+<li>data = 4h pulse Diagnostic Interrupt. (optional)</li>
+<li>data = 5h Initiate a soft-shutdown</li>
+</ul>
+<h2 id="reference"><a class="markdownIt-Anchor" href="#reference">#</a> Reference</h2>
+<p><a target="_blank" rel="noopener" href="https://www.intel.com.tw/content/www/tw/zh/products/docs/servers/ipmi/ipmi-second-gen-interface-spec-v2-rev1-1.html">https://www.intel.com.tw/content/www/tw/zh/products/docs/servers/ipmi/ipmi-second-gen-interface-spec-v2-rev1-1.html</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/11/17/cme9pg226001wln6seyvh9h46/">http://example.com/2023/11/17/cme9pg226001wln6seyvh9h46/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin Chen 的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OpenBMC/">OpenBMC</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/24/cme9pg226001yln6sbxol0obq/" title="BMC(3)-Yocto Project"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BMC(3)-Yocto Project</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/10/cme9pg225001uln6s9wu78o3y/" title="BMC(1)-BMC 學習筆記"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BMC(1)-BMC 學習筆記</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2024/09/12/cme9pg21x001bln6scfhy1l3q/" title="AspeedPFR 筆記整理版"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-13</div><div class="title">AspeedPFR 筆記整理版</div></div></a></div><div><a href="/2024/07/12/cme9pg21y001cln6sg20ff1p8/" title="AspeedPFR(1)-Introduction"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-13</div><div class="title">AspeedPFR(1)-Introduction</div></div></a></div><div><a href="/2024/07/19/cme9pg21z001eln6s8gwy9s2a/" title="AspeedPFR(2)-Zephyr"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-20</div><div class="title">AspeedPFR(2)-Zephyr</div></div></a></div><div><a href="/2024/07/26/cme9pg21z001fln6s41ctd29k/" title="AspeedPFR(3)-AST1060EVB"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-27</div><div class="title">AspeedPFR(3)-AST1060EVB</div></div></a></div><div><a href="/2024/08/02/cme9pg220001gln6s10i96wn0/" title="AspeedPFR(4)-AspeedSDK"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-03</div><div class="title">AspeedPFR(4)-AspeedSDK</div></div></a></div><div><a href="/2024/08/09/cme9pg221001jln6s0dq1ertk/" title="AspeedPFR(5)-SDK Tool"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-10</div><div class="title">AspeedPFR(5)-SDK Tool</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description">Kevin 的私人筆記，記錄創作靈感、技術研究、生活觀察。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">122</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ipmi-overview"><span class="toc-number">1.</span> <span class="toc-text"> IPMI Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ipmi-block-diagram"><span class="toc-number">1.1.</span> <span class="toc-text"> IPMI Block Diagram</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ipmi%E7%B3%BB%E7%B5%B1%E4%BB%8B%E9%9D%A2"><span class="toc-number">1.2.</span> <span class="toc-text"> IPMI 系統介面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ipmi-%E8%88%87-bmc"><span class="toc-number">1.3.</span> <span class="toc-text"> IPMI 與 BMC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%9D-ipmitool"><span class="toc-number">1.4.</span> <span class="toc-text"> 安裝 IPMITOOL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ipmi-standard-command"><span class="toc-number">2.</span> <span class="toc-text"> IPMI Standard Command</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-find-command"><span class="toc-number">3.</span> <span class="toc-text"> How to find command</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get-device-id"><span class="toc-number">4.</span> <span class="toc-text"> Get Device ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get-chassis-status"><span class="toc-number">5.</span> <span class="toc-text"> Get Chassis Status</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chassis-control"><span class="toc-number">6.</span> <span class="toc-text"> Chassis Control</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number">7.</span> <span class="toc-text"> Reference</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/07/cme9pg23m0057ln6se3alfb4r/" title="VirtualBox Gitlab 搬家筆記">VirtualBox Gitlab 搬家筆記</a><time datetime="2025-08-07T16:00:00.000Z" title="發表於 2025-08-08 00:00:00">2025-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/03/cme9pg248007kln6s50d33nnl/" title="職場上如何說再見">職場上如何說再見</a><time datetime="2025-08-03T16:00:00.000Z" title="發表於 2025-08-04 00:00:00">2025-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/19/cme9pg248007lln6s0wqk7rcf/" title="資安 CRA 準備與檢討筆記">資安 CRA 準備與檢討筆記</a><time datetime="2025-06-19T16:00:00.000Z" title="發表於 2025-06-20 00:00:00">2025-06-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/12/cme9pg22n0032ln6seggpgdkx/" title="Google Drive API 功能測試">Google Drive API 功能測試</a><time datetime="2025-06-12T16:00:00.000Z" title="發表於 2025-06-13 00:00:00">2025-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/05/cme9pg22h002kln6shcm6e0d6/" title="FMEA 沒用？你根本就不該用">FMEA 沒用？你根本就不該用</a><time datetime="2025-06-05T16:00:00.000Z" title="發表於 2025-06-06 00:00:00">2025-06-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">本站內容採用 CC BY-NC-SA 4.0 授權</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
