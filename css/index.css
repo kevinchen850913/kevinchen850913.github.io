@@ -600,13 +600,13 @@ input::placeholder {
   color: var(--font-color);
 }
 p {
-  margin: 0 0 2.6em;
+  margin: 0 0 2em;
   line-height: 1.6;
 }
 ol,
 ul,
 li {
-  margin-top: 0.2em;
+  margin-top: 0;
   margin-bottom: 1em;
 }
 h1,
@@ -616,7 +616,7 @@ h4,
 h5,
 h6 {
   position: relative;
-  margin: 0.8em 0 0.4em;
+  margin: 2.6em 0 0;
   color: var(--text-highlight-color);
   font-weight: bold;
 }
@@ -657,6 +657,7 @@ table td {
   padding: 6px 12px;
   border: 1px solid var(--light-grey);
   vertical-align: middle;
+  font-size: 0.8em;
 }
 *::-moz-selection {
   background: #00c4b6;
