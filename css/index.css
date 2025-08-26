@@ -616,7 +616,7 @@ h4,
 h5,
 h6 {
   position: relative;
-  margin: 2.6em 0 0;
+  margin: 2.8em 0 0;
   color: var(--text-highlight-color);
   font-weight: bold;
 }
@@ -657,7 +657,7 @@ table td {
   padding: 6px 12px;
   border: 1px solid var(--light-grey);
   vertical-align: middle;
-  font-size: 0.8em;
+  font-size: 0.6em;
 }
 *::-moz-selection {
   background: #00c4b6;
