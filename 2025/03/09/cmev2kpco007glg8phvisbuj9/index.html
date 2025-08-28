@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>批次檔應用-軟體便條紙 | Kevin Chen 的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="小專案的靈感是設計一種拋棄式軟體，將軟體拆分為半成品，讓使用者能根據需求自由組合，有點類似模組化的設計方，向這樣的設計能讓系統適應不確定的需求，並用簡單的方式對應複雜的挑戰。 最終產出的專案包含四個檔案：README.txt、Builder.bat、App、App.exe。軟體在提供給使用者之前，需要經手一位管理者，管理者負責打包產生 App.exe ，管理者不需要具備工程背景，就能通過簡單的操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="批次檔應用-軟體便條紙">
+<meta property="og:url" content="http://example.com/2025/03/09/cmev2kpco007glg8phvisbuj9/index.html">
+<meta property="og:site_name" content="Kevin Chen 的學習筆記">
+<meta property="og:description" content="小專案的靈感是設計一種拋棄式軟體，將軟體拆分為半成品，讓使用者能根據需求自由組合，有點類似模組化的設計方，向這樣的設計能讓系統適應不確定的需求，並用簡單的方式對應複雜的挑戰。 最終產出的專案包含四個檔案：README.txt、Builder.bat、App、App.exe。軟體在提供給使用者之前，需要經手一位管理者，管理者負責打包產生 App.exe ，管理者不需要具備工程背景，就能通過簡單的操作">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2025-03-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-28T07:15:14.429Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="CSharp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/03/09/cmev2kpco007glg8phvisbuj9/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-ELXXL0FKFN"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ELXXL0FKFN');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '批次檔應用-軟體便條紙',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-08-28 15:15:14'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin Chen 的學習筆記"><span class="site-name">Kevin Chen 的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">批次檔應用-軟體便條紙</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-03-09T16:00:00.000Z" title="發表於 2025-03-10 00:00:00">2025-03-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-08-28T07:15:14.429Z" title="更新於 2025-08-28 15:15:14">2025-08-28</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>小專案的靈感是設計一種拋棄式軟體，將軟體拆分為半成品，讓使用者能根據需求自由組合，有點類似模組化的設計方，向這樣的設計能讓系統適應不確定的需求，並用簡單的方式對應複雜的挑戰。</p>
+<p>最終產出的專案包含四個檔案：README.txt、Builder.bat、App、App.exe。軟體在提供給使用者之前，需要經手一位管理者，管理者負責打包產生 App.exe ，管理者不需要具備工程背景，就能通過簡單的操作來生成完整的應用程式，感覺就像在紙箱上多貼一張便條紙，不必更動到原有的程式碼。</p>
+<h3 id="軟體檔案說明"><a class="markdownIt-Anchor" href="#軟體檔案說明">#</a> 軟體檔案說明</h3>
+<p>該範例的功能為可配置密碼與效期，且不需要產生檔案。</p>
+<ul>
+<li>README.txt：提供使用說明、時間設定與密碼設定等操作指引。</li>
+<li>App：應用程式的半成品組件，組合後可以生成最終的 App.exe。</li>
+<li>Builder.bat：打包工具，將 App 與 README.txt 結合，生成 App.exe。</li>
+<li>App.exe：最終的應用程式，會根據設定自我分析並執行。</li>
+</ul>
+<h3 id="軟體加分點"><a class="markdownIt-Anchor" href="#軟體加分點">#</a> 軟體加分點</h3>
+<ul>
+<li>軟體免安裝：App.exe 已打包完成，無需安裝即可直接使用。</li>
+<li>保持環境乾淨：Builder.bat 確保檔案在打包過程中出現錯誤時能自動清除，避免產生無效檔案。</li>
+<li>可能的風險：Builder.bat 方案有可能會被部分防病毒軟體誤判為病毒，這需要注意。</li>
+</ul>
+<h3 id="readmetxt"><a class="markdownIt-Anchor" href="#readmetxt">#</a> README.txt</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">2026-01-01 00:00:00</span><br><span class="line">MyPassword</span><br><span class="line"></span><br><span class="line">How to Use:</span><br><span class="line">1. Verify the software validity period (first line).</span><br><span class="line">2. Confirm the password set for the software (second line).</span><br><span class="line">3. Remember to save the file after making any changes.</span><br><span class="line">4. Run Builder.bat.</span><br><span class="line">5. Locate APP.exe and test its functionality.</span><br><span class="line">6. Only distribute APP.exe to users.</span><br></pre></td></tr></table></figure>
+<h3 id="builderbat"><a class="markdownIt-Anchor" href="#builderbat">#</a> Builder.bat</h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">setlocal</span><br><span class="line"><span class="built_in">set</span> <span class="string">&quot;inputFile=README.txt&quot;</span></span><br><span class="line"><span class="built_in">set</span> <span class="string">&quot;encodedFile=App.config&quot;</span></span><br><span class="line"><span class="built_in">set</span> <span class="string">&quot;applicationFile=App&quot;</span></span><br><span class="line"><span class="built_in">set</span> <span class="string">&quot;outputFile=App.exe&quot;</span></span><br><span class="line"><span class="built_in">set</span> <span class="string">&quot;cleanUp=true&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> exist <span class="string">&quot;%encodedFile%&quot;</span> (</span><br><span class="line">    del <span class="string">&quot;%encodedFile%&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> exist <span class="string">&quot;%outputFile%&quot;</span> (</span><br><span class="line">    del <span class="string">&quot;%outputFile%&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> not exist <span class="string">&quot;%inputFile%&quot;</span> (</span><br><span class="line">    <span class="built_in">echo</span> Error: Source file not found. Exiting...</span><br><span class="line">    <span class="built_in">set</span> <span class="string">&quot;cleanUp=false&quot;</span></span><br><span class="line">    goto :<span class="built_in">exit</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Encoding <span class="string">&quot;%inputFile%&quot;</span> to <span class="string">&quot;%encodedFile%&quot;</span>...</span><br><span class="line">certutil -encode <span class="string">&quot;%inputFile%&quot;</span> <span class="string">&quot;%encodedFile%&quot;</span> &gt;nul 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> %errorlevel% neq 0 (</span><br><span class="line">    <span class="built_in">echo</span> Error: Failed to encode using certutil. Exiting...</span><br><span class="line">    <span class="built_in">set</span> <span class="string">&quot;cleanUp=false&quot;</span></span><br><span class="line">    goto :<span class="built_in">exit</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Merging <span class="string">&quot;%applicationFile%&quot;</span> and <span class="string">&quot;%encodedFile%&quot;</span> into <span class="string">&quot;%outputFile%&quot;</span>...</span><br><span class="line">copy /b <span class="string">&quot;%applicationFile%&quot;</span>+<span class="string">&quot;%encodedFile%&quot;</span> <span class="string">&quot;%outputFile%&quot;</span> &gt;nul 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> %errorlevel% neq 0 (</span><br><span class="line">    <span class="built_in">echo</span> Error: Failed to create <span class="string">&quot;%outputFile%&quot;</span>. Exiting...</span><br><span class="line">    <span class="built_in">set</span> <span class="string">&quot;cleanUp=false&quot;</span></span><br><span class="line">    goto :<span class="built_in">exit</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">:<span class="built_in">exit</span></span><br><span class="line"><span class="keyword">if</span> exist <span class="string">&quot;%encodedFile%&quot;</span> (</span><br><span class="line">    del <span class="string">&quot;%encodedFile%&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;%cleanUp%&quot;</span>==<span class="string">&quot;false&quot;</span> (</span><br><span class="line">    <span class="keyword">if</span> exist <span class="string">&quot;%outputFile%&quot;</span> (</span><br><span class="line">        del <span class="string">&quot;%outputFile%&quot;</span></span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;%cleanUp%&quot;</span>==<span class="string">&quot;true&quot;</span> (</span><br><span class="line">    <span class="built_in">echo</span> Process completed successfully. <span class="string">&quot;%outputFile%&quot;</span> is ready <span class="keyword">for</span> use.</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">endlocal</span><br><span class="line">:: pause</span><br></pre></td></tr></table></figure>
+<h3 id="maincs"><a class="markdownIt-Anchor" href="#maincs">#</a> main.cs</h3>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">InitSettings</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">string</span> inputFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 讀取 App 的二進位資料</span></span><br><span class="line">        <span class="built_in">byte</span>[] fileBytes = File.ReadAllBytes(inputFilePath);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 查找 Base64 編碼的部分</span></span><br><span class="line">        <span class="built_in">string</span> fileContent = Encoding.UTF8.GetString(fileBytes);</span><br><span class="line">        <span class="built_in">int</span> beginIndex = fileContent.IndexOf(<span class="string">&quot;-----BEGIN CERTIFICATE-----&quot;</span>);</span><br><span class="line">        <span class="built_in">int</span> endIndex = fileContent.IndexOf(<span class="string">&quot;-----END CERTIFICATE-----&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (beginIndex != <span class="number">-1</span> &amp;&amp; endIndex != <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 提取 Base64 字串並解碼</span></span><br><span class="line">            <span class="built_in">string</span> base64String = fileContent.Substring(beginIndex + <span class="string">&quot;-----BEGIN CERTIFICATE-----&quot;</span>.Length, endIndex - beginIndex - <span class="string">&quot;-----BEGIN CERTIFICATE-----&quot;</span>.Length);</span><br><span class="line">            <span class="built_in">byte</span>[] decodedBytes = Convert.FromBase64String(base64String);</span><br><span class="line">            decodedString = Encoding.UTF8.GetString(decodedBytes);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            MessageBox.Show(<span class="string">&quot;No valid encoded data found.&quot;</span>, <span class="string">&quot;Error&quot;</span>, MessageBoxButtons.OK, MessageBoxIcon.Error);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 解析解碼後的字串</span></span><br><span class="line">        <span class="built_in">string</span>[] parts = decodedString.Split(<span class="keyword">new</span>[] &#123; <span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;\r&quot;</span>, <span class="string">&quot;\n&quot;</span> &#125;, StringSplitOptions.None);</span><br><span class="line">        <span class="keyword">if</span> (parts.Length &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            expirationTime = DateTime.Parse(parts[<span class="number">0</span>]);</span><br><span class="line">            password = parts[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Parsed Expiration Date: &quot;</span> + expirationTime);</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Password: &quot;</span> + password);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            MessageBox.Show(<span class="string">&quot;Decoded data format is incorrect.&quot;</span>, <span class="string">&quot;Error&quot;</span>, MessageBoxButtons.OK, MessageBoxIcon.Error);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (FormatException ex)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 時間格式錯誤處理</span></span><br><span class="line">        MessageBox.Show(<span class="string">$&quot;Time format is incorrect: <span class="subst">&#123;ex.Message&#125;</span>&quot;</span>, <span class="string">&quot;Error&quot;</span>, MessageBoxButtons.OK, MessageBoxIcon.Error);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 其他錯誤處理</span></span><br><span class="line">        MessageBox.Show(<span class="string">$&quot;An error occurred: <span class="subst">&#123;ex.Message&#125;</span>&quot;</span>, <span class="string">&quot;Error&quot;</span>, MessageBoxButtons.OK, MessageBoxIcon.Error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/09/cmev2kpco007glg8phvisbuj9/">http://example.com/2025/03/09/cmev2kpco007glg8phvisbuj9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin Chen 的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CSharp/">CSharp</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/03/27/cmev2kpaj0019lg8p6vcz9zi1/" title="2025 台北國際自行車展"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2025 台北國際自行車展</div></div></a></div><div class="next-post pull-right"><a href="/2025/01/19/cmev2kpaj001alg8p71ea4e1g/" title="2025 年度電腦整理記錄"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2025 年度電腦整理記錄</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description">Kevin 的私人筆記，記錄創作靈感、技術研究、生活觀察。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BB%9F%E9%AB%94%E6%AA%94%E6%A1%88%E8%AA%AA%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text"> 軟體檔案說明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BB%9F%E9%AB%94%E5%8A%A0%E5%88%86%E9%BB%9E"><span class="toc-number">2.</span> <span class="toc-text"> 軟體加分點</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#readmetxt"><span class="toc-number">3.</span> <span class="toc-text"> README.txt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#builderbat"><span class="toc-number">4.</span> <span class="toc-text"> Builder.bat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#maincs"><span class="toc-number">5.</span> <span class="toc-text"> main.cs</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/07/cmev2kpcv007qlg8paq2d1fkj/" title="VirtualBox Gitlab 搬家筆記">VirtualBox Gitlab 搬家筆記</a><time datetime="2025-08-07T16:00:00.000Z" title="發表於 2025-08-08 00:00:00">2025-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/03/cmev2kpcq007jlg8p0roe9o4z/" title="第一次遇到大規模裁員">第一次遇到大規模裁員</a><time datetime="2025-08-03T16:00:00.000Z" title="發表於 2025-08-04 00:00:00">2025-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/19/cmev2kpcu007nlg8p5lgk3fo1/" title="資安 CRA 準備與檢討筆記">資安 CRA 準備與檢討筆記</a><time datetime="2025-06-19T16:00:00.000Z" title="發表於 2025-06-20 00:00:00">2025-06-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/12/cmev2kpbj0036lg8pac09c4nu/" title="Google Drive API 學習筆記">Google Drive API 學習筆記</a><time datetime="2025-06-12T16:00:00.000Z" title="發表於 2025-06-13 00:00:00">2025-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/05/cmev2kpb9002olg8pdz8e2c8z/" title="FMEA 沒用，你根本就不該用">FMEA 沒用，你根本就不該用</a><time datetime="2025-06-05T16:00:00.000Z" title="發表於 2025-06-06 00:00:00">2025-06-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">本站內容採用 CC BY-NC-SA 4.0 授權</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
