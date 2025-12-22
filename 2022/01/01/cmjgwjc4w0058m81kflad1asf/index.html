@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>PLX9x5x PCI Driver 學習筆記 | Kevin Chen 的學習筆記</title><meta name="author" content="Kevin Chen"><meta name="copyright" content="Kevin Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="# 驅動程式如何辨識裝置？ 從 pci9x5x.inx 的 DeviceId 進行判斷， 裝置管理員 &#x3D;&gt; 該裝置 &#x3D;&gt; 詳細資料 &#x3D;&gt; 硬體識別碼 (相容識別碼)， 電腦會自動判斷名稱是否符合，若符合就執行此驅動程式。 123456; For XP and later[MSFT.NT$ARCH$]; DisplayName           Section">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PLX9x5x PCI Driver 學習筆記">
+<meta property="og:url" content="http://example.com/2022/01/01/cmjgwjc4w0058m81kflad1asf/index.html">
+<meta property="og:site_name" content="Kevin Chen 的學習筆記">
+<meta property="og:description" content="# 驅動程式如何辨識裝置？ 從 pci9x5x.inx 的 DeviceId 進行判斷， 裝置管理員 &#x3D;&gt; 該裝置 &#x3D;&gt; 詳細資料 &#x3D;&gt; 硬體識別碼 (相容識別碼)， 電腦會自動判斷名稱是否符合，若符合就執行此驅動程式。 123456; For XP and later[MSFT.NT$ARCH$]; DisplayName           Section">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png">
+<meta property="article:published_time" content="2022-01-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-22T08:36:00.259Z">
+<meta property="article:author" content="Kevin Chen">
+<meta property="article:tag" content="PCIe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/01/01/cmjgwjc4w0058m81kflad1asf/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-ELXXL0FKFN"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ELXXL0FKFN');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'PLX9x5x PCI Driver 學習筆記',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-12-22 16:36:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">131</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812191529.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Kevin Chen 的學習筆記"><span class="site-name">Kevin Chen 的學習筆記</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PLX9x5x PCI Driver 學習筆記</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2022-01-01T16:00:00.000Z" title="發表於 2022-01-02 00:00:00">2022-01-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-12-22T08:36:00.259Z" title="更新於 2025-12-22 16:36:00">2025-12-22</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="驅動程式如何辨識裝置"><a class="markdownIt-Anchor" href="#驅動程式如何辨識裝置">#</a> 驅動程式如何辨識裝置？</h2>
+<p>從 pci9x5x.inx 的 DeviceId 進行判斷，<br>
+裝置管理員 =&gt; 該裝置 =&gt; 詳細資料 =&gt; 硬體識別碼 (相容識別碼)，<br>
+電腦會自動判斷名稱是否符合，若符合就執行此驅動程式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">; For XP and later</span><br><span class="line">[MSFT.NT$ARCH$]</span><br><span class="line">; DisplayName           Section           DeviceId</span><br><span class="line">; ----------------      ---------         -----------</span><br><span class="line">%Pci9056.DRVDESC%=      Pci9x5x_Inst,     PCI\VEN_10b5&amp;DEV_5601</span><br><span class="line">%Pci9656.DRVDESC%=      Pci9x5x_Inst,     PCI\VEN_10b5&amp;DEV_9601</span><br></pre></td></tr></table></figure>
+<h2 id="如何手動安裝驅動程式"><a class="markdownIt-Anchor" href="#如何手動安裝驅動程式">#</a> 如何手動安裝驅動程式？</h2>
+<p>裝置管理員 =&gt; 該裝置 =&gt; 驅動程式 =&gt; 更新驅動程式 =&gt; 瀏覽電腦上的驅動程式<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/images-2025/picgo/20251021112719962.png" alt="image.png"></p>
+<p>目標資料夾中應該要有 cat 、 inf 、sys ，如果沒數位簽章，那就需要啟動 WIN 測試模式，不然會無法安裝驅動程式。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/images-2025/picgo/20251021112654150.png" alt="image.png"></p>
+<h2 id="驅動程式錯誤導致電腦無法開機該如何處理"><a class="markdownIt-Anchor" href="#驅動程式錯誤導致電腦無法開機該如何處理">#</a> 驅動程式錯誤導致電腦無法開機該如何處理？</h2>
+<ul>
+<li>長壓電源關機，使用安全模式開機，移出異常驅動程式。</li>
+<li>移除硬體，裝置管理員顯示隱藏驅動，移出異常驅動程式。<br>
+<img src="https://cdn.jsdelivr.net/gh/kevinchen850913/images-2025/picgo/20251021112739458.png" alt="image.png"></li>
+</ul>
+<h2 id="plx9x5x-做了哪些事"><a class="markdownIt-Anchor" href="#plx9x5x-做了哪些事">#</a> PLX9x5x 做了哪些事？</h2>
+<p>處理 PnP 和電源事件、註冊設備介面、硬體資源映射、DMA 介面。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Function prototypes</span><br><span class="line">//</span><br><span class="line">DriverEntry;</span><br><span class="line">PLxEvtDeviceAdd;</span><br><span class="line">PlxEvtDeviceCleanup;</span><br><span class="line">PLxEvtDevicePrepareHardware;</span><br><span class="line">PLxEvtDeviceReleaseHardware;</span><br><span class="line">PLxEvtDeviceD0Entry;</span><br><span class="line">PLxEvtDeviceD0Exit;</span><br></pre></td></tr></table></figure>
+<p>驅動程序初始化入口點，該入口由系統直接調用。<br>
+ <code>WDF_DRIVER_CONFIG_INIT( &amp;config, PLxEvtDeviceAdd );</code> <br>
+ 使用 config 初始化驅動配置結構，該數值是由硬體裝置提供，例如 EEPROM 讀出，該動作會自動完成，直接使用就可以。</p>
+<h3 id="plxevtdeviceadd"><a class="markdownIt-Anchor" href="#plxevtdeviceadd">#</a> PLxEvtDeviceAdd</h3>
+<p>這裡驅動程序會註冊所有 PNP、電源、Io 回調、註冊接口和分配其他設備所需的軟件資源。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pnpPowerCallbacks.EvtDevicePrepareHardware = PLxEvtDevicePrepareHardware;</span><br><span class="line">pnpPowerCallbacks.EvtDeviceReleaseHardware = PLxEvtDeviceReleaseHardware;</span><br></pre></td></tr></table></figure>
+<p>為函數設置回調，像 PCI 就會需要參考硬體進行資源配置。</p>
+<h3 id="plxevtdevicepreparehardware"><a class="markdownIt-Anchor" href="#plxevtdevicepreparehardware">#</a> PLxEvtDevicePrepareHardware</h3>
+<p>當設備啟動或重新啟動時，執行設置設備所需的任何初始化，設置 DMA 通道或映射任何 I/O 端口資源。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">devExt = PLxGetDeviceContext(Device);</span><br><span class="line">status = PLxPrepareHardware(devExt, ResourcesTranslated);</span><br></pre></td></tr></table></figure>
+<p>WDFCMRESLIST   ResourcesTranslated 是 PnP 資源與設備，WDFCMRESLIST 是資源清單，內部包含 PCM_PARTIAL_RESOURCE_DESCRIPTOR，</p>
+<h3 id="plxpreparehardware"><a class="markdownIt-Anchor" href="#plxpreparehardware">#</a> PLxPrepareHardware</h3>
+<p>獲取驅動分配的硬體資源，並將其映射到系統地址空間，簡單來說就是分配 BAR ( Base Address Register)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PCM_PARTIAL_RESOURCE_DESCRIPTOR desc</span><br><span class="line">for (i=0; i &lt; WdfCmResourceListGetCount(ResourcesTranslated); i++) &#123;</span><br><span class="line">        desc = WdfCmResourceListGetDescriptor( ResourcesTranslated, i );</span><br><span class="line">        switch (desc-&gt;Type) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>desc 必須由 WdfCmResourceListGetDescriptor (ResourcesTranslated, i) 初始化，ResourcesTranslated 必須先初始化 desc 才能使用，WdfCmResourceListAppendDescriptor (ResourcesTranslated, desc); 個人測試無法成功無中生有產生 PCI BAR。</p>
+<h3 id="plxevtdevicereleasehardware"><a class="markdownIt-Anchor" href="#plxevtdevicereleasehardware">#</a> PLxEvtDeviceReleaseHardware</h3>
+<p>在設備停止時調用，取消在 PLxEvtDevicePrepareHardware 中產生的資源。devExt 如果判斷有資源，就下 MmUnmapIoSpace 簡單明瞭。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if (devExt-&gt;RegsBase) &#123;</span><br><span class="line">        MmUnmapIoSpace(devExt-&gt;RegsBase, devExt-&gt;RegsLength);</span><br><span class="line">        devExt-&gt;RegsBase = NULL;</span><br><span class="line">    &#125;</span><br><span class="line">if (devExt-&gt;SRAMBase) &#123;</span><br><span class="line">        MmUnmapIoSpace(devExt-&gt;SRAMBase, devExt-&gt;SRAMLength);</span><br><span class="line">        devExt-&gt;SRAMBase = NULL;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="plxevtdeviced0entry"><a class="markdownIt-Anchor" href="#plxevtdeviced0entry">#</a> PLxEvtDeviceD0Entry</h3>
+<p>進入 D0，PLxInitWritet 初始化 Dma 數據結構。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">status = PLxInitWrite( devExt );</span><br><span class="line">WRITE_REGISTER_ULONG( (PULONG) &amp;DevExt-&gt;Regs-&gt;Dma0_PCI_DAC, 0 );</span><br></pre></td></tr></table></figure>
+<h3 id="plxevtdrivercontextcleanup"><a class="markdownIt-Anchor" href="#plxevtdrivercontextcleanup">#</a> PlxEvtDriverContextCleanup</h3>
+<p>釋放在 DriverEntry 中分配的所有資源。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WPP_CLEANUP( WdfDriverWdmGetDriverObject( Driver ) );</span><br></pre></td></tr></table></figure>
+<h1 id="plx9x5x-還有哪些功能"><a class="markdownIt-Anchor" href="#plx9x5x-還有哪些功能">#</a> PLX9x5x 還有哪些功能？</h1>
+<p>在 Public.h 中定義，此 IOCTL 切換驅動程序的 DMA 傳輸要求，每次調用時打開和關閉。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define IOCTL_PLX9X5X_TOGGLE_SINGLE_TRANSFER \</span><br><span class="line">    CTL_CODE(FILE_DEVICE_UNKNOWN, 0x0, METHOD_BUFFERED, FILE_ANY_ACCESS)</span><br></pre></td></tr></table></figure>
+<p>PLxEvtIoDeviceControl</p>
+<p>收到設備請求後立即調用，請注意此功能會執行讀取與寫入，這在本示例是可以接受的，但您使用時可能需要某種程度的修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">switch (IoControlCode) &#123;</span><br><span class="line">    case IOCTL_PLX9X5X_TOGGLE_SINGLE_TRANSFER:</span><br><span class="line">        WdfRequestRetrieveOutputBuffer();</span><br><span class="line">        WdfRequestSetInformation();</span><br><span class="line">        break;</span><br><span class="line">    default:</span><br><span class="line">        //Unknown IOCTL </span><br><span class="line">        break;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 Control.c 的 PLxEvtIoDeviceControl 中把 IoControlCode 塞進 switch，然後該做什麼就做什麼，要增加功能只要在此加入。</p>
+<h1 id="plx9x5x-定義的專用結構"><a class="markdownIt-Anchor" href="#plx9x5x-定義的專用結構">#</a> PLX9x5x 定義的專用結構</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// 對象設備的擴展結構</span><br><span class="line">//</span><br><span class="line">typedef struct _DEVICE_EXTENSION &#123;</span><br><span class="line">	 WDFDEVICE           Device;</span><br><span class="line">    // 以下內容用於特定硬體</span><br><span class="line">    // 配置</span><br><span class="line"></span><br><span class="line">    // 硬體資源</span><br><span class="line">    PPCI9656_REGS       Regs;             // Registers address</span><br><span class="line">    PUCHAR              RegsBase;         // Registers base address</span><br><span class="line">    ULONG               RegsLength;       // Registers base length</span><br><span class="line"></span><br><span class="line">    PUCHAR              PortBase;         // Port base address</span><br><span class="line">    ULONG               PortLength;       // Port base length</span><br><span class="line"></span><br><span class="line">    PUCHAR              SRAMBase;         // SRAM base address</span><br><span class="line">    ULONG               SRAMLength;       // SRAM base length</span><br><span class="line"></span><br><span class="line">    PUCHAR              SRAM2Base;        // SRAM (alt) base address</span><br><span class="line">    ULONG               SRAM2Length;      // SRAM (alt) base length</span><br><span class="line"></span><br><span class="line">    WDFINTERRUPT       Interrupt;         // Returned by InterruptCreate</span><br><span class="line"></span><br><span class="line">    union &#123;</span><br><span class="line">        INT_CSR bits;</span><br><span class="line">        ULONG   ulong;</span><br><span class="line">    &#125;                       IntCsr;</span><br><span class="line"></span><br><span class="line">    union &#123;</span><br><span class="line">        DMA_CSR bits;</span><br><span class="line">        UCHAR   uchar;</span><br><span class="line">    &#125;                       Dma0Csr;</span><br><span class="line"></span><br><span class="line">    union &#123;</span><br><span class="line">        DMA_CSR bits;</span><br><span class="line">        UCHAR   uchar;</span><br><span class="line">    &#125;                       Dma1Csr;</span><br><span class="line"></span><br><span class="line">    // DmaEnabler</span><br><span class="line">    WDFDMAENABLER           DmaEnabler;</span><br><span class="line">    ULONG                   MaximumTransferLength;</span><br><span class="line"></span><br><span class="line">    // IOCTL handling</span><br><span class="line">    WDFQUEUE                ControlQueue;</span><br><span class="line">    BOOLEAN                 RequireSingleTransfer;</span><br><span class="line"></span><br><span class="line">#ifdef SIMULATE_MEMORY_FRAGMENTATION</span><br><span class="line">    PMDL                    WriteMdlChain;</span><br><span class="line">    PMDL                    ReadMdlChain;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">    // Write</span><br><span class="line">    WDFQUEUE                WriteQueue;</span><br><span class="line">    WDFDMATRANSACTION       WriteDmaTransaction;</span><br><span class="line"></span><br><span class="line">    ULONG                   WriteTransferElements;</span><br><span class="line">    WDFCOMMONBUFFER         WriteCommonBuffer;</span><br><span class="line">    size_t                  WriteCommonBufferSize;</span><br><span class="line">    _Field_size_(WriteCommonBufferSize) PUCHAR WriteCommonBufferBase;</span><br><span class="line">    PHYSICAL_ADDRESS        WriteCommonBufferBaseLA;  // Logical Address</span><br><span class="line"></span><br><span class="line">    // Read</span><br><span class="line">    ULONG                   ReadTransferElements;</span><br><span class="line">    WDFCOMMONBUFFER         ReadCommonBuffer;</span><br><span class="line">    size_t                  ReadCommonBufferSize;</span><br><span class="line">    _Field_size_(ReadCommonBufferSize) PUCHAR ReadCommonBufferBase;</span><br><span class="line">    PHYSICAL_ADDRESS        ReadCommonBufferBaseLA;   // Logical Address</span><br><span class="line"></span><br><span class="line">    WDFDMATRANSACTION       ReadDmaTransaction;</span><br><span class="line">    WDFQUEUE                ReadQueue;</span><br><span class="line"></span><br><span class="line">    ULONG                   HwErrCount;</span><br><span class="line">&#125;  DEVICE_EXTENSION, *PDEVICE_EXTENSION;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Kevin Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2022/01/01/cmjgwjc4w0058m81kflad1asf/">http://example.com/2022/01/01/cmjgwjc4w0058m81kflad1asf/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">Kevin Chen 的學習筆記</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PCIe/">PCIe</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/01/21/cmjgwjc53005zm81kh0y4e6dx/" title="Windows 驅動程式開發筆記"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Windows 驅動程式開發筆記</div></div></a></div><div class="next-post pull-right"><a href="/2021/12/27/cmjgwjc4u0051m81kfdto480s/" title="PCI Configuration Space"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PCI Configuration Space</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2021/12/27/cmjgwjc4u0051m81kfdto480s/" title="PCI Configuration Space"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-28</div><div class="title">PCI Configuration Space</div></div></a></div><div><a href="/2023/08/14/cmjgwjc4u0053m81kdocb3ksg/" title="PCIE 學習筆記"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-15</div><div class="title">PCIE 學習筆記</div></div></a></div><div><a href="/2022/01/24/cmjgwjc52005wm81kbi7yaqd0/" title="Windows debugger - WinDbg 使用筆記"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-25</div><div class="title">Windows debugger - WinDbg 使用筆記</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/kevinchen850913/PublicAlbum/img/20230812185039.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kevin Chen</div><div class="author-info__description">Kevin 的私人筆記，記錄創作靈感、技術研究、生活觀察。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">131</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E5%A6%82%E4%BD%95%E8%BE%A8%E8%AD%98%E8%A3%9D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text"> 驅動程式如何辨識裝置？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%89%8B%E5%8B%95%E5%AE%89%E8%A3%9D%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text"> 如何手動安裝驅動程式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E9%8C%AF%E8%AA%A4%E5%B0%8E%E8%87%B4%E9%9B%BB%E8%85%A6%E7%84%A1%E6%B3%95%E9%96%8B%E6%A9%9F%E8%A9%B2%E5%A6%82%E4%BD%95%E8%99%95%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text"> 驅動程式錯誤導致電腦無法開機該如何處理？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#plx9x5x-%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B"><span class="toc-number">4.</span> <span class="toc-text"> PLX9x5x 做了哪些事？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#plxevtdeviceadd"><span class="toc-number">4.1.</span> <span class="toc-text"> PLxEvtDeviceAdd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#plxevtdevicepreparehardware"><span class="toc-number">4.2.</span> <span class="toc-text"> PLxEvtDevicePrepareHardware</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#plxpreparehardware"><span class="toc-number">4.3.</span> <span class="toc-text"> PLxPrepareHardware</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#plxevtdevicereleasehardware"><span class="toc-number">4.4.</span> <span class="toc-text"> PLxEvtDeviceReleaseHardware</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#plxevtdeviced0entry"><span class="toc-number">4.5.</span> <span class="toc-text"> PLxEvtDeviceD0Entry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#plxevtdrivercontextcleanup"><span class="toc-number">4.6.</span> <span class="toc-text"> PlxEvtDriverContextCleanup</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#plx9x5x-%E9%82%84%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD"><span class="toc-number"></span> <span class="toc-text"> PLX9x5x 還有哪些功能？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#plx9x5x-%E5%AE%9A%E7%BE%A9%E7%9A%84%E5%B0%88%E7%94%A8%E7%B5%90%E6%A7%8B"><span class="toc-number"></span> <span class="toc-text"> PLX9x5x 定義的專用結構</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/07/cmjgwjc4y005hm81kff48ffo0/" title="VirtualBox Gitlab 搬家筆記">VirtualBox Gitlab 搬家筆記</a><time datetime="2025-08-07T16:00:00.000Z" title="發表於 2025-08-08 00:00:00">2025-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/19/cmjgwjc5l007vm81k9k8d9bsj/" title="資安 CRA 準備與檢討筆記">資安 CRA 準備與檢討筆記</a><time datetime="2025-06-19T16:00:00.000Z" title="發表於 2025-06-20 00:00:00">2025-06-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/12/cmjgwjc480039m81khhhwce81/" title="Google Drive API 學習筆記">Google Drive API 學習筆記</a><time datetime="2025-06-12T16:00:00.000Z" title="發表於 2025-06-13 00:00:00">2025-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/05/cmjgwjc5g007km81k0mt5cbho/" title="公司真的需要 FMEA 嗎?">公司真的需要 FMEA 嗎?</a><time datetime="2025-06-05T16:00:00.000Z" title="發表於 2025-06-06 00:00:00">2025-06-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/16/cmjgwjc3u002im81k2qbx8syo/" title="ClickOnce + GitHub Pages 輕鬆部署桌面應用程式">ClickOnce + GitHub Pages 輕鬆部署桌面應用程式</a><time datetime="2025-05-16T16:00:00.000Z" title="發表於 2025-05-17 00:00:00">2025-05-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Kevin Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">本站內容採用 CC BY-NC-SA 4.0 授權</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
